@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -7,8 +7,73 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
-	  <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.SendGrid" Version="9.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="9.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
+	  
+	  
+	  
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
+    
+	  
+	  
+	<PackageReference Include="Hangfire" Version="1.8.22" />
+    
+	  
+	  
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.2" />
+	<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
+	<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.2" />
+
+
+	<PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="10.0.10" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.2">	
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+	  
+	  
+	  
+    <PackageReference Include="SendGrid" Version="9.29.3" />
+    
+	  
+	  
+    <PackageReference Include="Supabase" Version="1.1.1" />
+    <PackageReference Include="Supabase.Storage" Version="2.4.1" />
+	
+	  
+	
+	  
+	<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
+	<PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.0" />
+	<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="10.1.1" />
+	
+  </ItemGroup>
+
+	
+	
+	
+	
+  <ItemGroup>
+    <Folder Include="Data\Context\" />
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="Data\Configurations\" />
+    <Folder Include="Domain\Entities\" />
+    <Folder Include="Domain\Enums\" />
+    <Folder Include="Domain\Constants\" />
+    <Folder Include="ExternalServices\Implementaions\Email\" />
+    <Folder Include="ExternalServices\Implementaions\FileStorage\" />
+    <Folder Include="ExternalServices\Implementaions\JWT\" />
+    <Folder Include="ExternalServices\Interfaces\Email\" />
+    <Folder Include="ExternalServices\Interfaces\FileStorage\" />
+    <Folder Include="ExternalServices\Interfaces\JWT\" />
+    <Folder Include="Features\Authentication\Queries\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Settings\" />
+    <Folder Include="RepositoryManager\Implementations\" />
+    <Folder Include="RepositoryManager\Interfaces\" />
   </ItemGroup>
 
 </Project>
