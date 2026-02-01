@@ -1,0 +1,6 @@
+@ProSphere_HostAddress = http://localhost:5167
+
+GET {{ProSphere_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
