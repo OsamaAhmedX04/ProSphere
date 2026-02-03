@@ -1,5 +1,4 @@
 ﻿using ProSphere.Domain.Entities;
-using System.Reactive;
 
 namespace ProSphere.RepositoryManager.Interfaces
 {
@@ -7,7 +6,7 @@ namespace ProSphere.RepositoryManager.Interfaces
     {
         IRepository<RefreshTokenAuth> RefreshTokenAuths { get; }
 
-        
+
 
         Task<int> CompleteAsync();
     }

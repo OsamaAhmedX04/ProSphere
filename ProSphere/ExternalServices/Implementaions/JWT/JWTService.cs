@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
 using ProSphere.Options;
 using ProSphere.Shared.DTOs;
 using System.IdentityModel.Tokens.Jwt;
