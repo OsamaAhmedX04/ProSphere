@@ -62,24 +62,10 @@
 	
 	
   <ItemGroup>
-    <Folder Include="Data\Context\" />
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Data\Configurations\" />
-    <Folder Include="Domain\Entities\" />
     <Folder Include="Domain\Enums\" />
-    <Folder Include="Domain\Constants\" />
-    <Folder Include="ExternalServices\Implementaions\Email\" />
-    <Folder Include="ExternalServices\Implementaions\FileStorage\" />
-    <Folder Include="ExternalServices\Implementaions\JWT\" />
-    <Folder Include="ExternalServices\Interfaces\Email\" />
-    <Folder Include="ExternalServices\Interfaces\FileStorage\" />
-    <Folder Include="ExternalServices\Interfaces\JWT\" />
     <Folder Include="Features\Authentication\Queries\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="Settings\" />
-    <Folder Include="RepositoryManager\Implementations\" />
-    <Folder Include="RepositoryManager\Interfaces\" />
   </ItemGroup>
 
 </Project>

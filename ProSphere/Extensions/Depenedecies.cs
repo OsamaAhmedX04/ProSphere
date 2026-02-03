@@ -3,11 +3,15 @@ using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ProSphere.Data.Context;
 using ProSphere.Domain.Entities;
+using ProSphere.ExternalServices.Implementaions.Email;
+using ProSphere.ExternalServices.Implementaions.JWT;
+using ProSphere.ExternalServices.Interfaces.Email;
+using ProSphere.Features.Authentication.Commands.Register;
+using ProSphere.Options;
 using ProSphere.RepositoryManager.Implementations;
 using ProSphere.RepositoryManager.Interfaces;
 using Supabase;
@@ -17,9 +21,10 @@ namespace ProSphere.Extensions
 {
     public static class Depenedecies
     {
-        public static IServiceCollection AddBuisenessServices(this IServiceCollection services)
+        public static IServiceCollection AddMediatorServices(this IServiceCollection services)
         {
-
+            services.AddMediatR(configuration =>
+                configuration.RegisterServicesFromAssemblyContaining<RegisterCommand>());
 
             return services;
         }
@@ -61,15 +66,16 @@ namespace ProSphere.Extensions
         public static IServiceCollection AddFluentValidation(this IServiceCollection services)
         {
             // Validators Service
-            services.AddValidatorsFromAssemblyContaining<Program>();
+            services.AddValidatorsFromAssemblyContaining<RegisterValidator>();
 
             return services;
         }
 
-        public static IServiceCollection AddJWT(this IServiceCollection services)
+        public static IServiceCollection AddJWT(this IServiceCollection services, IConfiguration configuration)
         {
             // Register JWT
             services.AddScoped<JWTService>();
+
             var jwtSettings = configuration.GetSection("JWT");
             var secretKey = Encoding.UTF8.GetBytes(jwtSettings["Key"]!);
 
@@ -93,16 +99,21 @@ namespace ProSphere.Extensions
                 };
             });
 
+
+            services.AddOptions<JWTOptions>()
+                .Bind(jwtSettings)
+                .ValidateOnStart();
+
             return services;
         }
 
         public static IServiceCollection AddEmailService(this IServiceCollection services, IConfiguration configuration)
         {
-            // Register SMTP
-            services.Configure<SMTPSettings>(configuration.GetSection("SmtpSettings"));
-
             // Register SendGrid
-            services.Configure<SendGridSettings>(configuration.GetSection("SendGridSettings"));
+            services.AddOptions<SendGridOptions>()
+                .Bind(configuration.GetSection("SendGridSettings"))
+                .ValidateOnStart();
+
             services.AddScoped<IEmailService, EmailService>();
 
             return services;
@@ -111,12 +122,14 @@ namespace ProSphere.Extensions
         public static IServiceCollection AddFileService(this IServiceCollection services, IConfiguration configuration)
         {
             // Bind Supabase settings from appsettings.json
-            services.Configure<SupabaseSettings>(configuration.GetSection("Supabase"));
+            services.AddOptions<SupaOptions>()
+                .Bind(configuration.GetSection("Supabase"))
+                .ValidateOnStart();
 
             // Register Supabase.Client as singleton
             services.AddSingleton<Client>(sp =>
             {
-                var settings = sp.GetRequiredService<IOptions<SupabaseSettings>>().Value;
+                var settings = sp.GetRequiredService<IOptions<SupaOptions>>().Value;
                 return new Client(settings.Url, settings.ServiceKey, new SupabaseOptions
                 {
                     AutoRefreshToken = true,
