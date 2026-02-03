@@ -13,7 +13,7 @@ namespace ProSphere.Data.Context
         IdentityUserRole<string>,
         IdentityUserLogin<string>,
         IdentityRoleClaim<string>,
-        IdentityUserToken>
+        IdentityUserToken<string>>
     {
         protected CustomIdentityDbContext(DbContextOptions options) : base(options)
         {
