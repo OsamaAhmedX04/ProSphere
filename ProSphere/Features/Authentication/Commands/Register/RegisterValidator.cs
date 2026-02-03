@@ -1,6 +1,6 @@
 ﻿namespace ProSphere.Features.Authentication.Commands.Register
 {
-    public class LoginValidator
+    public class RegisterValidator
     {
     }
 }
