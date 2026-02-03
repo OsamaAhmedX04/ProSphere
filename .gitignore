@@ -9,7 +9,7 @@ obj/
 *.suo
 
 # Logs
-*.log
+ProSphere/Logs/
 
 # App settings (secrets)
 appsettings.json
