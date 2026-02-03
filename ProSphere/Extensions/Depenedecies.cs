@@ -205,7 +205,7 @@ namespace ProSphere.Extensions
                 // Named policies
                 options.AddFixedWindowLimiter("strict", opt =>
                 {
-                    opt.PermitLimit = 10;
+                    opt.PermitLimit = 3;
                     opt.Window = TimeSpan.FromMinutes(1);
                     opt.QueueLimit = 0;
                 });
