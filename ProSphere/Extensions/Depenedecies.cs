@@ -2,6 +2,7 @@
 using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -14,8 +15,10 @@ using ProSphere.Features.Authentication.Commands.Register;
 using ProSphere.Options;
 using ProSphere.RepositoryManager.Implementations;
 using ProSphere.RepositoryManager.Interfaces;
+using Serilog;
 using Supabase;
 using System.Text;
+using System.Threading.RateLimiting;
 
 namespace ProSphere.Extensions
 {
@@ -164,6 +167,64 @@ namespace ProSphere.Extensions
                 .AddSendGrid(configuration["SendGridSettings:ApiKey"]!);
 
             return services;
+        }
+
+        public static IServiceCollection AddRateLimiting(this IServiceCollection services)
+        {
+            services.AddRateLimiter(options =>
+            {
+                options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+                // Custom rejection response
+                options.OnRejected = async (context, token) =>
+                {
+                    context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+                    await context.HttpContext.Response.WriteAsJsonAsync(new
+                    {
+                        error = "Too many requests. Please try again later."
+                    }, token);
+                };
+
+                // Global IP-based limiter
+                options.GlobalLimiter =
+                    PartitionedRateLimiter.Create<HttpContext, string>(context =>
+                    {
+                        var ip = context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+
+                        return RateLimitPartition.GetFixedWindowLimiter(
+                            ip,
+                            _ => new FixedWindowRateLimiterOptions
+                            {
+                                PermitLimit = 25,
+                                Window = TimeSpan.FromMinutes(1),
+                                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                                QueueLimit = 0
+                            });
+                    });
+
+                // Named policies
+                options.AddFixedWindowLimiter("strict", opt =>
+                {
+                    opt.PermitLimit = 10;
+                    opt.Window = TimeSpan.FromMinutes(1);
+                    opt.QueueLimit = 0;
+                });
+            });
+
+            return services;
+        }
+
+        public static IHostBuilder AddSerilog(this IHostBuilder hostBuilder)
+        {
+            hostBuilder.UseSerilog((context, services, configuration) =>
+            {
+                configuration
+                    .ReadFrom.Configuration(context.Configuration)
+                    .ReadFrom.Services(services)
+                    .Enrich.FromLogContext();
+            });
+
+            return hostBuilder;
         }
     }
 }

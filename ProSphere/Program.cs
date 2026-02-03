@@ -1,4 +1,6 @@
 using Hangfire;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 using ProSphere.Extensions;
 
@@ -10,6 +12,7 @@ namespace ProSphere
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Host.AddSerilog();
 
             builder.Services.AddControllers();
 
@@ -31,13 +34,16 @@ namespace ProSphere
             
             builder.Services.AddHealthCheck(builder.Configuration);
 
+            builder.Services.AddRateLimiting();
+
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -45,6 +51,15 @@ namespace ProSphere
             }
 
             app.UseHttpsRedirection();
+
+            app.MapHealthChecks("/health", new HealthCheckOptions
+            {
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
+
+            app.UseHangfireDashboard("/hangfire");
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
