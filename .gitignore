@@ -16,3 +16,6 @@ appsettings.json
 
 # Publish
 publish/
+
+# Migrations
+Data/Migrations
