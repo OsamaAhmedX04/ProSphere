@@ -1,6 +1,6 @@
 ﻿using ProSphere.Domain.Entities;
 using ProSphere.Features.Authentication.Commands.Login;
-using ProSphere.Shared.DTOs;
+using ProSphere.Shared.DTOs.Authentication;
 
 namespace ProSphere.ExternalServices.Interfaces.Authentication
 {

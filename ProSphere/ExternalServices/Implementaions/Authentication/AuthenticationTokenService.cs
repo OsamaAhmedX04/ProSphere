@@ -5,6 +5,7 @@ using ProSphere.ExternalServices.Interfaces.Authentication;
 using ProSphere.ExternalServices.Interfaces.JWT;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.Shared.DTOs;
+using ProSphere.Shared.DTOs.Authentication;
 
 namespace ProSphere.ExternalServices.Implementaions.Authentication
 {

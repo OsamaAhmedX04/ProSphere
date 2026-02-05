@@ -1,6 +1,7 @@
 ﻿using Hangfire;
 using ProSphere.Domain.Constants;
 using ProSphere.ExternalServices.Interfaces.Email;
+using System.Data;
 
 namespace ProSphere.ExternalServices.Implementaions.Email
 {
@@ -15,6 +16,17 @@ namespace ProSphere.ExternalServices.Implementaions.Email
                     email,
                     "Confirm Your Email",
                     EmailBody.GetEmailConfirmationBody(email, confirmationLink, firstName, lastName, role)
+                    )
+                );
+        }
+
+        public void SendResetPasswordMail(string email, string resettingLink)
+        {
+            BackgroundJob.Enqueue<IEmailService>(
+                service => service.SendEmailAsync(
+                    email,
+                    "Reset Your Password",
+                    EmailBody.GetResetPasswordBody(email, resettingLink)
                     )
                 );
         }

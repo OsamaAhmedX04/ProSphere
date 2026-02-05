@@ -2,7 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using ProSphere.ExternalServices.Interfaces.JWT;
 using ProSphere.Options;
-using ProSphere.Shared.DTOs;
+using ProSphere.Shared.DTOs.Authentication;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;

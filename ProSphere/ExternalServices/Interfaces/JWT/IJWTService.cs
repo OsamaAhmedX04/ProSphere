@@ -1,4 +1,4 @@
-﻿using ProSphere.Shared.DTOs;
+﻿using ProSphere.Shared.DTOs.Authentication;
 
 namespace ProSphere.ExternalServices.Interfaces.JWT
 {
