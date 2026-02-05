@@ -32,7 +32,7 @@ namespace ProSphere.ExternalServices.Implementaions.Authentication
 
             var refreshToken = Guid.NewGuid().ToString();
 
-            var loginResponse = new AuthenticationTokenDto
+            var authenticationTokenResponse = new AuthenticationTokenDto
             {
                 Token = token,
                 RefreshToken = refreshToken,
@@ -57,7 +57,36 @@ namespace ProSphere.ExternalServices.Implementaions.Authentication
                 tokenRow.RefreshTokenExpiration = expirationRefreshTokenDate;
             }
 
-            return loginResponse;
+            await _unitOfWork.CompleteAsync();
+
+            return authenticationTokenResponse;
+        }
+
+        public async Task<AuthenticationTokenDto> GenerateAuthenticationTokens(ApplicationUser user)
+        {
+            var userRole = await _userManager.GetRolesAsync(user);
+            var token = _jwtService.GenerateToken(new AuthenticatedUserDto
+            {
+                Id = user.Id,
+                Role = userRole.First()
+            });
+
+            var refreshToken = Guid.NewGuid().ToString();
+
+            var authenticationTokenResponse = new AuthenticationTokenDto
+            {
+                Token = token,
+                RefreshToken = refreshToken,
+            };
+
+            var tokenRow = await _unitOfWork.RefreshTokenAuths.GetAllAsIQueryable().FirstOrDefaultAsync(rt => rt.UserId == user.Id);
+            
+            tokenRow!.Token = token;
+            tokenRow.RefreshToken = refreshToken;
+
+            await _unitOfWork.CompleteAsync();
+
+            return authenticationTokenResponse;
         }
     }
 }

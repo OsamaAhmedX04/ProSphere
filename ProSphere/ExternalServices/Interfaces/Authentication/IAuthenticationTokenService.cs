@@ -6,5 +6,6 @@ namespace ProSphere.ExternalServices.Interfaces.Authentication
     public interface IAuthenticationTokenService
     {
         Task<AuthenticationTokenDto> GenerateAuthenticationTokens(ApplicationUser user, bool rememberMe);
+        Task<AuthenticationTokenDto> GenerateAuthenticationTokens(ApplicationUser user);
     }
 }

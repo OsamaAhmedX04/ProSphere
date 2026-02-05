@@ -29,5 +29,16 @@ namespace ProSphere.ExternalServices.Implementaions.Email
                     )
                 );
         }
+
+        public void SendDeleteAccountOTPMail(string email, string otp)
+        {
+            BackgroundJob.Enqueue<IEmailService>(
+                service => service.SendEmailAsync(
+                    email,
+                    "Delete Your Account",
+                    EmailBody.GetDeleteAccountBody(email, otp)
+                    )
+                );
+        }
     }
 }
