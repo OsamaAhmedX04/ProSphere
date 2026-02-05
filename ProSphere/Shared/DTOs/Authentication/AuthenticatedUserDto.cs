@@ -1,4 +1,4 @@
-﻿namespace ProSphere.Shared.DTOs
+﻿namespace ProSphere.Shared.DTOs.Authentication
 {
     public class AuthenticatedUserDto
     {
