@@ -191,5 +191,96 @@
                 </body>
                 </html>";
         }
+
+        public static string GetDeleteAccountBody(string email, string otp)
+        {
+            return $@"
+                <!DOCTYPE html>
+                <html lang='en'>
+                <head>
+                    <meta charset='UTF-8'>
+                    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                    <title>Confirm Account Deletion</title>
+                </head>
+                <body style='margin:0; padding:0; background-color:#f4f6f8; font-family:Arial, Helvetica, sans-serif;'>
+
+                    <table width='100%' cellpadding='0' cellspacing='0'>
+                        <tr>
+                            <td align='center' style='padding:40px 0;'>
+
+                                <table width='600' cellpadding='0' cellspacing='0' style='background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.08);'>
+
+                                    <!-- Header -->
+                                    <tr>
+                                        <td style='background:#dc2626; padding:30px; text-align:center; color:#ffffff;'>
+                                            <h1 style='margin:0; font-size:26px;'>Confirm Account Deletion ⚠️</h1>
+                                            <p style='margin:8px 0 0; font-size:15px;'>This action is irreversible</p>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Body -->
+                                    <tr>
+                                        <td style='padding:35px 40px; color:#333333;'>
+
+                                            <h2 style='margin-top:0;'>Hello,</h2>
+
+                                            <p style='font-size:15px; line-height:1.6;'>
+                                                We received a request to permanently delete the account associated with:
+                                                <br />
+                                                <strong>{email}</strong>
+                                            </p>
+
+                                            <p style='font-size:15px; line-height:1.6;'>
+                                                To confirm this request, please use the verification code below.
+                                            </p>
+
+                                            <!-- OTP Box -->
+                                            <div style='text-align:center; margin:35px 0;'>
+                                                <div style='display:inline-block;
+                                                            background:#fef2f2;
+                                                            border:2px dashed #dc2626;
+                                                            color:#dc2626;
+                                                            padding:18px 30px;
+                                                            font-size:26px;
+                                                            font-weight:bold;
+                                                            letter-spacing:6px;
+                                                            border-radius:10px;'>
+                                                    {otp}
+                                                </div>
+                                            </div>
+
+                                            <p style='font-size:14px; color:#555555; text-align:center;'>
+                                                This code will expire shortly for security reasons.
+                                            </p>
+
+                                            <p style='font-size:14px; margin-top:30px;'>
+                                                If you did <strong>not</strong> request account deletion, please ignore this email.
+                                                Your account will remain active.
+                                            </p>
+
+                                            <p style='margin-top:40px;'>
+                                                Regards,<br />
+                                                <strong>ProSphere Security Team</strong>
+                                            </p>
+
+                                        </td>
+                                    </tr>
+
+                                    <!-- Footer -->
+                                    <tr>
+                                        <td style='background:#f4f6f8; padding:20px; text-align:center; font-size:12px; color:#777777;'>
+                                            © {DateTime.UtcNow.Year} ProSphere. All rights reserved.
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                            </td>
+                        </tr>
+                    </table>
+
+                </body>
+                </html>";
+        }
     }
 }
