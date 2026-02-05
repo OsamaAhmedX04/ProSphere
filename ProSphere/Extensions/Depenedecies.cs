@@ -11,6 +11,7 @@ using ProSphere.Domain.Entities;
 using ProSphere.ExternalServices.Implementaions.Email;
 using ProSphere.ExternalServices.Implementaions.JWT;
 using ProSphere.ExternalServices.Interfaces.Email;
+using ProSphere.ExternalServices.Interfaces.JWT;
 using ProSphere.Features.Authentication.Commands.Register;
 using ProSphere.Options;
 using ProSphere.RepositoryManager.Implementations;
@@ -42,6 +43,7 @@ namespace ProSphere.Extensions
             // Register Identity
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
+                options.SignIn.RequireConfirmedEmail = true;
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 8;
                 options.Password.RequireUppercase = true;
@@ -51,6 +53,11 @@ namespace ProSphere.Extensions
             })
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders(); // For email confirm, reset password
+
+            services.Configure<DataProtectionTokenProviderOptions>(options =>
+            {
+                options.TokenLifespan = TimeSpan.FromHours(2);
+            });
 
             return services;
         }
@@ -77,7 +84,7 @@ namespace ProSphere.Extensions
         public static IServiceCollection AddJWT(this IServiceCollection services, IConfiguration configuration)
         {
             // Register JWT
-            services.AddScoped<JWTService>();
+            services.AddScoped<IJWTService,JWTService>();
 
             var jwtSettings = configuration.GetSection("JWT");
             var secretKey = Encoding.UTF8.GetBytes(jwtSettings["Key"]!);
