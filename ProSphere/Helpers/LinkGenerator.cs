@@ -12,5 +12,14 @@ namespace ProSphere.Helpers
 
             return confirmationLink;
         }
+
+        public static string GenerateResetPasswordLink(string userId, string token)
+        {
+            var encodedToken = WebUtility.UrlEncode(token);
+
+            var resettingLink = $"https://app.prosphere.com/reset-password?userId={userId}&token={encodedToken}";
+
+            return resettingLink;
+        }
     }
 }
