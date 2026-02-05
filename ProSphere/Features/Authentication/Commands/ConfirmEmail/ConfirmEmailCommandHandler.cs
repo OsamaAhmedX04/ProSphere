@@ -1,10 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Newtonsoft.Json.Linq;
 using ProSphere.Domain.Entities;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.Authentication;
-using ProSphere.Features.Authentication.Commands.Login;
 using ProSphere.ResultResponse;
 using ProSphere.Shared.DTOs.Authentication;
 using System.Net;

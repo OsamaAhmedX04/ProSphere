@@ -1,14 +1,11 @@
 ﻿using FluentValidation;
-using Hangfire;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using ProSphere.Domain.Constants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.ResultResponse;
-using ProSphere.Helpers;
 using LinkGenerator = ProSphere.Helpers.LinkGenerator;
 
 namespace ProSphere.Features.Authentication.Commands.Register
@@ -73,8 +70,8 @@ namespace ProSphere.Features.Authentication.Commands.Register
         }
 
 
-        
 
-        
+
+
     }
 }

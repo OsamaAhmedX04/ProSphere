@@ -1,7 +1,6 @@
 ﻿using Hangfire;
 using ProSphere.Domain.Constants;
 using ProSphere.ExternalServices.Interfaces.Email;
-using System.Data;
 
 namespace ProSphere.ExternalServices.Implementaions.Email
 {

@@ -36,7 +36,7 @@ namespace ProSphere.Features.Authentication.Commands.ChangePassword
             var changePasswordResult = await _userManager
                 .ChangePasswordAsync(user, command.request.CurrentPassword, command.request.NewPassword);
 
-            if(!changePasswordResult.Succeeded)
+            if (!changePasswordResult.Succeeded)
             {
                 var errors = changePasswordResult.ConvertErrorsToDictionary();
                 return Result.ValidationFailure(errors);

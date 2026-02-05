@@ -36,7 +36,7 @@ namespace ProSphere.Features.Authentication.Commands.ResetPassword
 
             var decodedToken = WebUtility.UrlDecode(command.token);
 
-            var resettingResult = await _userManager.ResetPasswordAsync(user, decodedToken,command.request.NewPassword);
+            var resettingResult = await _userManager.ResetPasswordAsync(user, decodedToken, command.request.NewPassword);
 
             if (!resettingResult.Succeeded)
             {

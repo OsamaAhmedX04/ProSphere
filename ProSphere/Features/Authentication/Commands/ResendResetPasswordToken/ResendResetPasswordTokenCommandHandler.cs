@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using ProSphere.Domain.Entities;
 using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.ResultResponse;
-using ProSphere.Helpers;
 using LinkGenerator = ProSphere.Helpers.LinkGenerator;
 
 namespace ProSphere.Features.Authentication.Commands.ResendResetPasswordToken

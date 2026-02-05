@@ -1,13 +1,10 @@
 ﻿using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProSphere.Domain.Entities;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.Authentication;
-using ProSphere.ExternalServices.Interfaces.JWT;
-using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 using ProSphere.Shared.DTOs.Authentication;
 

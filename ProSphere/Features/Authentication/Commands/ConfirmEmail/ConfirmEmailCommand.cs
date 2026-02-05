@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using ProSphere.Features.Authentication.Commands.Login;
 using ProSphere.ResultResponse;
 using ProSphere.Shared.DTOs.Authentication;
 
