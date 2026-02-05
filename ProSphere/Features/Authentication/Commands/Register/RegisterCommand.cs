@@ -1,6 +1,9 @@
-﻿namespace ProSphere.Features.Authentication.Commands.Register
+﻿using MediatR;
+using ProSphere.ResultResponse;
+
+namespace ProSphere.Features.Authentication.Commands.Register
 {
-    public class RegisterCommand
+    public record RegisterCommand(RegisterRequest request) : IRequest<Result>
     {
     }
 }
