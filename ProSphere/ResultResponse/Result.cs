@@ -1,4 +1,4 @@
-﻿namespace ProSphere.Result
+﻿namespace ProSphere.ResultResponse
 {
     public class Result
     {

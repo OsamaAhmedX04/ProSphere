@@ -67,7 +67,6 @@
 	
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Domain\Enums\" />
     <Folder Include="Features\Authentication\Queries\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
