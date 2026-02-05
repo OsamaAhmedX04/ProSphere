@@ -1,0 +1,11 @@
+﻿using ProSphere.Domain.Entities;
+using ProSphere.Features.Authentication.Commands.Login;
+using ProSphere.Shared.DTOs;
+
+namespace ProSphere.ExternalServices.Interfaces.Authentication
+{
+    public interface IAuthenticationTokenService
+    {
+        Task<AuthenticationTokenDto> GenerateAuthenticationTokens(ApplicationUser user, bool rememberMe);
+    }
+}
