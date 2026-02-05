@@ -1,6 +1,9 @@
-﻿namespace ProSphere.Features.Authentication.Commands.Login
+﻿using MediatR;
+using ProSphere.ResultResponse;
+
+namespace ProSphere.Features.Authentication.Commands.Login
 {
-    public class LoginCommand
+    public record LoginCommand(LoginRequest request) : IRequest<Result<LoginResponse>>
     {
     }
 }
