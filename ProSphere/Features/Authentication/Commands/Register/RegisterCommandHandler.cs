@@ -8,7 +8,8 @@ using ProSphere.Domain.Enums;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.ResultResponse;
-using System.Net;
+using ProSphere.Helpers;
+using LinkGenerator = ProSphere.Helpers.LinkGenerator;
 
 namespace ProSphere.Features.Authentication.Commands.Register
 {
@@ -16,11 +17,13 @@ namespace ProSphere.Features.Authentication.Commands.Register
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IValidator<RegisterRequest> _validator;
+        private readonly IEmailSenderService _emailSenderService;
 
-        public RegisterCommandHandler(UserManager<ApplicationUser> userManager, IValidator<RegisterRequest> validator)
+        public RegisterCommandHandler(UserManager<ApplicationUser> userManager, IValidator<RegisterRequest> validator, IEmailSenderService emailSenderService)
         {
             _userManager = userManager;
             _validator = validator;
+            _emailSenderService = emailSenderService;
         }
 
         public async Task<Result> Handle(RegisterCommand command, CancellationToken cancellationToken)
@@ -59,9 +62,9 @@ namespace ProSphere.Features.Authentication.Commands.Register
 
             var emailConfirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
 
-            var confirmationLink = GenerateConfirmationLink(newUser.Id, emailConfirmationToken);
+            var confirmationLink = LinkGenerator.GenerateEmailConfirmationLink(newUser.Id, emailConfirmationToken);
 
-            await SendEmailConfirmationMail(
+            _emailSenderService.SendEmailConfirmationMail(
                 command.request.Email, confirmationLink,
                 command.request.FirstName, command.request.LastName,
                 command.request.Role);
@@ -70,26 +73,8 @@ namespace ProSphere.Features.Authentication.Commands.Register
         }
 
 
-        private async Task SendEmailConfirmationMail(
-            string email, string confirmationLink, string firstName, string lastName, string role)
-        {
+        
 
-            BackgroundJob.Enqueue<IEmailService>(
-                service => service.SendEmailAsync(
-                    email,
-                    "Confirm Your Email",
-                    EmailBody.GetEmailConfirmationBody(email, confirmationLink, firstName, lastName, role)
-                    )
-                );
-        }
-
-        private string GenerateConfirmationLink(string userId, string token)
-        {
-            var encodedToken = WebUtility.UrlEncode(token);
-
-            var confirmationLink = $"https://app.prosphere.com/confirm-email?userId={userId}&token={encodedToken}";
-
-            return confirmationLink;
-        }
+        
     }
 }
