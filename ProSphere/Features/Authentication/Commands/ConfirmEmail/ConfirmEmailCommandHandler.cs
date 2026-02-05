@@ -6,7 +6,7 @@ using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.Authentication;
 using ProSphere.Features.Authentication.Commands.Login;
 using ProSphere.ResultResponse;
-using ProSphere.Shared.DTOs;
+using ProSphere.Shared.DTOs.Authentication;
 using System.Net;
 
 namespace ProSphere.Features.Authentication.Commands.ConfirmEmail
