@@ -68,10 +68,5 @@ namespace ProSphere.Features.Authentication.Commands.Register
 
             return Result.Success("User Registered Successfully , Check Your Mail To Confirm Your Email");
         }
-
-
-
-
-
     }
 }

@@ -23,7 +23,7 @@ namespace ProSphere.Features.Authentication.Commands.ResendResetPasswordToken
             var user = await _userManager.FindByEmailAsync(command.email);
 
             if (user == null)
-                return Result.Failure("User Not Found", 404);
+                return Result.Failure("User Not Found", StatusCodes.Status404NotFound);
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 

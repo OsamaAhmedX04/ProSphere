@@ -25,7 +25,7 @@ namespace ProSphere.Features.Authentication.Commands.ConfirmEmail
             var user = await _userManager.FindByIdAsync(command.userId);
 
             if (user == null)
-                return Result<AuthenticationTokenDto>.Failure("User Not Found", 404);
+                return Result<AuthenticationTokenDto>.Failure("User Not Found", StatusCodes.Status404NotFound);
 
             var decodedToken = WebUtility.UrlDecode(command.token);
 

@@ -22,7 +22,7 @@
 
         public static Result Success(string successMessage) => new Result(true, successMessage);
         public static Result Failure(string errorMessage, int errorCode) => new Result(false, null, errorMessage, errorCode);
-        public static Result ValidationFailure(IDictionary<string, List<string>> validationErrors) => new Result(false, null, "Validation Invalid", 400, validationErrors!);
+        public static Result ValidationFailure(IDictionary<string, List<string>> validationErrors) => new Result(false, null, "Validation Invalid", StatusCodes.Status400BadRequest, validationErrors!);
     }
 
 
@@ -38,6 +38,6 @@
 
         public static Result<T> Success(T value, string? successMessage = null) => new Result<T>(value, true, successMessage);
         public static Result<T> Failure(string errorMessage, int errorCode) => new Result<T>(default, false, null, errorMessage, errorCode);
-        public static Result<T> ValidationFailure(IDictionary<string, List<string>> validationErrors) => new Result<T>(default, false, null, "Validation Invalid", 400, validationErrors!);
+        public static Result<T> ValidationFailure(IDictionary<string, List<string>> validationErrors) => new Result<T>(default, false, null, "Validation Invalid", StatusCodes.Status400BadRequest, validationErrors!);
     }
 }

@@ -24,7 +24,7 @@ namespace ProSphere.Features.Authentication.Commands.ResetPassword
             var user = await _userManager.FindByIdAsync(command.userId);
 
             if (user == null)
-                return Result.Failure("User Not Found", 404);
+                return Result.Failure("User Not Found", StatusCodes.Status404NotFound);
 
             var validationResult = await _validator.ValidateAsync(command.request);
 

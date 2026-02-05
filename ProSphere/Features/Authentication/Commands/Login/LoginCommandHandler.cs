@@ -36,15 +36,15 @@ namespace ProSphere.Features.Authentication.Commands.Login
             var user = await _userManager.FindByEmailAsync(command.request.Email);
 
             if (user == null)
-                return Result<AuthenticationTokenDto>.Failure("User Not Found", 404);
+                return Result<AuthenticationTokenDto>.Failure("User Not Found", StatusCodes.Status404NotFound);
 
             if (!user.EmailConfirmed)
-                return Result<AuthenticationTokenDto>.Failure("Email Not Confirmed Yet , Check Your Mail", 400);
+                return Result<AuthenticationTokenDto>.Failure("Email Not Confirmed Yet , Check Your Mail", StatusCodes.Status400BadRequest);
 
             var loginResult = await _userManager.CheckPasswordAsync(user, command.request.Password);
 
             if (!loginResult)
-                return Result<AuthenticationTokenDto>.Failure("Wrong Email Or Password", 400);
+                return Result<AuthenticationTokenDto>.Failure("Wrong Email Or Password", StatusCodes.Status400BadRequest);
 
 
             var authenticationTokenResponse = await _authenticationTokenService.GenerateAuthenticationTokens(user, command.request.RememberMe);

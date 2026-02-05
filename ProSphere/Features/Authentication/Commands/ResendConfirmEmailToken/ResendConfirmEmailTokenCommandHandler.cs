@@ -23,10 +23,10 @@ namespace ProSphere.Features.Authentication.Commands.ResendConfirmEmailToken
             var user = await _userManager.FindByEmailAsync(command.email);
 
             if (user == null)
-                return Result.Failure("User Not Found", 404);
+                return Result.Failure("User Not Found", StatusCodes.Status404NotFound);
 
             if (user.EmailConfirmed)
-                return Result.Failure("This Email Is Already Confirmed", 409);
+                return Result.Failure("This Email Is Already Confirmed", StatusCodes.Status409Conflict);
 
             var userRoles = await _userManager.GetRolesAsync(user);
             var role = userRoles.FirstOrDefault();
