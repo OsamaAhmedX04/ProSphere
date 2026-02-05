@@ -15,6 +15,8 @@ namespace ProSphere
 
             builder.Services.AddControllers();
 
+            builder.Services.AddBusinessServices();
+
             builder.Services.AddMediatorServices();
 
             builder.Services.AddRepostoryAndUnitOfWork();
