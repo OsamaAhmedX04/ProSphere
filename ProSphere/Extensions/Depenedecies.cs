@@ -8,8 +8,10 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ProSphere.Data.Context;
 using ProSphere.Domain.Entities;
+using ProSphere.ExternalServices.Implementaions.Authentication;
 using ProSphere.ExternalServices.Implementaions.Email;
 using ProSphere.ExternalServices.Implementaions.JWT;
+using ProSphere.ExternalServices.Interfaces.Authentication;
 using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.ExternalServices.Interfaces.JWT;
 using ProSphere.Features.Authentication.Commands.Register;
@@ -25,6 +27,14 @@ namespace ProSphere.Extensions
 {
     public static class Depenedecies
     {
+
+        public static IServiceCollection AddBusinessServices(this IServiceCollection services)
+        {
+            services.AddScoped<IAuthenticationTokenService, AuthenticationTokenService>();
+            services.AddScoped<IEmailSenderService, EmailSenderService>();
+
+            return services;
+        }
         public static IServiceCollection AddMediatorServices(this IServiceCollection services)
         {
             services.AddMediatR(configuration =>
