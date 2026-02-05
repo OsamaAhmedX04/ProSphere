@@ -36,7 +36,7 @@ namespace ProSphere.Features.Authentication.Commands.RefreshToken
 
             var user = await _userManager.FindByIdAsync(tokenRow.UserId);
 
-            if(user == null)
+            if (user == null)
                 return Result<AuthenticationTokenDto>.Failure("User Not Found", StatusCodes.Status404NotFound);
 
             var authenticationTokenResponse = await _authenticationTokenService.GenerateAuthenticationTokens(user);

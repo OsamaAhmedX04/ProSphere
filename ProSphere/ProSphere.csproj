@@ -67,8 +67,6 @@
 	
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Features\Authentication\Commands\DeleteAccount\" />
-    <Folder Include="Features\Authentication\Commands\RefreshToken\" />
     <Folder Include="Features\Authentication\Queries\" />
   </ItemGroup>
 

@@ -47,7 +47,7 @@ namespace ProSphere.Features.Authentication.Commands.DeleteAccount
 
             await _db.SaveChangesAsync();
 
-            _emailSenderService.SendDeleteAccountOTPMail(user.Email!,otp);
+            _emailSenderService.SendDeleteAccountOTPMail(user.Email!, otp);
 
             return Result.Success("We Have Sent OTP In Your Mail");
         }

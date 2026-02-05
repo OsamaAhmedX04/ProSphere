@@ -80,7 +80,7 @@ namespace ProSphere.ExternalServices.Implementaions.Authentication
             };
 
             var tokenRow = await _unitOfWork.RefreshTokenAuths.GetAllAsIQueryable().FirstOrDefaultAsync(rt => rt.UserId == user.Id);
-            
+
             tokenRow!.Token = token;
             tokenRow.RefreshToken = refreshToken;
 
