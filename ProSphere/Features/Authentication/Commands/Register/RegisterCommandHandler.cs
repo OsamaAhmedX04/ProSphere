@@ -28,10 +28,10 @@ namespace ProSphere.Features.Authentication.Commands.Register
 
         public async Task<Result> Handle(RegisterCommand command, CancellationToken cancellationToken)
         {
-            var result = await _validator.ValidateAsync(command.request, cancellationToken);
-            if (!result.IsValid)
+            var validationResult = await _validator.ValidateAsync(command.request, cancellationToken);
+            if (!validationResult.IsValid)
             {
-                var errors = result.ConvertErrorsToDictionary();
+                var errors = validationResult.ConvertErrorsToDictionary();
                 return Result.ValidationFailure(errors);
             }
 

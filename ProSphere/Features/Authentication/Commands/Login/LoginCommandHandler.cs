@@ -9,7 +9,7 @@ using ProSphere.ExternalServices.Interfaces.Authentication;
 using ProSphere.ExternalServices.Interfaces.JWT;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using ProSphere.Shared.DTOs;
+using ProSphere.Shared.DTOs.Authentication;
 
 namespace ProSphere.Features.Authentication.Commands.Login
 {
@@ -29,10 +29,10 @@ namespace ProSphere.Features.Authentication.Commands.Login
         public async Task<Result<AuthenticationTokenDto>> Handle(
             LoginCommand command, CancellationToken cancellationToken)
         {
-            var result = await _validator.ValidateAsync(command.request, cancellationToken);
-            if (!result.IsValid)
+            var validationResult = await _validator.ValidateAsync(command.request, cancellationToken);
+            if (!validationResult.IsValid)
             {
-                var errors = result.ConvertErrorsToDictionary();
+                var errors = validationResult.ConvertErrorsToDictionary();
                 return Result<AuthenticationTokenDto>.ValidationFailure(errors);
             }
 
