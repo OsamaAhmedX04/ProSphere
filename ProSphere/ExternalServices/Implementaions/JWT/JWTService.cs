@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using ProSphere.ExternalServices.Interfaces.JWT;
 using ProSphere.Options;
 using ProSphere.Shared.DTOs;
 using System.IdentityModel.Tokens.Jwt;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace ProSphere.ExternalServices.Implementaions.JWT
 {
-    public class JWTService
+    public class JWTService : IJWTService
     {
         //private readonly IConfiguration _configuration;
 
