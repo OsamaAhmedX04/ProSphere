@@ -8,7 +8,6 @@ using ProSphere.ExternalServices.Interfaces.JWT;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 using ProSphere.Shared.DTOs;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ProSphere.Features.Authentication.Commands.Login
 {
@@ -42,12 +41,12 @@ namespace ProSphere.Features.Authentication.Commands.Login
             if (user == null)
                 return Result<LoginResponse>.Failure("User Not Found", 404);
 
-            if(!user.EmailConfirmed)
+            if (!user.EmailConfirmed)
                 return Result<LoginResponse>.Failure("Email Not Confirmed Yet , Check Your Mail", 400);
 
             var loginResult = await _userManager.CheckPasswordAsync(user, command.request.Password);
 
-            if(!loginResult)
+            if (!loginResult)
                 return Result<LoginResponse>.Failure("Wrong Email Or Password", 400);
 
 

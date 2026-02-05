@@ -2,14 +2,12 @@
 using Hangfire;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Newtonsoft.Json.Linq;
 using ProSphere.Domain.Constants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.ResultResponse;
-using Supabase.Gotrue;
 using System.Net;
 
 namespace ProSphere.Features.Authentication.Commands.Register
@@ -43,7 +41,7 @@ namespace ProSphere.Features.Authentication.Commands.Register
                 Gender = command.request.Gender.ToLower() == Gender.Male.ToString().ToLower() ? Gender.Male : Gender.Female
             };
 
-            var createNewUserResult = await _userManager.CreateAsync(newUser,command.request.Password);
+            var createNewUserResult = await _userManager.CreateAsync(newUser, command.request.Password);
 
             if (!createNewUserResult.Succeeded)
             {
@@ -51,9 +49,9 @@ namespace ProSphere.Features.Authentication.Commands.Register
                 return Result.ValidationFailure(errors);
             }
 
-            var addToRoleResult = await _userManager.AddToRoleAsync(newUser,command.request.Role);
+            var addToRoleResult = await _userManager.AddToRoleAsync(newUser, command.request.Role);
 
-            if(!addToRoleResult.Succeeded)
+            if (!addToRoleResult.Succeeded)
             {
                 var errors = addToRoleResult.ConvertErrorsToDictionary();
                 return Result.ValidationFailure(errors);
@@ -75,12 +73,12 @@ namespace ProSphere.Features.Authentication.Commands.Register
         private async Task SendEmailConfirmationMail(
             string email, string confirmationLink, string firstName, string lastName, string role)
         {
-            
+
             BackgroundJob.Enqueue<IEmailService>(
                 service => service.SendEmailAsync(
                     email,
                     "Confirm Your Email",
-                    EmailBody.GetEmailConfirmationBody(email, confirmationLink, firstName,lastName,role)
+                    EmailBody.GetEmailConfirmationBody(email, confirmationLink, firstName, lastName, role)
                     )
                 );
         }

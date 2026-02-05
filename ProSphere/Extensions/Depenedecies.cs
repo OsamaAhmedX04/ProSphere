@@ -84,7 +84,7 @@ namespace ProSphere.Extensions
         public static IServiceCollection AddJWT(this IServiceCollection services, IConfiguration configuration)
         {
             // Register JWT
-            services.AddScoped<IJWTService,JWTService>();
+            services.AddScoped<IJWTService, JWTService>();
 
             var jwtSettings = configuration.GetSection("JWT");
             var secretKey = Encoding.UTF8.GetBytes(jwtSettings["Key"]!);
