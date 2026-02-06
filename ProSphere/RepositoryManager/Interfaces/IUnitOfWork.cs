@@ -6,6 +6,13 @@ namespace ProSphere.RepositoryManager.Interfaces
     {
         IRepository<RefreshTokenAuth> RefreshTokenAuths { get; }
 
+        IRepository<ProfessionalVerification> ProfessionalVerifications { get; }
+        IRepository<IdentityVerification> IdentityVerifications { get; }
+        IRepository<FinancialVerification> FinancialVerifications { get; }
+
+        IRepository<Creator> Creators { get; }
+        IRepository<Investor> Investors { get; }
+
 
 
         Task<int> CompleteAsync();
