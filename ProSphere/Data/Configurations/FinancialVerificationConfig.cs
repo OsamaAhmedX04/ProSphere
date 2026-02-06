@@ -26,8 +26,8 @@ namespace ProSphere.Data.Configurations
 
             builder
                 .HasOne(v => v.Investor)
-                .WithOne(i => i.FinancialVerification)
-                .HasForeignKey<FinancialVerification>(v => v.InvestorId)
+                .WithMany(i => i.FinancialVerifications)
+                .HasForeignKey(v => v.InvestorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
