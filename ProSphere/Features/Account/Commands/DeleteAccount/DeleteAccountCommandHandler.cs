@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using ProSphere.Data.Context;
 using ProSphere.Domain.Constants;
 using ProSphere.Domain.Entities;
+using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
+using Supabase.Gotrue;
 
 namespace ProSphere.Features.Account.Commands.DeleteAccount
 {
@@ -32,12 +34,32 @@ namespace ProSphere.Features.Account.Commands.DeleteAccount
             if (otp == null || otp.Value != command.otp || otp.ExpireDate <= DateTime.UtcNow)
                 return Result.Failure("OTP Is Invalid Or Expired", StatusCodes.Status404NotFound);
 
+            
             await _userManager.RemoveAuthenticationTokenAsync(user, TokenInfo.DefaultLoginProvider, TokenInfo.DeleteAccountOTPName);
-            _db.Users.Remove(user);
-            await _db.SaveChangesAsync();
+            
+            await DeleteUser(user);
 
             return Result.Success("User Deleted Successfully");
 
+        }
+
+        private async Task DeleteUser(ApplicationUser user)
+        {
+            await DeleteUserPrivacyData(user);
+
+            _db.Users.Remove(user);
+            await _db.SaveChangesAsync();
+        }
+        private async Task DeleteUserPrivacyData(ApplicationUser user )
+        {
+            if (await _userManager.IsInRoleAsync(user, Role.Investor) || await _userManager.IsInRoleAsync(user, Role.Creator))
+                await _db.IdentityVerifications.Where(x => x.UserId == user.Id).ExecuteDeleteAsync();
+
+            if (await _userManager.IsInRoleAsync(user, Role.Investor))
+            {
+                await _db.FinancialVerifications.Where(x => x.InvestorId == user.Id).ExecuteDeleteAsync();
+                await _db.ProfessionalVerifications.Where(x => x.InvestorId == user.Id).ExecuteDeleteAsync();
+            }
         }
     }
 }
