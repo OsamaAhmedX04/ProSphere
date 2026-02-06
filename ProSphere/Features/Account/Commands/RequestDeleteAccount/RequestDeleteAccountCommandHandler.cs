@@ -9,7 +9,7 @@ using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.Helpers;
 using ProSphere.ResultResponse;
 
-namespace ProSphere.Features.Authentication.Commands.DeleteAccount
+namespace ProSphere.Features.Account.Commands.RequestDeleteAccount
 {
     public class RequestDeleteAccountCommandHandler : IRequestHandler<RequestDeleteAccountCommand, Result>
     {

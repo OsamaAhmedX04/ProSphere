@@ -6,7 +6,7 @@ using ProSphere.Domain.Constants;
 using ProSphere.Domain.Entities;
 using ProSphere.ResultResponse;
 
-namespace ProSphere.Features.Authentication.Commands.DeleteAccount
+namespace ProSphere.Features.Account.Commands.DeleteAccount
 {
     public class DeleteAccountCommandHandler : IRequestHandler<DeleteAccountCommand, Result>
     {

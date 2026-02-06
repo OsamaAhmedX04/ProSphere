@@ -67,6 +67,8 @@
 	
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="Features\Account\Endpoint\" />
+    <Folder Include="Features\Account\Queries\" />
     <Folder Include="Features\Authentication\Queries\" />
   </ItemGroup>
 
