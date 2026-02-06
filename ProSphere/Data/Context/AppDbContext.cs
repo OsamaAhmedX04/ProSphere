@@ -10,6 +10,13 @@ namespace ProSphere.Data.Context
 
         public DbSet<RefreshTokenAuth> RefreshTokens { get; set; }
 
+        public DbSet<IdentityVerification> IdentityVerifications { get; set; }
+        public DbSet<FinancialVerification> FinancialVerifications { get; set; }
+        public DbSet<ProfessionalVerification> ProfessionalVerifications { get; set; }
+
+        public DbSet<Creator> Creator { get; set; }
+        public DbSet<Investor> Investor { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

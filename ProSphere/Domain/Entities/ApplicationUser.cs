@@ -15,7 +15,13 @@ namespace ProSphere.Domain.Entities
 
         public bool IsActive { get; set; }
 
+        public Creator Creator { get; set; }
+        public Investor Investor { get; set; }
         public RefreshTokenAuth RefreshTokenAuth { get; set; }
+        public ICollection<IdentityVerification> IdentityVerifications { get; set; } = new List<IdentityVerification>();
+        public ICollection<IdentityVerification> ReviewedIdentityVerifications { get; set; } = new List<IdentityVerification>();
+        public ICollection<FinancialVerification> ReviewedFinancialVerifications { get; set; } = new List<FinancialVerification>();
+        public ICollection<ProfessionalVerification> ReviewedProfessionalVerifications { get; set; } = new List<ProfessionalVerification>();
 
     }
 }
