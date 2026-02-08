@@ -40,5 +40,71 @@ namespace ProSphere.ExternalServices.Implementaions.Email
                     )
                 );
         }
+
+        public void SendAcceptanceVerifiedIdentityMail(string email, string firstName, string lastName)
+        {
+            BackgroundJob.Enqueue<IEmailService>(
+                service => service.SendEmailAsync(
+                    email,
+                    "Identity Verified Successfully",
+                    EmailBody.GetVerifiedIdentityAcceptanceBody(email, firstName, lastName)
+                    )
+                );
+        }
+
+        public void SendRejectionVerifiedIdentityMail(string email, string firstName, string lastName, string rejectionReason)
+        {
+            BackgroundJob.Enqueue<IEmailService>(
+                service => service.SendEmailAsync(
+                    email,
+                    "Identity Rejected",
+                    EmailBody.GetVerifiedIdentityRejectionBody(email, firstName, lastName, rejectionReason)
+                    )
+                );
+        }
+
+        public void SendAcceptanceVerifiedFinancialMail(string email, string firstName, string lastName)
+        {
+            BackgroundJob.Enqueue<IEmailService>(
+                service => service.SendEmailAsync(
+                    email,
+                    "Financail Verification Accepted",
+                    EmailBody.GetVerifiedFinancialAcceptanceBody(email, firstName, lastName)
+                    )
+                );
+        }
+
+        public void SendRejectionVerifiedFinancialMail(string email, string firstName, string lastName, string rejectionReason)
+        {
+            BackgroundJob.Enqueue<IEmailService>(
+                service => service.SendEmailAsync(
+                    email,
+                    "Financail Verification Rejected",
+                    EmailBody.GetVerifiedFinancialRejectionBody(email, firstName, lastName, rejectionReason)
+                    )
+                );
+        }
+
+        public void SendAcceptanceVerifiedProfessionalMail(string email, string firstName, string lastName)
+        {
+            BackgroundJob.Enqueue<IEmailService>(
+                service => service.SendEmailAsync(
+                    email,
+                    "Professinal Verification Accepted",
+                    EmailBody.GetVerifiedProfessionalAcceptanceBody(email, firstName, lastName)
+                    )
+                );
+        }
+
+        public void SendRejectionVerifiedProfessionalMail(string email, string firstName, string lastName, string rejectionReason)
+        {
+            BackgroundJob.Enqueue<IEmailService>(
+                service => service.SendEmailAsync(
+                    email,
+                    "Professinal Verification Rejected",
+                    EmailBody.GetVerifiedProfessionalRejectionBody(email, firstName, lastName, rejectionReason)
+                    )
+                );
+        }
     }
 }
