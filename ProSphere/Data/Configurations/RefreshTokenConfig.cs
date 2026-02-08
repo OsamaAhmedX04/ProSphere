@@ -9,6 +9,7 @@ namespace ProSphere.Data.Configurations
         public void Configure(EntityTypeBuilder<RefreshTokenAuth> builder)
         {
             builder.HasKey(rf => rf.UserId);
+
         }
     }
 }

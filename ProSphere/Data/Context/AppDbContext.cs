@@ -13,6 +13,10 @@ namespace ProSphere.Data.Context
         public DbSet<IdentityVerification> IdentityVerifications { get; set; }
         public DbSet<FinancialVerification> FinancialVerifications { get; set; }
         public DbSet<ProfessionalVerification> ProfessionalVerifications { get; set; }
+        public DbSet<IdentityVerificationHistory> IdentityVerificationHistories { get; set; }
+        public DbSet<FinancialVerificationHistory> FinancialVerificationHistories { get; set; }
+        public DbSet<ProfessionalVerificationHistory> ProfessionalVerificationHistories { get; set; }
+        public DbSet<UserAccountHistory> UserAccountHistories { get; set; }
 
         public DbSet<Creator> Creator { get; set; }
         public DbSet<Investor> Investor { get; set; }

@@ -25,5 +25,8 @@ namespace ProSphere.Domain.Entities
         public ApplicationUser? Moderator { get; set; }
         public DateTime? ReviewedAt { get; set; }
         public DateTime CreatedAt { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

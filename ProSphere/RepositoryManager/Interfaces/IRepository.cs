@@ -38,6 +38,8 @@ namespace ProSphere.RepositoryManager.Interfaces
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null
             ) where TResult : class;
 
+        Task<List<TEntity>> GetAllAsyncEnhanced(Expression<Func<TEntity, bool>> filter);
+
         Task<PageSourcePagination<TResult>> GetAllPaginatedAsync<TResult>(
             Expression<Func<TEntity, TResult>> selector,
             int pageNumber = 1, int pageSize = 10,

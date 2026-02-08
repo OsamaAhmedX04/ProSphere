@@ -97,6 +97,11 @@ namespace ProSphere.RepositoryManager.Implementations
             return await query.Select(selector).ToListAsync();
         }
 
+        public async Task<List<TEntity>> GetAllAsyncEnhanced(Expression<Func<TEntity, bool>> filter)
+        {
+            return await _dbSet.Where(filter).ToListAsync();
+        }
+
 
         public async Task<PageSourcePagination<TResult>> GetAllPaginatedAsync<TResult>(
             Expression<Func<TEntity, TResult>> selector,

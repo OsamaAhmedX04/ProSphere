@@ -22,6 +22,10 @@ namespace ProSphere.Data.Configurations
             builder.Property(v => v.CreatedAt)
                 .HasDefaultValueSql("GETUTCDATE()");
 
+            builder.Property(v => v.RowVersion)
+                .IsRowVersion();
+
+
             builder
                 .HasOne(v => v.User)
                 .WithMany(a => a.IdentityVerifications)

@@ -10,7 +10,6 @@ namespace ProSphere.Data.Configurations
         {
             builder.HasKey(c => c.Id);
 
-            builder.Property(c => c.IsVerified).HasDefaultValue(false);
 
             builder
                 .HasOne(c => c.User)

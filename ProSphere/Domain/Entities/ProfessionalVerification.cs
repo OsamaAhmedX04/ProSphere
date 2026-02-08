@@ -13,7 +13,7 @@ namespace ProSphere.Domain.Entities
         public string InvestorId { get; set; }
         public Investor Investor { get; set; }
 
-        public ProfessionalType DocumentType { get; set; }
+        public string DocumentType { get; set; }
         public string DocumentURL { get; set; }
 
         public string? Notes { get; set; }
@@ -26,5 +26,8 @@ namespace ProSphere.Domain.Entities
         public ApplicationUser? Moderator { get; set; }
         public DateTime ReviewedAt { get; set; }
         public DateTime CreatedAt { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

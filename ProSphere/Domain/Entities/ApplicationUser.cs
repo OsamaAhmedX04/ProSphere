@@ -12,9 +12,7 @@ namespace ProSphere.Domain.Entities
         [Required, MaxLength(40)]
         public string LastName { get; set; }
         public Gender Gender { get; set; }
-
-        public bool IsActive { get; set; }
-
+        public bool IsVerified { get; set; }
         public Creator Creator { get; set; }
         public Investor Investor { get; set; }
         public RefreshTokenAuth RefreshTokenAuth { get; set; }

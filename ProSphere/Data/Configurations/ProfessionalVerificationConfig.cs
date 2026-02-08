@@ -13,16 +13,16 @@ namespace ProSphere.Data.Configurations
 
             builder.Property(v => v.DocumentURL).IsRequired();
 
-            builder.Property(v => v.DocumentType)
-                .HasConversion<string>()
-                .IsRequired();
-
             builder.Property(v => v.status)
                 .HasConversion<string>()
                 .IsRequired();
 
             builder.Property(v => v.CreatedAt)
                 .HasDefaultValueSql("GETUTCDATE()");
+
+            builder.Property(v => v.RowVersion)
+                .IsRowVersion();
+
 
             builder
                 .HasOne(v => v.Investor)

@@ -10,11 +10,10 @@ namespace ProSphere.Data.Configurations
         {
             builder.HasKey(i => i.Id);
 
-            builder.Property(i => i.IsVerified).HasDefaultValue(false);
-
             builder.Property(i => i.InvestorLevel)
                 .HasConversion<string>()
                 .IsRequired();
+            
 
             builder
                 .HasOne(i => i.User)
