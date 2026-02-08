@@ -31,9 +31,12 @@ namespace ProSphere.Features.Account.Commands.RequestDeleteAccount
             if (user == null)
                 return Result.Failure("User Not Found", StatusCodes.Status404NotFound);
 
+            //if (user.IsDeleted)
+            //    return Result.Failure("User Not Found", StatusCodes.Status404NotFound);
+
             var otp = OTPGenerator.GenerateRandomOTP();
 
-            var result = await _userManager.SetAuthenticationTokenAsync(user, TokenInfo.DefaultLoginProvider, TokenInfo.DeleteAccountOTPName, otp);
+            var result = await _userManager.SetAuthenticationTokenAsync(user, AuthenticationTokenInfo.DefaultLoginProvider, AuthenticationTokenInfo.DeleteAccountOTPName, otp);
 
             if (!result.Succeeded)
             {
@@ -41,7 +44,7 @@ namespace ProSphere.Features.Account.Commands.RequestDeleteAccount
                 return Result.ValidationFailure(errors);
             }
 
-            var token = await _db.UserTokens.FirstOrDefaultAsync(t => t.Name == TokenInfo.DeleteAccountOTPName && t.UserId == user.Id);
+            var token = await _db.UserTokens.FirstOrDefaultAsync(t => t.Name == AuthenticationTokenInfo.DeleteAccountOTPName && t.UserId == user.Id);
 
             token!.ExpireDate = DateTime.UtcNow.AddMinutes(15);
 
