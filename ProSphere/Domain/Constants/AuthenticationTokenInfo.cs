@@ -1,6 +1,6 @@
 ﻿namespace ProSphere.Domain.Constants
 {
-    public static class TokenInfo
+    public static class AuthenticationTokenInfo
     {
         public const string DeleteAccountOTPName = "DeleteAccountOTP";
 
