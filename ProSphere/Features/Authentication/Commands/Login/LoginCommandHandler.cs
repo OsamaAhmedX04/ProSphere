@@ -38,6 +38,9 @@ namespace ProSphere.Features.Authentication.Commands.Login
             if (user == null)
                 return Result<AuthenticationTokenDto>.Failure("User Not Found", StatusCodes.Status404NotFound);
 
+            //if (user.IsDeleted)
+            //    return Result<AuthenticationTokenDto>.Failure("User Not Found", StatusCodes.Status404NotFound);
+
             if (!user.EmailConfirmed)
                 return Result<AuthenticationTokenDto>.Failure("Email Not Confirmed Yet , Check Your Mail", StatusCodes.Status400BadRequest);
 
