@@ -10,11 +10,15 @@ using ProSphere.Data.Context;
 using ProSphere.Domain.Entities;
 using ProSphere.ExternalServices.Implementaions.Authentication;
 using ProSphere.ExternalServices.Implementaions.Email;
+using ProSphere.ExternalServices.Implementaions.FileStorage;
 using ProSphere.ExternalServices.Implementaions.JWT;
 using ProSphere.ExternalServices.Interfaces.Authentication;
 using ProSphere.ExternalServices.Interfaces.Email;
+using ProSphere.ExternalServices.Interfaces.FileStorage;
 using ProSphere.ExternalServices.Interfaces.JWT;
 using ProSphere.Features.Authentication.Commands.Register;
+using ProSphere.Jobs.Account.DeleteAccount;
+using ProSphere.Jobs.Documents.DeleteDocumentVerification;
 using ProSphere.Options;
 using ProSphere.RepositoryManager.Implementations;
 using ProSphere.RepositoryManager.Interfaces;
@@ -157,6 +161,8 @@ namespace ProSphere.Extensions
                 });
             });
 
+            services.AddScoped<IFileService, FileService>();
+
             return services;
         }
 
@@ -171,6 +177,13 @@ namespace ProSphere.Extensions
                 .UseSqlServerStorage(configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddHangfireServer();
+
+            return services;
+        }
+        public static IServiceCollection AddBackgroundJobs(this IServiceCollection services)
+        {
+            services.AddScoped<IDeleteAccountJob, DeleteAccountJob>();
+            services.AddScoped<IDeleteDocumentVerificationJob, DeleteDocumentVerificationJob>();
 
             return services;
         }

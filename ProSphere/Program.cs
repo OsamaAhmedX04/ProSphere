@@ -23,6 +23,8 @@ namespace ProSphere
 
             builder.Services.AddFluentValidation();
 
+            builder.Services.AddBackgroundJobs();
+
             builder.Services.AddDbContextAndIdentity(builder.Configuration);
 
             builder.Services.AddJWT(builder.Configuration);
