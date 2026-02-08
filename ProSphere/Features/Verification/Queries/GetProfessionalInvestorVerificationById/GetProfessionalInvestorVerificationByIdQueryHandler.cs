@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using ProSphere.Domain.Constants;
-using ProSphere.Features.Verification.Queries.GetFinancialInvestorVerificationById;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 

@@ -1,5 +1,4 @@
 ﻿using ProSphere.Domain.Constants;
-using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.ExternalServices.Interfaces.FileStorage;
 using ProSphere.RepositoryManager.Interfaces;
@@ -26,7 +25,7 @@ namespace ProSphere.Jobs.Documents.DeleteDocumentVerification
                 );
             await _unitOfWork.FinancialVerifications.BulkDeleteAsync(v => v.InvestorId == userId && v.status == status);
 
-            foreach (var document in documents )
+            foreach (var document in documents)
                 await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + document);
         }
 

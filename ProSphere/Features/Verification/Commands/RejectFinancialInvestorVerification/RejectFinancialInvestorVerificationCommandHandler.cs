@@ -8,7 +8,6 @@ using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ProSphere.Features.Verification.Commands.RejectFinancialInvestorVerification
 {

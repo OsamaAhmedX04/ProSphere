@@ -4,10 +4,8 @@ using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.FileStorage;
-using ProSphere.Features.Verification.Commands.VerifyIdentity;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ProSphere.Features.Verification.Commands.VerifyFinancialInvestor
 {

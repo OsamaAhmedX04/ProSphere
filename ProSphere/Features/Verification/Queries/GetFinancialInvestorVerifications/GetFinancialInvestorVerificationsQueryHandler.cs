@@ -2,12 +2,10 @@
 using MediatR;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
-using ProSphere.Features.Verification.Queries.GetIdentityVerifications;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
 using System.Linq.Expressions;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ProSphere.Features.Verification.Queries.GetFinancialInvestorVerifications
 {
@@ -21,7 +19,7 @@ namespace ProSphere.Features.Verification.Queries.GetFinancialInvestorVerificati
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<PageSourcePagination<GetFinancialInvestorVerificationResponse>>> 
+        public async Task<Result<PageSourcePagination<GetFinancialInvestorVerificationResponse>>>
             Handle(GetFinancialInvestorVerificationQuery query, CancellationToken cancellationToken)
         {
             Expression<Func<FinancialVerification, bool>> filter = v => true;

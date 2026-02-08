@@ -5,12 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using ProSphere.Data.Context;
 using ProSphere.Domain.Constants;
 using ProSphere.Domain.Entities;
-using ProSphere.Domain.Enums;
 using ProSphere.Jobs.Account.DeleteAccount;
-using ProSphere.RepositoryManager.Implementations;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using Supabase.Gotrue;
 
 namespace ProSphere.Features.Account.Commands.DeleteAccount
 {
@@ -30,7 +27,7 @@ namespace ProSphere.Features.Account.Commands.DeleteAccount
         public async Task<Result> Handle(DeleteAccountCommand command, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByIdAsync(command.userId);
-            
+
 
             if (user == null)
                 return Result.Failure("User Not Found", StatusCodes.Status404NotFound);
@@ -41,7 +38,7 @@ namespace ProSphere.Features.Account.Commands.DeleteAccount
             if (otp == null || otp.Value != command.otp || otp.ExpireDate <= DateTime.UtcNow)
                 return Result.Failure("OTP Is Invalid Or Expired", StatusCodes.Status404NotFound);
 
-            
+
             await _userManager.RemoveAuthenticationTokenAsync(user, AuthenticationTokenInfo.DefaultLoginProvider, AuthenticationTokenInfo.DeleteAccountOTPName);
 
             var deleteUselessDataJob = BackgroundJob.Enqueue<IDeleteAccountJob>(
@@ -56,12 +53,12 @@ namespace ProSphere.Features.Account.Commands.DeleteAccount
             BackgroundJob.Schedule<IDeleteAccountJob>(
                 service => service.DeleteUserAsync(user.Id),
                 TimeSpan.FromDays(30)
-                ); 
+                );
 
             return Result.Success("User Deleted Successfully");
 
         }
 
-        
+
     }
 }

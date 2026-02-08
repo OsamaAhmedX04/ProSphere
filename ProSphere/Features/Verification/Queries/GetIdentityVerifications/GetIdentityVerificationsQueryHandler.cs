@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using LinqKit;
+﻿using LinqKit;
 using MediatR;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
@@ -20,7 +19,7 @@ namespace ProSphere.Features.Verification.Queries.GetIdentityVerifications
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<PageSourcePagination<GetIdentityVerificationResponse>>> 
+        public async Task<Result<PageSourcePagination<GetIdentityVerificationResponse>>>
             Handle(GetIdentityVerificationQuery query, CancellationToken cancellationToken)
         {
             Expression<Func<IdentityVerification, bool>> filter = v => true;
@@ -49,7 +48,7 @@ namespace ProSphere.Features.Verification.Queries.GetIdentityVerifications
                 pageNumber: query.pageNumber,
                 pageSize: 20
                 );
-            
+
             return Result<PageSourcePagination<GetIdentityVerificationResponse>>
                 .Success(result, "Paginated Identites Retrieved Successfully");
 

@@ -2,7 +2,6 @@
 using MediatR;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
-using ProSphere.Features.Verification.Queries.GetFinancialInvestorVerifications;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
@@ -20,7 +19,7 @@ namespace ProSphere.Features.Verification.Queries.GetProfessionalInvestorVerific
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<PageSourcePagination<GetProfessionalInvestorVerificationResponse>>> 
+        public async Task<Result<PageSourcePagination<GetProfessionalInvestorVerificationResponse>>>
             Handle(GetProfessionalInvestorVerificationQuery query, CancellationToken cancellationToken)
         {
             Expression<Func<ProfessionalVerification, bool>> filter = v => true;

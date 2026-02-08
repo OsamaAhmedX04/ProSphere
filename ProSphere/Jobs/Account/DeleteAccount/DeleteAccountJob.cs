@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using ProSphere.Data.Context;
+﻿using Microsoft.AspNetCore.Identity;
 using ProSphere.Domain.Constants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
@@ -32,7 +29,7 @@ namespace ProSphere.Jobs.Account.DeleteAccount
             var financialHistory = await _unitOfWork.FinancialVerificationHistories.FirstOrDefaultAsync(h => h.InvestorEmail == user.Email);
             var professionalHistory = await _unitOfWork.ProfessionalVerificationHistories.FirstOrDefaultAsync(h => h.InvestorEmail == user.Email);
 
-            if (identityHistory != null) 
+            if (identityHistory != null)
             {
                 _unitOfWork.IdentityVerificationHistories.Delete(identityHistory.Id);
                 await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + identityHistory.IdBackImageURL);
@@ -135,7 +132,7 @@ namespace ProSphere.Jobs.Account.DeleteAccount
                 }
             }
 
-            await _unitOfWork.UserAccountHistories.AddAsync(new UserAccountHistory{ Email = user.Email! });
+            await _unitOfWork.UserAccountHistories.AddAsync(new UserAccountHistory { Email = user.Email! });
 
             if (userRoles.Contains(Role.Creator))
             {

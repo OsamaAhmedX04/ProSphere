@@ -6,7 +6,6 @@ using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.Email;
-using ProSphere.Features.Verification.Commands.RejectFinancialInvestorVerification;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 

@@ -1,5 +1,4 @@
-﻿using ProSphere.Domain.Entities;
-using ProSphere.Domain.Enums;
+﻿using ProSphere.Domain.Enums;
 
 namespace ProSphere.Jobs.Documents.DeleteDocumentVerification
 {

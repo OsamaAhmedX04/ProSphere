@@ -1,9 +1,4 @@
-﻿using ProSphere.Domain.Entities;
-using ProSphere.Domain.Enums;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ProSphere.Features.Verification.Queries.GetIdentityVerificationById
+﻿namespace ProSphere.Features.Verification.Queries.GetIdentityVerificationById
 {
     public class GetIdentityVerificationByIdResponse
     {

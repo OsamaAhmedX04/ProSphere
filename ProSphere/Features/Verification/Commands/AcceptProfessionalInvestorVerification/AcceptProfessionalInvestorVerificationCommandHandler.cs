@@ -8,7 +8,6 @@ using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.Jobs.Documents.DeleteDocumentVerification;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ProSphere.Features.Verification.Commands.AcceptProfessionalInvestorVerification
 {

@@ -1,6 +1,4 @@
-﻿using ProSphere.Domain.Enums;
-
-namespace ProSphere.Features.Verification.Commands.VerifyFinancialInvestor
+﻿namespace ProSphere.Features.Verification.Commands.VerifyFinancialInvestor
 {
     public class VerifyFinancialInvestorRequest
     {

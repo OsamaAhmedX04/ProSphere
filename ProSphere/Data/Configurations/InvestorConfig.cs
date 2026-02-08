@@ -13,7 +13,7 @@ namespace ProSphere.Data.Configurations
             builder.Property(i => i.InvestorLevel)
                 .HasConversion<string>()
                 .IsRequired();
-            
+
 
             builder
                 .HasOne(i => i.User)

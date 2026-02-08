@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using ProSphere.Features.Verification.Commands.RejectIdentityVerification;
 using ProSphere.ResultResponse;
 
 namespace ProSphere.Features.Verification.Commands.RejectFinancialInvestorVerification

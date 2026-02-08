@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using ProSphere.Domain.Constants;
-using ProSphere.Features.Verification.Queries.GetIdentityVerificationById;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ProSphere.Features.Verification.Queries.GetFinancialInvestorVerificationById
 {
@@ -17,7 +15,7 @@ namespace ProSphere.Features.Verification.Queries.GetFinancialInvestorVerificati
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<GetFinancialInvestorVerificationByIdResponse>> 
+        public async Task<Result<GetFinancialInvestorVerificationByIdResponse>>
             Handle(GetFinancialInvestorVerificationByIdQuery query, CancellationToken cancellationToken)
         {
             var result = await _unitOfWork.FinancialVerifications.GetEnhancedAsync(

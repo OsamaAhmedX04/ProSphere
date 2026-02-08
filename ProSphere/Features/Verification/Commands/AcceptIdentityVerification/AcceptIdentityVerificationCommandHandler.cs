@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.ExternalServices.Interfaces.Email;
-using ProSphere.ExternalServices.Interfaces.FileStorage;
 using ProSphere.Jobs.Documents.DeleteDocumentVerification;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;

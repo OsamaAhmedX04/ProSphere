@@ -70,7 +70,7 @@ namespace ProSphere.Features.Authentication.Commands.Register
                 return Result.ValidationFailure(errors);
             }
 
-            if(command.request.Role == Role.Creator)
+            if (command.request.Role == Role.Creator)
             {
                 await _unitOfWork.Creators.AddAsync(new Creator
                 {
@@ -103,8 +103,8 @@ namespace ProSphere.Features.Authentication.Commands.Register
             return Result.Success("User Registered Successfully , Check Your Mail To Confirm Your Email");
         }
 
-        private async Task<bool> IsDeletedUser(string userEmail) => 
+        private async Task<bool> IsDeletedUser(string userEmail) =>
             await _unitOfWork.UserAccountHistories.FirstOrDefaultAsync(h => h.Email == userEmail) != null;
-        
+
     }
 }
