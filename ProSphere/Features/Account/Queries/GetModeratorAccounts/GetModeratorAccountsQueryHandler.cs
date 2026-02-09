@@ -19,7 +19,7 @@ namespace ProSphere.Features.Account.Queries.GetModeratorAccounts
 
         public async Task<Result<PageSourcePagination<GetModeratorAccountsResponse>>> Handle(GetModeratorAccountsQuery query, CancellationToken cancellationToken)
         {
-            Expression<Func<Moderator, bool>> filter = m => true;
+            Expression<Func<Domain.Entities.Moderator, bool>> filter = m => true;
 
             if (!string.IsNullOrEmpty(query.userName))
                 filter = filter.And(m => (m.User.FirstName + " " + m.User.LastName).Contains(query.userName));
