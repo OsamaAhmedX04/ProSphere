@@ -26,11 +26,11 @@ namespace ProSphere.Features.Account.Queries.GetInvestorAccount
                     Gender = i.User.Gender.ToString(),
                     ImageProfileURL = SupabaseConstants.PrefixSupaURL + i.ImageProfileURL ?? null,
                     IsVerified = i.User.IsVerified,
-                    IsFinancail = i.InvestorLevel.ToString() == InvestorLevel.Professional.ToString()
+                    IsFinancail = i.InvestorLevel == InvestorLevel.Professional
                                   ||
-                                  i.InvestorLevel.ToString() == InvestorLevel.Financial.ToString(),
+                                  i.InvestorLevel == InvestorLevel.Financial,
 
-                    IsProfessional = i.InvestorLevel.ToString() == InvestorLevel.Professional.ToString()
+                    IsProfessional = i.InvestorLevel == InvestorLevel.Professional
                 });
 
             if (result is null)

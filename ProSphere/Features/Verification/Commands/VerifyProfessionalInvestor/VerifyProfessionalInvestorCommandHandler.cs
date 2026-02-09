@@ -38,9 +38,18 @@ namespace ProSphere.Features.Verification.Commands.VerifyProfessionalInvestor
                 return Result.ValidationFailure(errors);
             }
 
-            var investor = await _unitOfWork.Investors.GetByIdAsync(command.investorId);
+            var investor = await _unitOfWork.Investors.GetEnhancedAsync(
+                filter: i => i.Id == command.investorId,
+                selector: i => new
+                {
+                    investorId = i.Id,
+                    IsFinancialVerified = i.InvestorLevel == InvestorLevel.Financial,
+                });
+
             if (investor == null)
                 return Result.Failure("Investor Not Found", StatusCodes.Status404NotFound);
+            if (!investor.IsFinancialVerified)
+                return Result.Failure("You Have to Verify That You are a Financial Investor First", StatusCodes.Status400BadRequest);
 
             var documentImageURL = await _fileService.UploadAsync(command.request.DocumentImage, $"Verifications/Professional/{command.investorId}");
 
