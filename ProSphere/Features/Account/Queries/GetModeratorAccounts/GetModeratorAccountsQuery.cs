@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using ProSphere.Features.Account.Queries.GetAdminAccount;
 using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
 

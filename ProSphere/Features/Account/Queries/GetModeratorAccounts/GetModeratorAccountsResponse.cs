@@ -1,7 +1,4 @@
-﻿using ProSphere.Domain.Enums;
-using System.ComponentModel.DataAnnotations;
-
-namespace ProSphere.Features.Account.Queries.GetModeratorAccounts
+﻿namespace ProSphere.Features.Account.Queries.GetModeratorAccounts
 {
     public class GetModeratorAccountsResponse
     {

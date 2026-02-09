@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using ProSphere.Domain.Constants;
 using ProSphere.Domain.Enums;
-using ProSphere.Features.Account.Queries.GetCreatorAccount;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 
@@ -27,7 +26,7 @@ namespace ProSphere.Features.Account.Queries.GetInvestorAccount
                     Gender = i.User.Gender.ToString(),
                     ImageProfileURL = SupabaseConstants.PrefixSupaURL + i.ImageProfileURL ?? null,
                     IsVerified = i.User.IsVerified,
-                    IsFinancail = i.InvestorLevel.ToString() == InvestorLevel.Professional.ToString() 
+                    IsFinancail = i.InvestorLevel.ToString() == InvestorLevel.Professional.ToString()
                                   ||
                                   i.InvestorLevel.ToString() == InvestorLevel.Financial.ToString(),
 

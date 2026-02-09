@@ -21,8 +21,8 @@ namespace ProSphere.Features.Account.Queries.GetModeratorAccounts
         {
             Expression<Func<Moderator, bool>> filter = m => true;
 
-            if(!string.IsNullOrEmpty(query.userName))
-                filter = filter.And(m => (m.User.FirstName + " " +  m.User.LastName).Contains(query.userName));
+            if (!string.IsNullOrEmpty(query.userName))
+                filter = filter.And(m => (m.User.FirstName + " " + m.User.LastName).Contains(query.userName));
 
             var moderators = await _unitOfWork.Moderators.GetAllPaginatedEnhancedAsync(
                 filter: filter,

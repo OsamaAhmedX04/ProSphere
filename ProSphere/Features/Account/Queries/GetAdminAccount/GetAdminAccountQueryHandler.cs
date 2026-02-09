@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using System.Reflection.Metadata.Ecma335;
 
 namespace ProSphere.Features.Account.Queries.GetAdminAccount
 {

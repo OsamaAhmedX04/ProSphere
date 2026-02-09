@@ -1,6 +1,4 @@
-﻿using ProSphere.Domain.Enums;
-
-namespace ProSphere.Features.Account.Queries.GetAdminAccount
+﻿namespace ProSphere.Features.Account.Queries.GetAdminAccount
 {
     public class GetAdminAccountResponse
     {

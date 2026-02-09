@@ -1,6 +1,4 @@
-﻿using ProSphere.Domain.Enums;
-
-namespace ProSphere.Features.Account.Queries.GetCreatorAccount
+﻿namespace ProSphere.Features.Account.Queries.GetCreatorAccount
 {
     public class GetCreatorAccountResponse
     {
