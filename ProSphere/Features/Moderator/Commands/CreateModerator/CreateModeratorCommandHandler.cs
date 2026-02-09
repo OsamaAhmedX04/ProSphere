@@ -61,7 +61,7 @@ namespace ProSphere.Features.Moderator.Commands.CreateModerator
                 return Result<CreateModeratorResponse>.ValidationFailure(errors);
             }
 
-            var newModerator = new Domain.Entities.Moderator{Id = newUser.Id};
+            var newModerator = new Domain.Entities.Moderator { Id = newUser.Id };
             await _unitOfWork.Moderators.AddAsync(newModerator);
             await _unitOfWork.CompleteAsync();
 

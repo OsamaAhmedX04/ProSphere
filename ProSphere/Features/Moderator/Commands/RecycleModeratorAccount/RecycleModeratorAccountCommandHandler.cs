@@ -3,10 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using ProSphere.Domain.Constants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
-using ProSphere.Features.Moderator.Commands.CreateModerator;
 using ProSphere.Helpers;
 using ProSphere.ResultResponse;
-using System.Runtime.CompilerServices;
 
 namespace ProSphere.Features.Moderator.Commands.RecycleModeratorAccount
 {
@@ -27,7 +25,7 @@ namespace ProSphere.Features.Moderator.Commands.RecycleModeratorAccount
                 return Result<RecycleModeratorAccountResponse>.Failure("User Not Found", StatusCodes.Status404NotFound);
 
             var userRoles = await _userManager.GetRolesAsync(user);
-            if(!(userRoles.Contains(Role.Moderator) || userRoles.Contains(Role.InActiveModerator)))
+            if (!(userRoles.Contains(Role.Moderator) || userRoles.Contains(Role.InActiveModerator)))
                 return Result<RecycleModeratorAccountResponse>.Failure("User Not Found", StatusCodes.Status404NotFound);
 
             var response = new RecycleModeratorAccountResponse { TempPassword = PasswordGenerator.Generate(PasswordDificulty.Low) };

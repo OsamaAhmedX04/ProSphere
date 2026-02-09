@@ -1,6 +1,5 @@
 ﻿using LinqKit;
 using MediatR;
-using ProSphere.Domain.Entities;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;

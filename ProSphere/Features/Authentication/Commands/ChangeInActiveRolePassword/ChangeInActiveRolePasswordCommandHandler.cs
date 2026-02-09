@@ -5,7 +5,6 @@ using ProSphere.Domain.Constants;
 using ProSphere.Domain.Entities;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.Authentication;
-using ProSphere.Features.Authentication.Commands.ChangePassword;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 using ProSphere.Shared.DTOs.Authentication;
@@ -31,7 +30,7 @@ namespace ProSphere.Features.Authentication.Commands.ChangeInActiveRolePassword
             _validator = validator;
         }
 
-        public async Task<Result<AuthenticationTokenDto>> 
+        public async Task<Result<AuthenticationTokenDto>>
             Handle(ChangeInActiveRolePasswordCommand command, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByIdAsync(command.request.UserId);
@@ -56,7 +55,7 @@ namespace ProSphere.Features.Authentication.Commands.ChangeInActiveRolePassword
                 return Result<AuthenticationTokenDto>.ValidationFailure(errors);
             }
             var userRoles = await _userManager.GetRolesAsync(user);
-            
+
 
             if (userRoles.Contains(Role.Moderator))
             {
@@ -69,7 +68,7 @@ namespace ProSphere.Features.Authentication.Commands.ChangeInActiveRolePassword
                 var isSuperAdmin = admin!.IsSuperAdmin;
                 await _userManager.RemoveFromRoleAsync(user, Role.InActiveAdmin);
 
-                if(isSuperAdmin)
+                if (isSuperAdmin)
                     await _userManager.AddToRoleAsync(user, Role.SuperAdmin);
 
                 else

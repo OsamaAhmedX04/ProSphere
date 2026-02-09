@@ -25,7 +25,7 @@ namespace ProSphere.Features.Admin.Commands.DeleteAdmin
             var userRoles = await _userManager.GetRolesAsync(user);
             var role = userRoles.FirstOrDefault();
 
-            if((role == Role.SuperAdmin) || (role != Role.Admin && role != Role.InActiveAdmin))
+            if ((role == Role.SuperAdmin) || (role != Role.Admin && role != Role.InActiveAdmin))
                 return Result.Failure("User Not Found", StatusCodes.Status404NotFound);
 
             await _userManager.DeleteAsync(user);

@@ -1,6 +1,4 @@
-﻿using MediatR.NotificationPublishers;
-
-namespace ProSphere.Features.Admin.Commands.CreateAdmin
+﻿namespace ProSphere.Features.Admin.Commands.CreateAdmin
 {
     public class CreateAdminRequest
     {
