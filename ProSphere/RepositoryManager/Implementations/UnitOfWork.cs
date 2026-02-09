@@ -17,6 +17,8 @@ namespace ProSphere.RepositoryManager.Implementations
         public IRepository<UserAccountHistory> UserAccountHistories { get; }
         public IRepository<Creator> Creators { get; }
         public IRepository<Investor> Investors { get; }
+        public IRepository<Admin> Admins { get; }
+        public IRepository<Moderator> Moderators { get; }
 
         public UnitOfWork(AppDbContext db)
         {
@@ -34,6 +36,8 @@ namespace ProSphere.RepositoryManager.Implementations
 
             Creators = new Repository<Creator>(_db);
             Investors = new Repository<Investor>(_db);
+            Admins = new Repository<Admin>(_db);
+            Moderators = new Repository<Moderator>(_db);
 
 
         }
