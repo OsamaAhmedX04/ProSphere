@@ -19,6 +19,20 @@ namespace ProSphere.Data.Configurations
                 },
                 new IdentityRole
                 {
+                    Id = "7a9f3c1e-2d6b-4e8f-9c3a-5b1f2d7e8a9b",
+                    Name = "SuperAdmin",
+                    NormalizedName = "SUPERADMIN",
+                    ConcurrencyStamp = "51112211-1111-3333-1111-166111111111"
+                },
+                new IdentityRole
+                {
+                    Id = "c1f8e7d4-5a2b-4c6d-9f1e-3b7a8d2c9f4e",
+                    Name = "InActiveAdmin",
+                    NormalizedName = "INACTIVEADMIN",
+                    ConcurrencyStamp = "51112211-1111-3333-1111-166111111111"
+                },
+                new IdentityRole
+                {
                     Id = "a7e13e2a-63a7-4c5d-a5b9-5b49efb0123f",
                     Name = "Creator",
                     NormalizedName = "CREATOR",
@@ -41,8 +55,8 @@ namespace ProSphere.Data.Configurations
                 new IdentityRole
                 {
                     Id = "b3f14a23-34a5-4bc0-912d-0f2f1d8d4a11",
-                    Name = "Expert",
-                    NormalizedName = "EXPERT",
+                    Name = "InActiveModerator",
+                    NormalizedName = "INACTIVEMODERATOR",
                     ConcurrencyStamp = "33333333-3333-3333-3333-333333333333"
                 },
             };

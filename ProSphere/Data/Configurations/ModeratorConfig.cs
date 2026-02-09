@@ -10,6 +10,7 @@ namespace ProSphere.Data.Configurations
         {
             builder.HasKey(x => x.Id);
 
+
             builder
                 .HasOne(c => c.User)
                 .WithMany(a => a.Moderators)

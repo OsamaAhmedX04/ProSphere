@@ -17,6 +17,15 @@ namespace ProSphere.Data.Configurations
                 .HasForeignKey(c => c.Id)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            var admins = new List<Admin>()
+            {
+                new Admin()
+                {
+                    Id = "d3b07384-d9f8-4f2a-8d3c-1b2a9e6f4f5e",
+                    IsSuperAdmin = true,
+                }
+            };
+            builder.HasData(admins);
         }
     }
 }
