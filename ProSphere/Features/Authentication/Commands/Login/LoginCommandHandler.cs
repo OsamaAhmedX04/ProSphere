@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ProSphere.Domain.Constants;
 using ProSphere.Domain.Entities;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.Authentication;
@@ -38,9 +39,6 @@ namespace ProSphere.Features.Authentication.Commands.Login
             if (user == null)
                 return Result<AuthenticationTokenDto>.Failure("User Not Found", StatusCodes.Status404NotFound);
 
-            //if (user.IsDeleted)
-            //    return Result<AuthenticationTokenDto>.Failure("User Not Found", StatusCodes.Status404NotFound);
-
             if (!user.EmailConfirmed)
                 return Result<AuthenticationTokenDto>.Failure("Email Not Confirmed Yet , Check Your Mail", StatusCodes.Status400BadRequest);
 
@@ -49,6 +47,9 @@ namespace ProSphere.Features.Authentication.Commands.Login
             if (!loginResult)
                 return Result<AuthenticationTokenDto>.Failure("Wrong Email Or Password", StatusCodes.Status400BadRequest);
 
+            var userRoles = await _userManager.GetRolesAsync(user);
+            if (userRoles.Contains(Role.InActiveModerator) || userRoles.Contains(Role.InActiveAdmin))
+                return Result<AuthenticationTokenDto>.Failure("This Is InActive Role, Please Change Password", StatusCodes.Status403Forbidden);
 
             var authenticationTokenResponse = await _authenticationTokenService.GenerateAuthenticationTokens(user, command.request.RememberMe);
 

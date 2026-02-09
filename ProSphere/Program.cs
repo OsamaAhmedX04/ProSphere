@@ -51,6 +51,7 @@ namespace ProSphere
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.UseHangfireDashboard("/hangfire");
             }
 
             app.UseHttpsRedirection();
@@ -60,7 +61,6 @@ namespace ProSphere
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
 
-            app.UseHangfireDashboard("/hangfire");
 
             app.UseAuthentication();
 
