@@ -1,0 +1,13 @@
+﻿namespace ProSphere.Features.Account.Queries.GetInvestorAccount
+{
+    public class GetInvestorAccountResponse
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string? ImageProfileURL { get; set; }
+        public string Gender { get; set; }
+        public bool IsVerified { get; set; }
+        public bool IsFinancail { get; set; }
+        public bool IsProfessional { get; set; }
+    }
+}
