@@ -4,16 +4,15 @@ using ProSphere.Domain.Entities;
 
 namespace ProSphere.Data.Configurations
 {
-    public class CreatorConfig : IEntityTypeConfiguration<Creator>
+    public class ModeratorConfig : IEntityTypeConfiguration<Moderator>
     {
-        public void Configure(EntityTypeBuilder<Creator> builder)
+        public void Configure(EntityTypeBuilder<Moderator> builder)
         {
-            builder.HasKey(c => c.Id);
-
+            builder.HasKey(x => x.Id);
 
             builder
                 .HasOne(c => c.User)
-                .WithMany(a => a.Creators)
+                .WithMany(a => a.Moderators)
                 .HasForeignKey(c => c.Id)
                 .OnDelete(DeleteBehavior.Cascade);
         }

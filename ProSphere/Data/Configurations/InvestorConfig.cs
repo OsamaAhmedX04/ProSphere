@@ -15,10 +15,11 @@ namespace ProSphere.Data.Configurations
                 .IsRequired();
 
 
+
             builder
                 .HasOne(i => i.User)
-                .WithOne(a => a.Investor)
-                .HasForeignKey<Investor>(i => i.Id)
+                .WithMany(a => a.Investors)
+                .HasForeignKey(i => i.Id)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

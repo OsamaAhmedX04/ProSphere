@@ -13,13 +13,13 @@ namespace ProSphere.Domain.Entities
         public string LastName { get; set; }
         public Gender Gender { get; set; }
         public bool IsVerified { get; set; }
-        public Creator Creator { get; set; }
-        public Investor Investor { get; set; }
+        public List<Creator> Creators { get; set; } = new List<Creator>();
+        public List<Investor> Investors { get; set; } = new List<Investor>();
+        public List<Moderator> Moderators { get; set; } = new List<Moderator>();
+        public List<Admin> Admins { get; set; } = new List<Admin>();
         public RefreshTokenAuth RefreshTokenAuth { get; set; }
         public ICollection<IdentityVerification> IdentityVerifications { get; set; } = new List<IdentityVerification>();
-        public ICollection<IdentityVerification> ReviewedIdentityVerifications { get; set; } = new List<IdentityVerification>();
-        public ICollection<FinancialVerification> ReviewedFinancialVerifications { get; set; } = new List<FinancialVerification>();
-        public ICollection<ProfessionalVerification> ReviewedProfessionalVerifications { get; set; } = new List<ProfessionalVerification>();
+        
 
     }
 }

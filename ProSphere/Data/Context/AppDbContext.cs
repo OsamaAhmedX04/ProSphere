@@ -18,8 +18,10 @@ namespace ProSphere.Data.Context
         public DbSet<ProfessionalVerificationHistory> ProfessionalVerificationHistories { get; set; }
         public DbSet<UserAccountHistory> UserAccountHistories { get; set; }
 
-        public DbSet<Creator> Creator { get; set; }
-        public DbSet<Investor> Investor { get; set; }
+        public DbSet<Creator> Creators { get; set; }
+        public DbSet<Investor> Investors { get; set; }
+        public DbSet<Admin> Amdins { get; set; }
+        public DbSet<Moderator> Moderators { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

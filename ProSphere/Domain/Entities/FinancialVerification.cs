@@ -21,7 +21,7 @@ namespace ProSphere.Domain.Entities
 
         [ForeignKey("Moderator")]
         public string? ReviewedBy { get; set; }
-        public ApplicationUser? Moderator { get; set; }
+        public Moderator? Moderator { get; set; }
         public DateTime ReviewedAt { get; set; }
         public DateTime CreatedAt { get; set; }
 
