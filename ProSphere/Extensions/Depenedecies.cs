@@ -16,7 +16,7 @@ using ProSphere.ExternalServices.Interfaces.Authentication;
 using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.ExternalServices.Interfaces.FileStorage;
 using ProSphere.ExternalServices.Interfaces.JWT;
-using ProSphere.Features.Authentication.Commands.Register;
+using ProSphere.Features.Registration.Commands.Register;
 using ProSphere.Jobs.Account.DeleteAccount;
 using ProSphere.Jobs.Documents.DeleteDocumentVerification;
 using ProSphere.Options;
