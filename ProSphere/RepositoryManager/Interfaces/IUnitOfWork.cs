@@ -19,6 +19,9 @@ namespace ProSphere.RepositoryManager.Interfaces
         IRepository<Admin> Admins { get; }
         IRepository<Moderator> Moderators { get; }
 
+        IRepository<Skill> Skills { get; }
+        IRepository<CreatorSkill> CreatorSkills { get; }
+
 
 
         Task<int> CompleteAsync();

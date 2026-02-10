@@ -23,6 +23,10 @@ namespace ProSphere.Data.Context
         public DbSet<Admin> Amdins { get; set; }
         public DbSet<Moderator> Moderators { get; set; }
 
+
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<CreatorSkill> CreatorSkills { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
