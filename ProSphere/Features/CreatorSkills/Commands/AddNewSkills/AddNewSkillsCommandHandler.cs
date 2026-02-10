@@ -21,7 +21,7 @@ namespace ProSphere.Features.CreatorSkills.Commands.AddNewSkills
         public async Task<Result> Handle(AddNewSkillsCommand command, CancellationToken cancellationToken)
         {
             var validationResult = await _validator.ValidateAsync(command.request);
-            if(!validationResult.IsValid)
+            if (!validationResult.IsValid)
             {
                 var errors = validationResult.ConvertErrorsToDictionary();
                 return Result.ValidationFailure(errors);

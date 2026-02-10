@@ -20,7 +20,7 @@ namespace ProSphere.Features.CreatorSkills.Queries.GetCreatorSkills
             var isExisting = await _unitOfWork.Creators.IsExistAsync(command.creatorId);
             if (!isExisting)
                 return Result<PageSourcePagination<GetCreatorSkillsResponse>>.Failure("Creator Not Found", StatusCodes.Status404NotFound);
-            
+
             var result = await _unitOfWork.CreatorSkills.GetAllPaginatedEnhancedAsync(
                 filter: cs => cs.CreatorId == command.creatorId,
                 selector: c => new GetCreatorSkillsResponse

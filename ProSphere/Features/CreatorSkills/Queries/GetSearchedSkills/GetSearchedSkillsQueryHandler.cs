@@ -22,7 +22,7 @@ namespace ProSphere.Features.CreatorSkills.Queries.GetSearchedSkills
         {
             Expression<Func<Skill, bool>> filter = s => true;
 
-            if(!string.IsNullOrEmpty(query.searchTerm))
+            if (!string.IsNullOrEmpty(query.searchTerm))
             {
                 filter = s => s.Name.Contains(query.searchTerm);
             }
