@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ProSphere.Features.PasswordRecovery.Commands.ForgotPasswrod;
 using ProSphere.Features.Registration.Commands.ConfirmEmail;
 using ProSphere.Features.Registration.Commands.Register;
 using ProSphere.Features.Registration.Commands.ResendConfirmEmailToken;

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ProSphere.Features.Moderator.Commands.CreateModerator;
 using ProSphere.Features.PasswordManagement.Commands.ChangeInActiveRolePassword;
 using ProSphere.Features.PasswordManagement.Commands.ChangePassword;
 

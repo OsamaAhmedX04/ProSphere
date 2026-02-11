@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ProSphere.Features.PasswordManagement.Commands.ChangePassword;
 using ProSphere.Features.PasswordRecovery.Commands.ForgotPasswrod;
 using ProSphere.Features.PasswordRecovery.Commands.ResendResetPasswordToken;
 using ProSphere.Features.PasswordRecovery.Commands.ResetPassword;

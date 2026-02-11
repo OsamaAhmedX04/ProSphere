@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ProSphere.Features.Registration.Commands.Register;
 using ProSphere.Features.Verification.Commands.AcceptFinancialInvestorVerification;
 using ProSphere.Features.Verification.Commands.AcceptIdentityVerification;
 using ProSphere.Features.Verification.Commands.AcceptProfessionalInvestorVerification;
@@ -16,7 +15,6 @@ using ProSphere.Features.Verification.Queries.GetIdentityVerificationById;
 using ProSphere.Features.Verification.Queries.GetIdentityVerifications;
 using ProSphere.Features.Verification.Queries.GetProfessionalInvestorVerificationById;
 using ProSphere.Features.Verification.Queries.GetProfessionalInvestorVerifications;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ProSphere.Features.Verification.Endpoint
 {
@@ -63,7 +61,7 @@ namespace ProSphere.Features.Verification.Endpoint
             var result = await _sender.Send(query);
             return StatusCode(result.StatusCode, result);
         }
-        
+
 
         [HttpGet("financials")]
         public async Task<IActionResult> GetFinancialsVerification(int pageNumber, string? status = null)

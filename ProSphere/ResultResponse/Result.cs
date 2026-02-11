@@ -35,7 +35,7 @@ namespace ProSphere.ResultResponse
 
         public static Result Success(string successMessage) => new Result(true, StatusCodes.Status200OK, successMessage);
         public static Result Failure(string errorMessage, int errorCode) => new Result(false, errorCode, null, errorMessage);
-        public static Result ValidationFailure(IDictionary<string, List<string>> validationErrors) => new Result(false, StatusCodes.Status400BadRequest, null, "Validation Invalid",  validationErrors!);
+        public static Result ValidationFailure(IDictionary<string, List<string>> validationErrors) => new Result(false, StatusCodes.Status400BadRequest, null, "Validation Invalid", validationErrors!);
     }
 
 
@@ -54,7 +54,7 @@ namespace ProSphere.ResultResponse
         public static Result<T> Failure(string errorMessage, int errorCode) => new Result<T>(default, false, errorCode, null, errorMessage);
         public static Result<T> ValidationFailure(IDictionary<string, List<string>> validationErrors) => new Result<T>(default, false, StatusCodes.Status400BadRequest, null, "Validation Invalid", validationErrors!);
 
-        
+
 
     }
 }

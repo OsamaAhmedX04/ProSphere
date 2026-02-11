@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ProSphere.Features.Account.Queries.GetAdminAccount;
 using ProSphere.Features.Admin.Commands.CreateAdmin;
 using ProSphere.Features.Admin.Commands.DeleteAdmin;
 

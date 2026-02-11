@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ProSphere.Features.Authentication.Commands.Login;
 using ProSphere.Features.CreatorSkills.Commands.AddNewSkills;
 using ProSphere.Features.CreatorSkills.Commands.DeleteSkills;
 using ProSphere.Features.CreatorSkills.Queries.GetCreatorSkills;
