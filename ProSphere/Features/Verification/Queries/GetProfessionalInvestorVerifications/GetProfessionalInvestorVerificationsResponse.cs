@@ -1,6 +1,6 @@
 ﻿namespace ProSphere.Features.Verification.Queries.GetProfessionalInvestorVerifications
 {
-    public class GetProfessionalInvestorVerificationResponse
+    public class GetProfessionalInvestorVerificationsResponse
     {
         public Guid ProfessionalDocumentId { get; set; }
         public string UserId { get; set; }

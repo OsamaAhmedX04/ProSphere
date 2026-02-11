@@ -9,18 +9,18 @@ using System.Linq.Expressions;
 
 namespace ProSphere.Features.Verification.Queries.GetFinancialInvestorVerifications
 {
-    public class GetFinancialInvestorVerificationQueryHandler
-        : IRequestHandler<GetFinancialInvestorVerificationQuery, Result<PageSourcePagination<GetFinancialInvestorVerificationResponse>>>
+    public class GetFinancialInvestorVerificationsQueryHandler
+        : IRequestHandler<GetFinancialInvestorVerificationsQuery, Result<PageSourcePagination<GetFinancialInvestorVerificationsResponse>>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public GetFinancialInvestorVerificationQueryHandler(IUnitOfWork unitOfWork)
+        public GetFinancialInvestorVerificationsQueryHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<PageSourcePagination<GetFinancialInvestorVerificationResponse>>>
-            Handle(GetFinancialInvestorVerificationQuery query, CancellationToken cancellationToken)
+        public async Task<Result<PageSourcePagination<GetFinancialInvestorVerificationsResponse>>>
+            Handle(GetFinancialInvestorVerificationsQuery query, CancellationToken cancellationToken)
         {
             Expression<Func<FinancialVerification, bool>> filter = v => true;
             if (!string.IsNullOrEmpty(query.status))
@@ -38,7 +38,7 @@ namespace ProSphere.Features.Verification.Queries.GetFinancialInvestorVerificati
 
             var result = await _unitOfWork.FinancialVerifications.GetAllPaginatedEnhancedAsync(
                 filter: filter,
-                selector: v => new GetFinancialInvestorVerificationResponse
+                selector: v => new GetFinancialInvestorVerificationsResponse
                 {
                     FinancialDocumentId = v.Id,
                     UserId = v.InvestorId,
@@ -49,7 +49,7 @@ namespace ProSphere.Features.Verification.Queries.GetFinancialInvestorVerificati
                 pageSize: 20
                 );
 
-            return Result<PageSourcePagination<GetFinancialInvestorVerificationResponse>>
+            return Result<PageSourcePagination<GetFinancialInvestorVerificationsResponse>>
                 .Success(result, "Paginated Finacials Retrieved Successfully");
         }
     }

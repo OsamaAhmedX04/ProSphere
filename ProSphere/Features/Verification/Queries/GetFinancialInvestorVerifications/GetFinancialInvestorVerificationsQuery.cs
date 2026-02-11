@@ -4,7 +4,7 @@ using ProSphere.ResultResponse;
 
 namespace ProSphere.Features.Verification.Queries.GetFinancialInvestorVerifications
 {
-    public record GetFinancialInvestorVerificationQuery(int pageNumber, string? status = null) : IRequest<Result<PageSourcePagination<GetFinancialInvestorVerificationResponse>>>
+    public record GetFinancialInvestorVerificationsQuery(int pageNumber, string? status = null) : IRequest<Result<PageSourcePagination<GetFinancialInvestorVerificationsResponse>>>
     {
     }
 }

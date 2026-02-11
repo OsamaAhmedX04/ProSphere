@@ -9,18 +9,18 @@ using System.Linq.Expressions;
 
 namespace ProSphere.Features.Verification.Queries.GetProfessionalInvestorVerifications
 {
-    public class GetProfessionalInvestorVerificationQueryHandler
-        : IRequestHandler<GetProfessionalInvestorVerificationQuery, Result<PageSourcePagination<GetProfessionalInvestorVerificationResponse>>>
+    public class GetProfessionalInvestorVerificationsQueryHandler
+        : IRequestHandler<GetProfessionalInvestorVerificationsQuery, Result<PageSourcePagination<GetProfessionalInvestorVerificationsResponse>>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public GetProfessionalInvestorVerificationQueryHandler(IUnitOfWork unitOfWork)
+        public GetProfessionalInvestorVerificationsQueryHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<PageSourcePagination<GetProfessionalInvestorVerificationResponse>>>
-            Handle(GetProfessionalInvestorVerificationQuery query, CancellationToken cancellationToken)
+        public async Task<Result<PageSourcePagination<GetProfessionalInvestorVerificationsResponse>>>
+            Handle(GetProfessionalInvestorVerificationsQuery query, CancellationToken cancellationToken)
         {
             Expression<Func<ProfessionalVerification, bool>> filter = v => true;
             if (!string.IsNullOrEmpty(query.status))
@@ -38,7 +38,7 @@ namespace ProSphere.Features.Verification.Queries.GetProfessionalInvestorVerific
 
             var result = await _unitOfWork.ProfessionalVerifications.GetAllPaginatedEnhancedAsync(
                 filter: filter,
-                selector: v => new GetProfessionalInvestorVerificationResponse
+                selector: v => new GetProfessionalInvestorVerificationsResponse
                 {
                     ProfessionalDocumentId = v.Id,
                     UserId = v.InvestorId,
@@ -49,7 +49,7 @@ namespace ProSphere.Features.Verification.Queries.GetProfessionalInvestorVerific
                 pageSize: 20
                 );
 
-            return Result<PageSourcePagination<GetProfessionalInvestorVerificationResponse>>
+            return Result<PageSourcePagination<GetProfessionalInvestorVerificationsResponse>>
                 .Success(result, "Paginated Professionals Retrieved Successfully");
         }
     }
