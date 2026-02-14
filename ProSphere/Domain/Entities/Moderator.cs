@@ -10,6 +10,7 @@ namespace ProSphere.Domain.Entities
         public string Id { get; set; }
         public ApplicationUser User { get; set; }
         public bool IsUsed { get; set; }
+        public string Code { get; set; }
 
         public ICollection<Employee> Employees { get; set; } = new List<Employee>();
 
