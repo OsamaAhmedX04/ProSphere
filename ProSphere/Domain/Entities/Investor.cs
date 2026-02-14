@@ -13,6 +13,8 @@ namespace ProSphere.Domain.Entities
         public string UserName { get; set; }
         public InvestorLevel InvestorLevel { get; set; }
         public string? ImageProfileURL { get; set; }
+        public string? HeadLine { get; set; }
+        public string? BIO { get; set; }
 
         public ICollection<FinancialVerification> FinancialVerifications { get; set; } = new List<FinancialVerification>();
         public ICollection<ProfessionalVerification> ProfessionalVerifications { get; set; } = new List<ProfessionalVerification>();

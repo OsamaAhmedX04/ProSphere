@@ -18,6 +18,7 @@ namespace ProSphere.Domain.Entities
         public List<Moderator> Moderators { get; set; } = new List<Moderator>();
         public List<Admin> Admins { get; set; } = new List<Admin>();
         public RefreshTokenAuth RefreshTokenAuth { get; set; }
+        public UserSocialMedia SocialMedia { get; set; }
         public ICollection<IdentityVerification> IdentityVerifications { get; set; } = new List<IdentityVerification>();
 
 

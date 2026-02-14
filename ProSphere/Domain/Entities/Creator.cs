@@ -11,7 +11,8 @@ namespace ProSphere.Domain.Entities
         public ApplicationUser User { get; set; }
         public string UserName { get; set; }
         public string? ImageProfileURL { get; set; }
-
+        public string? HeadLine { get; set; }
+        public string? BIO { get; set; }
         public ICollection<CreatorSkill> Skills { get; set; } = new List<CreatorSkill>();
 
     }

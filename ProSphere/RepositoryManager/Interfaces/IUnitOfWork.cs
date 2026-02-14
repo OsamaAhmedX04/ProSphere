@@ -22,6 +22,7 @@ namespace ProSphere.RepositoryManager.Interfaces
 
         IRepository<Skill> Skills { get; }
         IRepository<CreatorSkill> CreatorSkills { get; }
+        IRepository<UserSocialMedia> UsersSocialMedia { get; }
 
 
 

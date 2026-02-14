@@ -22,6 +22,7 @@ namespace ProSphere.RepositoryManager.Implementations
         public IRepository<Employee> Employees { get; }
         public IRepository<Skill> Skills { get; }
         public IRepository<CreatorSkill> CreatorSkills { get; }
+        public IRepository<UserSocialMedia> UsersSocialMedia { get; }
 
         public UnitOfWork(AppDbContext db)
         {
@@ -45,6 +46,7 @@ namespace ProSphere.RepositoryManager.Implementations
 
             Skills = new Repository<Skill>(_db);
             CreatorSkills = new Repository<CreatorSkill>(_db);
+            UsersSocialMedia = new Repository<UserSocialMedia>(_db);
 
 
         }
