@@ -18,6 +18,7 @@ namespace ProSphere.RepositoryManager.Interfaces
         IRepository<Investor> Investors { get; }
         IRepository<Admin> Admins { get; }
         IRepository<Moderator> Moderators { get; }
+        IRepository<Employee> Employees { get; }
 
         IRepository<Skill> Skills { get; }
         IRepository<CreatorSkill> CreatorSkills { get; }

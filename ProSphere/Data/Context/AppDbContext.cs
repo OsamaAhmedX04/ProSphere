@@ -22,6 +22,7 @@ namespace ProSphere.Data.Context
         public DbSet<Investor> Investors { get; set; }
         public DbSet<Admin> Amdins { get; set; }
         public DbSet<Moderator> Moderators { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
 
         public DbSet<Skill> Skills { get; set; }

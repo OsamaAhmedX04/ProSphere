@@ -19,6 +19,7 @@ namespace ProSphere.RepositoryManager.Implementations
         public IRepository<Investor> Investors { get; }
         public IRepository<Admin> Admins { get; }
         public IRepository<Moderator> Moderators { get; }
+        public IRepository<Employee> Employees { get; }
         public IRepository<Skill> Skills { get; }
         public IRepository<CreatorSkill> CreatorSkills { get; }
 
@@ -40,6 +41,7 @@ namespace ProSphere.RepositoryManager.Implementations
             Investors = new Repository<Investor>(_db);
             Admins = new Repository<Admin>(_db);
             Moderators = new Repository<Moderator>(_db);
+            Employees = new Repository<Employee>(_db);
 
             Skills = new Repository<Skill>(_db);
             CreatorSkills = new Repository<CreatorSkill>(_db);
