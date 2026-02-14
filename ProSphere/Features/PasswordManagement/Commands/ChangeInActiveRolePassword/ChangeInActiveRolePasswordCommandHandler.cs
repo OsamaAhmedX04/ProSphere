@@ -46,15 +46,26 @@ namespace ProSphere.Features.PasswordManagement.Commands.ChangeInActiveRolePassw
                 return Result<AuthenticationTokenDto>.ValidationFailure(errors);
             }
 
+            var userRoles = await _userManager.GetRolesAsync(user);
+            if (userRoles.Contains(Role.Moderator))
+            {
+                var isavailableModerator = await _unitOfWork.Moderators.AnyAsync(m => m.IsUsed == false && m.Id == command.request.UserId);
+                if (!isavailableModerator)
+                    return Result<AuthenticationTokenDto>.Failure("Moderator Account Not Assigned Yet", StatusCodes.Status404NotFound);
+            }
+
+            var isSimilar = await _userManager.CheckPasswordAsync(user, command.request.NewPassword);
+            if(isSimilar)
+                return Result<AuthenticationTokenDto>.Failure("You Cannot Enter The Same Password", StatusCodes.Status400BadRequest);
+
             var changePasswordResult = await _userManager
-                .ChangePasswordAsync(user, command.request.CurrentPassword, command.request.NewPassword);
+            .ChangePasswordAsync(user, command.request.CurrentPassword, command.request.NewPassword);
 
             if (!changePasswordResult.Succeeded)
             {
                 var errors = changePasswordResult.ConvertErrorsToDictionary();
                 return Result<AuthenticationTokenDto>.ValidationFailure(errors);
             }
-            var userRoles = await _userManager.GetRolesAsync(user);
 
 
             if (userRoles.Contains(Role.Moderator))
