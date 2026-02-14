@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProSphere.Domain.Entities
 {
@@ -7,7 +8,10 @@ namespace ProSphere.Domain.Entities
         [Key]
         public int Id { get; set; }
         public string InvestorEmail { get; set; }
-        public string DocumentType { get; set; }
+
+        [ForeignKey("DocumentType")]
+        public int DocumentTypeId { get; set; }
+        public ProfessionalDocumentType DocumentType { get; set; }
         public string DocumentURL { get; set; }
     }
 }

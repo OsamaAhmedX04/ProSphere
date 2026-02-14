@@ -13,7 +13,9 @@ namespace ProSphere.Domain.Entities
         public string InvestorId { get; set; }
         public Investor Investor { get; set; }
 
-        public string DocumentType { get; set; }
+        [ForeignKey("DocumentType")]
+        public int DocumentTypeId { get; set; }
+        public ProfessionalDocumentType DocumentType { get; set; }
         public string DocumentURL { get; set; }
 
         public string? Notes { get; set; }

@@ -13,6 +13,8 @@ namespace ProSphere.RepositoryManager.Interfaces
         IRepository<FinancialVerification> FinancialVerifications { get; }
         IRepository<FinancialVerificationHistory> FinancialVerificationHistories { get; }
         IRepository<UserAccountHistory> UserAccountHistories { get; }
+        IRepository<FinancialDocumentType> FinancialDocumentTypes { get; }
+        IRepository<ProfessionalDocumentType> ProfessionalDocumentTypes { get; }
 
         IRepository<Creator> Creators { get; }
         IRepository<Investor> Investors { get; }

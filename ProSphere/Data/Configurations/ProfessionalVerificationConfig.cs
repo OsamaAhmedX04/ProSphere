@@ -35,6 +35,12 @@ namespace ProSphere.Data.Configurations
                 .WithMany(a => a.ReviewedProfessionalVerifications)
                 .HasForeignKey(v => v.ReviewedBy)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            builder
+                .HasOne(v => v.DocumentType)
+                .WithMany(d => d.ProfessionalVerifications)
+                .HasForeignKey(v => v.DocumentTypeId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

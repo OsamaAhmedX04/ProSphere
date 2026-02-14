@@ -12,7 +12,9 @@ namespace ProSphere.Data.Context
 
         public DbSet<IdentityVerification> IdentityVerifications { get; set; }
         public DbSet<FinancialVerification> FinancialVerifications { get; set; }
+        public DbSet<FinancialDocumentType> FinancialDocumentTypes { get; set; }
         public DbSet<ProfessionalVerification> ProfessionalVerifications { get; set; }
+        public DbSet<ProfessionalDocumentType> ProfessionalDocumentTypes { get; set; }
         public DbSet<IdentityVerificationHistory> IdentityVerificationHistories { get; set; }
         public DbSet<FinancialVerificationHistory> FinancialVerificationHistories { get; set; }
         public DbSet<ProfessionalVerificationHistory> ProfessionalVerificationHistories { get; set; }
@@ -20,7 +22,7 @@ namespace ProSphere.Data.Context
 
         public DbSet<Creator> Creators { get; set; }
         public DbSet<Investor> Investors { get; set; }
-        public DbSet<Admin> Amdins { get; set; }
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<Moderator> Moderators { get; set; }
         public DbSet<Employee> Employees { get; set; }
 

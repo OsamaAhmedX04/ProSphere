@@ -14,6 +14,8 @@ namespace ProSphere.RepositoryManager.Implementations
         public IRepository<IdentityVerificationHistory> IdentityVerificationHistories { get; }
         public IRepository<ProfessionalVerification> ProfessionalVerifications { get; }
         public IRepository<ProfessionalVerificationHistory> ProfessionalVerificationHistories { get; }
+        public IRepository<FinancialDocumentType> FinancialDocumentTypes { get; }
+        public IRepository<ProfessionalDocumentType> ProfessionalDocumentTypes { get; }
         public IRepository<UserAccountHistory> UserAccountHistories { get; }
         public IRepository<Creator> Creators { get; }
         public IRepository<Investor> Investors { get; }
@@ -37,6 +39,8 @@ namespace ProSphere.RepositoryManager.Implementations
             FinancialVerificationHistories = new Repository<FinancialVerificationHistory>(_db);
             IdentityVerificationHistories = new Repository<IdentityVerificationHistory>(_db);
             UserAccountHistories = new Repository<UserAccountHistory>(_db);
+            FinancialDocumentTypes = new Repository<FinancialDocumentType>(_db);
+            ProfessionalDocumentTypes = new Repository<ProfessionalDocumentType>(_db);
 
             Creators = new Repository<Creator>(_db);
             Investors = new Repository<Investor>(_db);
