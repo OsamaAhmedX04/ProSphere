@@ -3,10 +3,8 @@ using MediatR;
 using ProSphere.Domain.Constants;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.FileStorage;
-using ProSphere.Features.Account.Commands.UpdateCreatorAccount;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ProSphere.Features.Account.Commands.UpdateInvestorAccount
 {

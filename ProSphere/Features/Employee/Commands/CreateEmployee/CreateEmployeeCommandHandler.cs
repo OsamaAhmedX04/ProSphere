@@ -32,13 +32,13 @@ namespace ProSphere.Features.Employee.Commands.CreateEmployee
 
             var moderator = await _unitOfWork.Moderators.GetEnhancedAsync(
                 filter: m => m.IsUsed == false && m.Id == command.request.AssignedToModeratorId,
-                selector: m => new {m.Id});
+                selector: m => new { m.Id });
             if (moderator is null)
                 return Result.Failure("Moderator Account Is Not Available", StatusCodes.Status404NotFound);
 
 
             var isDuplicatedEmail = await _unitOfWork.Employees.AnyAsync(e => e.Email == command.request.Email);
-            if(isDuplicatedEmail)
+            if (isDuplicatedEmail)
                 return Result.Failure("Employee Is Email Already Exist", StatusCodes.Status400BadRequest);
 
 

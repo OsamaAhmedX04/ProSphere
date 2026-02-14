@@ -21,7 +21,7 @@ namespace ProSphere.Features.Employee.Commands.DeleteEmployee
 
             var moderator = await _unitOfWork.Moderators.FirstOrDefaultAsync(m => m.Id == employee.AssignedTo);
 
-            if(moderator is null)
+            if (moderator is null)
                 return Result.Failure("User Not Found", StatusCodes.Status404NotFound);
 
             moderator.IsUsed = false;

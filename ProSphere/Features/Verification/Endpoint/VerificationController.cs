@@ -10,12 +10,10 @@ using ProSphere.Features.Verification.Commands.RejectProfessionalInvestorVerific
 using ProSphere.Features.Verification.Commands.VerifyFinancialInvestor;
 using ProSphere.Features.Verification.Commands.VerifyIdentity;
 using ProSphere.Features.Verification.Commands.VerifyProfessionalInvestor;
-using ProSphere.Features.Verification.Queries.GetFinancialDocumentTypes;
 using ProSphere.Features.Verification.Queries.GetFinancialInvestorVerificationById;
 using ProSphere.Features.Verification.Queries.GetFinancialInvestorVerifications;
 using ProSphere.Features.Verification.Queries.GetIdentityVerificationById;
 using ProSphere.Features.Verification.Queries.GetIdentityVerifications;
-using ProSphere.Features.Verification.Queries.GetProfessionalDocumentTypes;
 using ProSphere.Features.Verification.Queries.GetProfessionalInvestorVerificationById;
 using ProSphere.Features.Verification.Queries.GetProfessionalInvestorVerifications;
 
@@ -32,7 +30,7 @@ namespace ProSphere.Features.Verification.Endpoint
             _sender = sender;
         }
 
-        
+
 
         #region Get
         [HttpGet("identity/{identityDocumentId}")]

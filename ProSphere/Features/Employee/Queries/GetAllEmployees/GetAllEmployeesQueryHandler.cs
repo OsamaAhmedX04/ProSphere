@@ -1,6 +1,5 @@
 ﻿using LinqKit;
 using MediatR;
-using ProSphere.Domain.Entities;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
@@ -22,7 +21,7 @@ namespace ProSphere.Features.Employee.Queries.GetAllEmployees
         {
             Expression<Func<Domain.Entities.Employee, bool>> filter = e => true;
 
-            if(!string.IsNullOrEmpty(query.name))
+            if (!string.IsNullOrEmpty(query.name))
                 filter = filter.And(e => e.Name.Contains(query.name));
 
             if (!string.IsNullOrEmpty(query.country))

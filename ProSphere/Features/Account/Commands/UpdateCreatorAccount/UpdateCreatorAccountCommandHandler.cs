@@ -32,12 +32,12 @@ namespace ProSphere.Features.Account.Commands.UpdateCreatorAccount
             }
 
             var creator = await _unitOfWork.Creators.FirstOrDefaultAsync(c => c.Id == command.creatorId);
-            if(creator == null)
+            if (creator == null)
                 return Result.Failure("Creator Not Found", StatusCodes.Status404NotFound);
 
             if (command.request.ImageProfile != null)
             {
-                if(creator.ImageProfileURL != null)
+                if (creator.ImageProfileURL != null)
                     await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + creator.ImageProfileURL);
 
                 var imagePath = await _fileService.UploadAsync(command.request.ImageProfile, "Creators/ProfileImages");

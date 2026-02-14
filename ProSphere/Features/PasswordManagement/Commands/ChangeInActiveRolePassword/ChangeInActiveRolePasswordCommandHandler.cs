@@ -55,7 +55,7 @@ namespace ProSphere.Features.PasswordManagement.Commands.ChangeInActiveRolePassw
             }
 
             var isSimilar = await _userManager.CheckPasswordAsync(user, command.request.NewPassword);
-            if(isSimilar)
+            if (isSimilar)
                 return Result<AuthenticationTokenDto>.Failure("You Cannot Enter The Same Password", StatusCodes.Status400BadRequest);
 
             var changePasswordResult = await _userManager

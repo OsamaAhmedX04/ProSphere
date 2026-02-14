@@ -69,7 +69,6 @@
     <Folder Include="Data\Migrations\" />
     <Folder Include="Features\Admin\Queries\" />
     <Folder Include="Features\Authentication\Queries\" />
-    <Folder Include="Features\Moderator\Queries\" />
     <Folder Include="Features\PasswordManagement\Queries\" />
     <Folder Include="Features\PasswordRecovery\Queries\" />
     <Folder Include="Features\Registration\Queries\" />

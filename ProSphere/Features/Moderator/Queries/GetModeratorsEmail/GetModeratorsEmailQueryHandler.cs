@@ -1,7 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Identity;
-using ProSphere.Domain.Constants;
-using ProSphere.Domain.Entities;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
@@ -19,11 +16,11 @@ namespace ProSphere.Features.Moderator.Queries.GetModeratorsEmail
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<PageSourcePagination<GetModeratorsEmailResponse>>> 
+        public async Task<Result<PageSourcePagination<GetModeratorsEmailResponse>>>
             Handle(GetModeratorsEmailQuery query, CancellationToken cancellationToken)
         {
             Expression<Func<Domain.Entities.Moderator, bool>> filter = m => true;
-            if(query.isUsed != null)
+            if (query.isUsed != null)
             {
                 filter = m => m.IsUsed == query.isUsed;
             }
