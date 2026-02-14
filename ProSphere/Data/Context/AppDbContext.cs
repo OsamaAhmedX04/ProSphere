@@ -27,6 +27,7 @@ namespace ProSphere.Data.Context
 
         public DbSet<Skill> Skills { get; set; }
         public DbSet<CreatorSkill> CreatorSkills { get; set; }
+        public DbSet<UserSocialMedia> UsersSocialMedia { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
