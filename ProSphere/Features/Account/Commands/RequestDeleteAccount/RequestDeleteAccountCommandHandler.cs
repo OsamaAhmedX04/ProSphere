@@ -34,7 +34,7 @@ namespace ProSphere.Features.Account.Commands.RequestDeleteAccount
             //if (user.IsDeleted)
             //    return Result.Failure("User Not Found", StatusCodes.Status404NotFound);
 
-            var otp = OTPGenerator.GenerateRandomOTP();
+            var otp = OTPGenerator.Generate();
 
             var result = await _userManager.SetAuthenticationTokenAsync(user, AuthenticationTokenInfo.DefaultLoginProvider, AuthenticationTokenInfo.DeleteAccountOTPName, otp);
 

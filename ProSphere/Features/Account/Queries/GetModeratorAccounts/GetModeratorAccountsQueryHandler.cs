@@ -28,8 +28,9 @@ namespace ProSphere.Features.Account.Queries.GetModeratorAccounts
                 selector: m => new GetModeratorAccountsResponse
                 {
                     UserId = m.Id,
-                    Gender = m.User.Gender.ToString(),
-                    Email = m.User.Email!
+                    Email = m.User.Email!,
+                    IsUsed = m.IsUsed,
+                    Code = m.Code
                 });
 
             return Result<PageSourcePagination<GetModeratorAccountsResponse>>
