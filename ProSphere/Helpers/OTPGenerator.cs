@@ -4,10 +4,10 @@ namespace ProSphere.Helpers
 {
     public static class OTPGenerator
     {
-        public static string GenerateRandomOTP()
+        public static string Generate()
         {
             string otp = "";
-            otp += RandomDataGenerator.GetRandomString(CharacterSets.numbers, 6);
+            otp += RandomDataGenerator.GenerateString(CharacterSets.numbers, 6);
             return otp;
         }
     }

@@ -16,9 +16,9 @@ namespace ProSphere.Helpers
                 _ => 0
             };
 
-            password += RandomDataGenerator.GetRandomString(CharacterSets.numbers, numberOfChars);
-            password += RandomDataGenerator.GetRandomString(CharacterSets.specialChars, numberOfChars);
-            password += RandomDataGenerator.GetRandomString(CharacterSets.lowerCaseLetters, numberOfChars);
+            password += RandomDataGenerator.GenerateString(CharacterSets.numbers, numberOfChars);
+            password += RandomDataGenerator.GenerateString(CharacterSets.specialChars, numberOfChars);
+            password += RandomDataGenerator.GenerateString(CharacterSets.lowerCaseLetters, numberOfChars);
 
             return password;
         }

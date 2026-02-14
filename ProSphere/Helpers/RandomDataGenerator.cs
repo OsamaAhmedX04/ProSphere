@@ -2,7 +2,7 @@
 {
     public static class RandomDataGenerator
     {
-        public static string GetRandomString(char[] array, int numberOfChars)
+        public static string GenerateString(char[] array, int numberOfChars)
         {
             string text = "";
             Random random = new Random();
