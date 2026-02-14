@@ -41,7 +41,8 @@ namespace ProSphere.Features.Admin.Commands.CreateAdmin
                 FirstName = command.request.FirstName,
                 LastName = command.request.LastName,
                 IsVerified = true,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                Gender = Gender.None
             };
             var response = new CreateAdminResponse { TempPassword = PasswordGenerator.Generate(PasswordDificulty.Low) };
 

@@ -40,7 +40,8 @@ namespace ProSphere.Features.Moderator.Commands.CreateModerator
                 LastName = "ProSphere",
                 Email = command.request.Email,
                 UserName = command.request.Email,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                Gender = Gender.None
             };
 
             var response = new CreateModeratorResponse { TempPassword = PasswordGenerator.Generate(PasswordDificulty.Low) };
