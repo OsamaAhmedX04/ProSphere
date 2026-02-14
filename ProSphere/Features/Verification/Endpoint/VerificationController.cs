@@ -1,7 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ProSphere.Domain.Constants;
-using ProSphere.Domain.Entities;
 using ProSphere.Features.Verification.Commands.AcceptFinancialInvestorVerification;
 using ProSphere.Features.Verification.Commands.AcceptIdentityVerification;
 using ProSphere.Features.Verification.Commands.AcceptProfessionalInvestorVerification;

@@ -1,7 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ProSphere.Features.Registration.Commands.Register;
 using ProSphere.Features.SocialMediaAccounts.Commands.SetSocialMediaAccounts;
 using ProSphere.Features.SocialMediaAccounts.Queries.GetUserSocialMeidaAccounts;
 

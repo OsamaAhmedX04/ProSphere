@@ -18,7 +18,7 @@ namespace ProSphere.Features.SocialMediaAccounts.Queries.GetUserSocialMeidaAccou
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<GetUserSocialMeidaAccountsResponse>> 
+        public async Task<Result<GetUserSocialMeidaAccountsResponse>>
             Handle(GetUserSocialMeidaAccountsQuery query, CancellationToken cancellationToken)
         {
             var user = await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == query.userId);

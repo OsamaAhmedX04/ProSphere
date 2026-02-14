@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProSphere.Domain.Entities;
 using ProSphere.Extensions;
-using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 
 namespace ProSphere.Features.SocialMediaAccounts.Commands.SetSocialMediaAccounts

@@ -9,7 +9,7 @@ namespace ProSphere.Features.Verification.Commands.VerifyFinancialInvestor
         {
             RuleFor(v => v.DocumentTypeId)
                 .NotEmpty().WithMessage("Document Type Id Is Required");
-                
+
 
             RuleFor(v => v.DocumentImage)
                 .NotNull().WithMessage("Document Image Is Required")

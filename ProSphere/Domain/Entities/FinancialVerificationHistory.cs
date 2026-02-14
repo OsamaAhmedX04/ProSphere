@@ -8,7 +8,7 @@ namespace ProSphere.Domain.Entities
         [Key]
         public int Id { get; set; }
         public string InvestorEmail { get; set; }
-        
+
         [ForeignKey("DocumentType")]
         public int DocumentTypeId { get; set; }
         public FinancialDocumentType DocumentType { get; set; }

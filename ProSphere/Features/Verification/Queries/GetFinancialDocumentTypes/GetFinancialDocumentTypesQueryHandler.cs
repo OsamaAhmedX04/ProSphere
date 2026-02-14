@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using ProSphere.Domain.Constants;
 using ProSphere.RepositoryManager.Interfaces;
 
 namespace ProSphere.Features.Verification.Queries.GetFinancialDocumentTypes

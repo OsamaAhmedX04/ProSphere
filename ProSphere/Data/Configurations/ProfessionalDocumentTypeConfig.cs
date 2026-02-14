@@ -14,8 +14,8 @@ namespace ProSphere.Data.Configurations
                 .IsRequired()
                 .HasMaxLength(100);
 
-           builder.Property(p => p.Description)
-                .HasMaxLength(500);
+            builder.Property(p => p.Description)
+                 .HasMaxLength(500);
 
             builder.HasData(
                 new ProfessionalDocumentType
