@@ -22,6 +22,8 @@ namespace ProSphere.Features.Account.Queries.GetCreatorAccount
                 {
                     FirstName = c.User.FirstName,
                     LastName = c.User.LastName,
+                    HeadLine = c.HeadLine,
+                    BIO = c.BIO,
                     Gender = c.User.Gender.ToString(),
                     ImageProfileURL = SupabaseConstants.PrefixSupaURL + c.ImageProfileURL ?? null,
                     IsVerified = c.User.IsVerified

@@ -25,6 +25,8 @@ namespace ProSphere.Features.Account.Queries.GetInvestorAccount
                     LastName = i.User.LastName,
                     Gender = i.User.Gender.ToString(),
                     ImageProfileURL = SupabaseConstants.PrefixSupaURL + i.ImageProfileURL ?? null,
+                    HeadLine = i.HeadLine,
+                    BIO = i.BIO,
                     IsVerified = i.User.IsVerified,
                     IsFinancail = i.InvestorLevel == InvestorLevel.Professional
                                   ||
