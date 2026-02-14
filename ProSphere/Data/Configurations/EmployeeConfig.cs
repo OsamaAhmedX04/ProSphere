@@ -23,6 +23,12 @@ namespace ProSphere.Data.Configurations
             builder.Property(e => e.Country)
                 .IsRequired();
 
+            builder.Property(e => e.IsDeleted).HasDefaultValue(false);
+
+            builder.Property(e => e.IsActive).HasDefaultValue(true);
+
+            builder.Property(e => e.StartWorkAt).HasDefaultValueSql("GETUTCDATE()");
+
             builder
                 .HasQueryFilter(e => !e.IsDeleted);
 
