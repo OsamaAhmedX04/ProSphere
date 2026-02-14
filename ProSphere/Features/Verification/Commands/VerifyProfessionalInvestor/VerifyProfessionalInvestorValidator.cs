@@ -7,19 +7,8 @@ namespace ProSphere.Features.Verification.Commands.VerifyProfessionalInvestor
     {
         public VerifyProfessionalInvestorValidator()
         {
-            RuleFor(v => v.DocumentType)
-                .NotEmpty().WithMessage("Document Type Is Required")
-                .Must(d =>
-                    d.ToLower() == ProfessionalType.CommercialRegister.ToLower()
-                    ||
-                    d.ToLower() == ProfessionalType.Letter.ToLower()
-                    ||
-                    d.ToLower() == ProfessionalType.Membership.ToLower()
-                    ||
-                    d.ToLower() == ProfessionalType.TaxCard.ToLower()
-                    ||
-                    d.ToLower() == ProfessionalType.Other.ToLower()
-                    ).WithMessage("Please Enter Valid Professional Document Type");
+            RuleFor(v => v.DocumentTypeId)
+                .NotEmpty().WithMessage("Document Type Id Is Required");
 
             RuleFor(v => v.DocumentImage)
                 .NotNull().WithMessage("Document Image Is Required")

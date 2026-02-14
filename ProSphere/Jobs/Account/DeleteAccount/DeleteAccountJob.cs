@@ -109,7 +109,7 @@ namespace ProSphere.Jobs.Account.DeleteAccount
                 {
                     var history = new FinancialVerificationHistory
                     {
-                        DocumentType = financialVerification.DocumentType,
+                        DocumentTypeId = financialVerification.DocumentTypeId,
                         DocumentURL = financialVerification.DocumentURL,
                         InvestorEmail = user.Email!
                     };
@@ -123,7 +123,7 @@ namespace ProSphere.Jobs.Account.DeleteAccount
                 {
                     var history = new ProfessionalVerificationHistory
                     {
-                        DocumentType = professionalVerification.DocumentType,
+                        DocumentTypeId = professionalVerification.DocumentTypeId,
                         DocumentURL = professionalVerification.DocumentURL,
                         InvestorEmail = user.Email!
                     };

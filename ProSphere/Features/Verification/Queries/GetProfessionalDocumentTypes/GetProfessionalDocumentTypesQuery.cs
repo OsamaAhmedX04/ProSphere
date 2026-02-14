@@ -2,7 +2,7 @@
 
 namespace ProSphere.Features.Verification.Queries.GetProfessionalDocumentTypes
 {
-    public record GetProfessionalDocumentTypesQuery : IRequest<List<string>>
+    public record GetProfessionalDocumentTypesQuery : IRequest<List<GetProfessionalDocumentTypesResponse>>
     {
     }
 }

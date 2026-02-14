@@ -7,17 +7,9 @@ namespace ProSphere.Features.Verification.Commands.VerifyFinancialInvestor
     {
         public VerifyFinancialInvestorValidator()
         {
-            RuleFor(v => v.DocumentType)
-                .NotEmpty().WithMessage("Document Type Is Required")
-                .Must(d =>
-                    d.ToLower() == FinancialType.FinancialLetter.ToLower()
-                    ||
-                    d.ToLower() == FinancialType.Wallet.ToLower()
-                    ||
-                    d.ToLower() == FinancialType.BankStatement.ToLower()
-                    ||
-                    d.ToLower() == FinancialType.Other.ToLower()
-                    ).WithMessage("Please Enter Valid Finincial Document Type");
+            RuleFor(v => v.DocumentTypeId)
+                .NotEmpty().WithMessage("Document Type Id Is Required");
+                
 
             RuleFor(v => v.DocumentImage)
                 .NotNull().WithMessage("Document Image Is Required")

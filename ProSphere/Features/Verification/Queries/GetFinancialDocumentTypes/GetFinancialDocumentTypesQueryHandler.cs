@@ -1,14 +1,30 @@
 ﻿using MediatR;
 using ProSphere.Domain.Constants;
+using ProSphere.RepositoryManager.Interfaces;
 
 namespace ProSphere.Features.Verification.Queries.GetFinancialDocumentTypes
 {
     // still work on it
-    public class GetFinancialDocumentTypesQueryHandler : IRequestHandler<GetFinancialDocumentTypesQuery, List<string>>
+    public class GetFinancialDocumentTypesQueryHandler : IRequestHandler<GetFinancialDocumentTypesQuery, List<GetFinancialDocumentTypesResponse>>
     {
-        public Task<List<string>> Handle(GetFinancialDocumentTypesQuery request, CancellationToken cancellationToken)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public GetFinancialDocumentTypesQueryHandler(IUnitOfWork unitOfWork)
         {
-            return Task.FromResult(FinancialType.Types);
+            _unitOfWork = unitOfWork;
+        }
+
+        public async Task<List<GetFinancialDocumentTypesResponse>>
+            Handle(GetFinancialDocumentTypesQuery query, CancellationToken cancellationToken)
+        {
+            var result = await _unitOfWork.FinancialDocumentTypes.GetAllAsyncEnhanced(
+                selector: x => new GetFinancialDocumentTypesResponse
+                {
+                    DocumentTypeId = x.Id,
+                    Name = x.Name
+                });
+
+            return result;
         }
     }
 }

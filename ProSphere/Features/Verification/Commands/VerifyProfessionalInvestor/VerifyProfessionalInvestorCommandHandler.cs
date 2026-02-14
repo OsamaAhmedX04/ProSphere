@@ -51,12 +51,17 @@ namespace ProSphere.Features.Verification.Commands.VerifyProfessionalInvestor
             if (!investor.IsFinancialVerified)
                 return Result.Failure("You Have to Verify That You are a Financial Investor First", StatusCodes.Status400BadRequest);
 
+            var documentTypeExists = await _unitOfWork.ProfessionalDocumentTypes
+                .IsExistAsync(command.request.DocumentTypeId);
+            if (!documentTypeExists)
+                return Result.Failure("Document Type Not Found", StatusCodes.Status404NotFound);
+
             var documentImageURL = await _fileService.UploadAsync(command.request.DocumentImage, $"Verifications/Professional/{command.investorId}");
 
             var professionalVerification = new ProfessionalVerification
             {
                 InvestorId = command.investorId,
-                DocumentType = command.request.DocumentType,
+                DocumentTypeId = command.request.DocumentTypeId,
                 DocumentURL = documentImageURL,
                 Notes = command.request.Notes != null ? command.request.Notes : null,
                 status = Status.Pending,

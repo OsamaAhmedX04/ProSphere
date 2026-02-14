@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ProSphere.Domain.Constants;
+using ProSphere.Domain.Entities;
 using ProSphere.Features.Verification.Commands.AcceptFinancialInvestorVerification;
 using ProSphere.Features.Verification.Commands.AcceptIdentityVerification;
 using ProSphere.Features.Verification.Commands.AcceptProfessionalInvestorVerification;
@@ -10,10 +11,12 @@ using ProSphere.Features.Verification.Commands.RejectProfessionalInvestorVerific
 using ProSphere.Features.Verification.Commands.VerifyFinancialInvestor;
 using ProSphere.Features.Verification.Commands.VerifyIdentity;
 using ProSphere.Features.Verification.Commands.VerifyProfessionalInvestor;
+using ProSphere.Features.Verification.Queries.GetFinancialDocumentTypes;
 using ProSphere.Features.Verification.Queries.GetFinancialInvestorVerificationById;
 using ProSphere.Features.Verification.Queries.GetFinancialInvestorVerifications;
 using ProSphere.Features.Verification.Queries.GetIdentityVerificationById;
 using ProSphere.Features.Verification.Queries.GetIdentityVerifications;
+using ProSphere.Features.Verification.Queries.GetProfessionalDocumentTypes;
 using ProSphere.Features.Verification.Queries.GetProfessionalInvestorVerificationById;
 using ProSphere.Features.Verification.Queries.GetProfessionalInvestorVerifications;
 
@@ -89,13 +92,17 @@ namespace ProSphere.Features.Verification.Endpoint
         [HttpGet("financial/types")]
         public async Task<IActionResult> GetFinancialDocumentTypes()
         {
-            return Ok(FinancialType.Types);
+            var query = new GetFinancialDocumentTypesQuery();
+            var result = await _sender.Send(query);
+            return StatusCode(StatusCodes.Status200OK, result);
         }
 
         [HttpGet("professional/types")]
         public async Task<IActionResult> GetProfessionalDocumentTypes()
         {
-            return Ok(ProfessionalType.Types);
+            var query = new GetProfessionalDocumentTypesQuery();
+            var result = await _sender.Send(query);
+            return StatusCode(StatusCodes.Status200OK, result);
         }
 
         #endregion

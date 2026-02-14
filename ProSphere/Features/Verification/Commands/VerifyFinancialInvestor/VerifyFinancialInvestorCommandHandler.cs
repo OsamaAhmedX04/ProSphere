@@ -49,13 +49,17 @@ namespace ProSphere.Features.Verification.Commands.VerifyFinancialInvestor
             if (!investor.IsIdentityVerified)
                 return Result.Failure("You Have to Verify Your Identity First", StatusCodes.Status400BadRequest);
 
+            var documentTypeExists = await _unitOfWork.FinancialDocumentTypes
+                .IsExistAsync(command.request.DocumentTypeId);
+            if (!documentTypeExists)
+                return Result.Failure("Document Type Not Found", StatusCodes.Status404NotFound);
 
             var documentImageURL = await _fileService.UploadAsync(command.request.DocumentImage, $"Verifications/Financial/{command.investorId}");
 
             var financialVerification = new FinancialVerification
             {
                 InvestorId = command.investorId,
-                DocumentType = command.request.DocumentType,
+                DocumentTypeId = command.request.DocumentTypeId,
                 DocumentURL = documentImageURL,
                 Notes = command.request.Notes != null ? command.request.Notes : null,
                 status = Status.Pending,

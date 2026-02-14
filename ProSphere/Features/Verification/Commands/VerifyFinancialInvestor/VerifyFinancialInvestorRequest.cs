@@ -2,7 +2,7 @@
 {
     public class VerifyFinancialInvestorRequest
     {
-        public string DocumentType { get; set; }
+        public int DocumentTypeId { get; set; }
         public IFormFile DocumentImage { get; set; }
         public string? Notes { get; set; }
     }
