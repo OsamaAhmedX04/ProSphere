@@ -106,5 +106,16 @@ namespace ProSphere.ExternalServices.Implementaions.Email
                     )
                 );
         }
+
+        public void SendWelcomeEmployeeMail(string email, string name)
+        {
+            BackgroundJob.Enqueue<IEmailService>(
+                service => service.SendEmailAsync(
+                    email,
+                    "Welcome To Our New Employee",
+                    EmailBody.GetWelcomeNewEmployeeBody(email, name)
+                    )
+                );
+        }
     }
 }

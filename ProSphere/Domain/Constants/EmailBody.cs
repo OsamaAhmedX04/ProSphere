@@ -797,5 +797,92 @@
                 </body>
                 </html>";
         }
+
+
+        public static string GetWelcomeNewEmployeeBody(string email, string name)
+        {
+            return $@"
+                <!DOCTYPE html>
+                <html lang='en'>
+                <head>
+                <meta charset='UTF-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Welcome to ProSphere Team</title>
+                </head>
+                <body style='margin:0; padding:0; background:#f4f6f8; font-family:Arial, Helvetica, sans-serif;'>
+
+                <table width='100%' cellpadding='0' cellspacing='0'>
+                <tr>
+                <td align='center' style='padding:50px 0;'>
+
+                <table width='640' cellpadding='0' cellspacing='0'
+                       style='background:#ffffff; border-radius:16px; overflow:hidden;
+                              box-shadow:0 15px 45px rgba(0,0,0,0.1);'>
+
+                <!-- Header -->
+                <tr>
+                <td style='background:linear-gradient(135deg,#0f172a,#1e293b);
+                           padding:45px; text-align:center; color:#ffffff;'>
+                <h1 style='margin:0; font-size:28px;'>Welcome to ProSphere 👋</h1>
+                <p style='margin-top:12px; font-size:15px; opacity:0.9;'>
+                You’ve been assigned as a Moderator
+                </p>
+                </td>
+                </tr>
+
+                <!-- Body -->
+                <tr>
+                <td style='padding:45px; color:#333;'>
+
+                <h2 style='margin-top:0; font-size:20px;'>
+                Hello {name},
+                </h2>
+
+                <p style='font-size:15.5px; line-height:1.8;'>
+                Your account <strong>{email}</strong> has been successfully created
+                and assigned the <strong>Moderator</strong> role within ProSphere.
+                </p>
+
+                <div style='margin:30px 0; padding:24px;
+                            background:#f1f5f9;
+                            border-left:6px solid #0f172a;
+                            border-radius:12px;'>
+                <p style='margin:0; font-size:15px; line-height:1.7; color:#0f172a;'>
+                To activate your account:<br /><br />
+                1. Please contact the <strong>ProSphere Team</strong>.<br />
+                2. You will receive your login email and temporary password.<br />
+                3. Sign in and change your password to activate your account.
+                </p>
+                </div>
+
+                <p style='font-size:15.5px; line-height:1.8;'>
+                For security reasons, your account will remain inactive
+                until you complete the password change process.
+                </p>
+
+                <p style='margin-top:40px;'>
+                We’re glad to have you on board.<br />
+                <strong>ProSphere Administration Team</strong>
+                </p>
+
+                </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                <td style='background:#f4f6f8; padding:22px;
+                           text-align:center; font-size:12px; color:#777;'>
+                © {DateTime.UtcNow.Year} ProSphere. All rights reserved.
+                </td>
+                </tr>
+
+                </table>
+                </td>
+                </tr>
+                </table>
+
+                </body>
+                </html>";
+        }
     }
 }
