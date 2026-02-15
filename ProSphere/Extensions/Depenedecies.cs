@@ -256,5 +256,12 @@ namespace ProSphere.Extensions
 
             return hostBuilder;
         }
+
+        public static IServiceCollection AddCaching(this IServiceCollection services)
+        {
+            services.AddMemoryCache();
+
+            return services;
+        }
     }
 }

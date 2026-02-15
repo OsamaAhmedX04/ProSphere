@@ -39,6 +39,8 @@ namespace ProSphere
 
             builder.Services.AddRateLimiting();
 
+            builder.Services.AddCaching();
+
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
