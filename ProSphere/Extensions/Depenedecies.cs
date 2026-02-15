@@ -19,6 +19,7 @@ using ProSphere.ExternalServices.Interfaces.JWT;
 using ProSphere.Features.Registration.Commands.Register;
 using ProSphere.Jobs.Account.DeleteAccount;
 using ProSphere.Jobs.Documents.DeleteDocumentVerification;
+using ProSphere.Jobs.Search.SearchSaver;
 using ProSphere.Options;
 using ProSphere.RepositoryManager.Implementations;
 using ProSphere.RepositoryManager.Interfaces;
@@ -97,7 +98,7 @@ namespace ProSphere.Extensions
 
         public static IServiceCollection AddJWT(this IServiceCollection services, IConfiguration configuration)
         {
-            // Register JWT
+            services.AddSwaggerGenJwtAuth();
             services.AddScoped<IJWTService, JWTService>();
 
             var jwtSettings = configuration.GetSection("JWT");
@@ -184,6 +185,7 @@ namespace ProSphere.Extensions
         {
             services.AddScoped<IDeleteAccountJob, DeleteAccountJob>();
             services.AddScoped<IDeleteDocumentVerificationJob, DeleteDocumentVerificationJob>();
+            services.AddScoped<ISearchSaver, SearchSaver>();
 
             return services;
         }
