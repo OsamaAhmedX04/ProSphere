@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace ProSphere.Helpers
+namespace ProSphere.Helpers.Generators
 {
     public static class LinkGenerator
     {

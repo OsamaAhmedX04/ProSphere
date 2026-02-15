@@ -1,4 +1,4 @@
-﻿namespace ProSphere.Helpers
+﻿namespace ProSphere.Helpers.Generators
 {
     public static class RandomDataGenerator
     {

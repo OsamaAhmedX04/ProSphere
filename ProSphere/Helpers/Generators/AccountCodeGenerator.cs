@@ -1,6 +1,6 @@
-﻿using ProSphere.Domain.Constants;
+﻿using ProSphere.Domain.Constants.SetsConstants;
 
-namespace ProSphere.Helpers
+namespace ProSphere.Helpers.Generators
 {
     public static class AccountCodeGenerator
     {
