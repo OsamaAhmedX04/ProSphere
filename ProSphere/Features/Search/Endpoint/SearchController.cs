@@ -1,8 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ProSphere.Features.CreatorSkills.Queries.GetSearchedSkills;
-using ProSphere.Features.Employee.Queries.GetAllEmployees;
 using ProSphere.Features.Search.Queries.GetSearchHistory;
 using ProSphere.Features.Search.Queries.SearchForCreators;
 using ProSphere.Features.Search.Queries.SearchForInvestors;

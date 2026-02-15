@@ -1,7 +1,6 @@
 ﻿using Hangfire;
 using LinqKit;
 using MediatR;
-using ProSphere.Domain.Constants.SearchConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.Features.Account.Queries.GetInvestorAccounts;
@@ -23,7 +22,7 @@ namespace ProSphere.Features.Search.Queries.SearchForInvestors
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<PageSourcePagination<GetInvestorAccountsResponse>>> 
+        public async Task<Result<PageSourcePagination<GetInvestorAccountsResponse>>>
             Handle(SearchForInvestorsQuery query, CancellationToken cancellationToken)
         {
             Expression<Func<Investor, bool>> filter = i => true;
@@ -43,14 +42,14 @@ namespace ProSphere.Features.Search.Queries.SearchForInvestors
             var result = await _unitOfWork.Investors.GetAllPaginatedEnhancedAsync(
                 filter: filter,
                 selector: i => new GetInvestorAccountsResponse
-                    {
-                        UserName = i.UserName,
-                        ImageProfileURL = i.ImageProfileURL,
-                        HeadLine = i.HeadLine,
-                        IsVerified = i.User.IsVerified,
-                        IsFinancail = i.InvestorLevel == InvestorLevel.Financial || i.InvestorLevel == InvestorLevel.Professional,
-                        IsProfessional = i.InvestorLevel == InvestorLevel.Professional
-                    },
+                {
+                    UserName = i.UserName,
+                    ImageProfileURL = i.ImageProfileURL,
+                    HeadLine = i.HeadLine,
+                    IsVerified = i.User.IsVerified,
+                    IsFinancail = i.InvestorLevel == InvestorLevel.Financial || i.InvestorLevel == InvestorLevel.Professional,
+                    IsProfessional = i.InvestorLevel == InvestorLevel.Professional
+                },
                 pageNumber: query.pageNumber,
                 pageSize: 20
             );

@@ -20,7 +20,7 @@ namespace ProSphere.Features.Search.Queries.GetSearchHistory
                 .OrderByDescending(sh => sh.SearchDate)
                 .Take(10)
                 .Select(sh => sh.SearchTerm)
-                .Where(term => term != null) 
+                .Where(term => term != null)
                 .ToListAsync(cancellationToken);
 
             return searchHistories!;

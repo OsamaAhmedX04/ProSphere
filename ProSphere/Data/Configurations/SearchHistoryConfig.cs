@@ -13,7 +13,7 @@ namespace ProSphere.Data.Configurations
             builder.Property(sh => sh.SearchTerm)
                 .IsRequired()
                 .HasMaxLength(200);
-    
+
             builder.Property(sh => sh.SearchCategory)
                 .IsRequired()
                 .HasMaxLength(50);

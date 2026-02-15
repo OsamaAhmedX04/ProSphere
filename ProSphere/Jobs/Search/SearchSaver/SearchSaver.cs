@@ -26,18 +26,18 @@ namespace ProSphere.Jobs.Search.SearchSaver
             await _unitOfWork.SearchHistories.AddAsync(searchHistory);
             await _unitOfWork.CompleteAsync();
         }
-        
+
 
         public async Task SaveSearchAtInvestorHistory(string userId, string? userName = null, bool? verified = null, bool? financial = null, bool? professional = null)
         {
-                var searchHistory = new SearchHistory
-                {
-                    UserId = userId,
-                    SearchTerm = userName,
-                    FullSearchTerm = $"UserName: {userName}, Verified: {verified}, Financial: {financial}, Professional: {professional}",
-                    SearchCategory = SearchCategory.Investors
-                };
-                await _unitOfWork.SearchHistories.AddAsync(searchHistory);
+            var searchHistory = new SearchHistory
+            {
+                UserId = userId,
+                SearchTerm = userName,
+                FullSearchTerm = $"UserName: {userName}, Verified: {verified}, Financial: {financial}, Professional: {professional}",
+                SearchCategory = SearchCategory.Investors
+            };
+            await _unitOfWork.SearchHistories.AddAsync(searchHistory);
             await _unitOfWork.CompleteAsync();
         }
     }

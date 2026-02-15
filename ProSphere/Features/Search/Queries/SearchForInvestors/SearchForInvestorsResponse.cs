@@ -1,6 +1,4 @@
-﻿using ProSphere.Domain.Enums;
-
-namespace ProSphere.Features.Search.Queries.SearchForInvestors
+﻿namespace ProSphere.Features.Search.Queries.SearchForInvestors
 {
     public class SearchForInvestorsResponse
     {

@@ -1,7 +1,6 @@
 ﻿using Hangfire;
 using LinqKit;
 using MediatR;
-using ProSphere.Domain.Constants.SearchConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Jobs.Search.SearchSaver;
 using ProSphere.RepositoryManager.Interfaces;
@@ -25,7 +24,7 @@ namespace ProSphere.Features.Search.Queries.SearchForCreators
         {
             Expression<Func<Creator, bool>> filter = c => true;
 
-            if(!string.IsNullOrEmpty(query.userName))
+            if (!string.IsNullOrEmpty(query.userName))
                 filter = filter.And(c => c.UserName.Contains(query.userName));
 
             if (query.verified.HasValue)
@@ -52,7 +51,7 @@ namespace ProSphere.Features.Search.Queries.SearchForCreators
                          query.userId, query.userName, query.verified
                   ));
             }
-               
+
 
             return Result<PageSourcePagination<SearchForCreatorsResponse>>
                 .Success(result, "Paginated Search For Creators Retreived Successfully");
