@@ -1,4 +1,4 @@
-﻿namespace ProSphere.Domain.Constants
+﻿namespace ProSphere.Domain.Constants.SetsConstants
 {
     public static class CharacterSets
     {
