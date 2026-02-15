@@ -42,6 +42,8 @@ namespace ProSphere.Features.Moderator.Commands.RecycleModeratorAccount
             await _userManager.AddToRoleAsync(user, Role.InActiveModerator);
 
             _cache.Remove(CacheKey.GetModeratorAccountKey(command.moderatorId));
+            _cache.Remove(CacheKey.GetModeratorAvailableEmailsKey);
+
 
             return Result<RecycleModeratorAccountResponse>.Success(response, "Moderator Recycled Successfully");
         }
