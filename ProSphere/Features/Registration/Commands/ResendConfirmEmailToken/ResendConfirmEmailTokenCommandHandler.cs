@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using ProSphere.Domain.Entities;
 using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.ResultResponse;
-using LinkGenerator = ProSphere.Helpers.LinkGenerator;
+using LinkGenerator = ProSphere.Helpers.Generators.LinkGenerator;
 
 namespace ProSphere.Features.Registration.Commands.ResendConfirmEmailToken
 {

@@ -1,4 +1,4 @@
-﻿using ProSphere.Domain.Constants;
+﻿using ProSphere.Domain.Constants.FileConstants;
 using ProSphere.Domain.Enums;
 using ProSphere.ExternalServices.Interfaces.FileStorage;
 using ProSphere.RepositoryManager.Interfaces;

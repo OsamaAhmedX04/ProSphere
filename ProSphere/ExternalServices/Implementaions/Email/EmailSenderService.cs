@@ -1,5 +1,5 @@
 ﻿using Hangfire;
-using ProSphere.Domain.Constants;
+using ProSphere.Domain.Constants.EmailConstants;
 using ProSphere.ExternalServices.Interfaces.Email;
 
 namespace ProSphere.ExternalServices.Implementaions.Email

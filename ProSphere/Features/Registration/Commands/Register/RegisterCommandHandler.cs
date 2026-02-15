@@ -3,14 +3,14 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProSphere.Data.Context;
-using ProSphere.Domain.Constants;
+using ProSphere.Domain.Constants.RoleConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using LinkGenerator = ProSphere.Helpers.LinkGenerator;
+using LinkGenerator = ProSphere.Helpers.Generators.LinkGenerator;
 
 namespace ProSphere.Features.Registration.Commands.Register
 {

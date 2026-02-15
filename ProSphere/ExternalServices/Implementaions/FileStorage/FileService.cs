@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
-using ProSphere.Domain.Constants;
+using ProSphere.Domain.Constants.FileConstants;
 using ProSphere.ExternalServices.Interfaces.FileStorage;
 using ProSphere.Options;
 using Supabase;

@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProSphere.Data.Context;
-using ProSphere.Domain.Constants;
+using ProSphere.Domain.Constants.TokenConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Jobs.Account.DeleteAccount;
 using ProSphere.RepositoryManager.Interfaces;

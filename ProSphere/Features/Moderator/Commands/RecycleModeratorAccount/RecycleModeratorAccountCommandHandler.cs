@@ -1,20 +1,25 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using ProSphere.Domain.Constants;
+using Microsoft.Extensions.Caching.Memory;
+using ProSphere.Domain.Constants.CacheConstants;
+using ProSphere.Domain.Constants.RoleConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
-using ProSphere.Helpers;
+using ProSphere.Helpers.Generators;
 using ProSphere.ResultResponse;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ProSphere.Features.Moderator.Commands.RecycleModeratorAccount
 {
     public class RecycleModeratorAccountCommandHandler : IRequestHandler<RecycleModeratorAccountCommand, Result<RecycleModeratorAccountResponse>>
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IMemoryCache _cache;
 
-        public RecycleModeratorAccountCommandHandler(UserManager<ApplicationUser> userManager)
+        public RecycleModeratorAccountCommandHandler(UserManager<ApplicationUser> userManager, IMemoryCache cache)
         {
             _userManager = userManager;
+            _cache = cache;
         }
 
         public async Task<Result<RecycleModeratorAccountResponse>> Handle(RecycleModeratorAccountCommand command, CancellationToken cancellationToken)
@@ -35,6 +40,8 @@ namespace ProSphere.Features.Moderator.Commands.RecycleModeratorAccount
 
             await _userManager.RemoveFromRoleAsync(user, Role.Moderator);
             await _userManager.AddToRoleAsync(user, Role.InActiveModerator);
+
+            _cache.Remove(CacheKey.GetModeratorAccountKey(command.moderatorId));
 
             return Result<RecycleModeratorAccountResponse>.Success(response, "Moderator Recycled Successfully");
         }

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using ProSphere.Domain.Constants;
+using ProSphere.Domain.Constants.RoleConstants;
 using ProSphere.Domain.Enums;
 
 namespace ProSphere.Features.Registration.Commands.Register

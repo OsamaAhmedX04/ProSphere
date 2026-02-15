@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProSphere.Data.Context;
-using ProSphere.Domain.Constants;
+using ProSphere.Domain.Constants.TokenConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.Email;
-using ProSphere.Helpers;
+using ProSphere.Helpers.Generators;
 using ProSphere.ResultResponse;
 
 namespace ProSphere.Features.Account.Commands.RequestDeleteAccount
