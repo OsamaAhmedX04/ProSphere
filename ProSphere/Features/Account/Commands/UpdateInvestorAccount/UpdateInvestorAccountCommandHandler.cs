@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
-using ProSphere.Domain.Constants;
+using ProSphere.Domain.Constants.FileConstants;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.FileStorage;
 using ProSphere.RepositoryManager.Interfaces;

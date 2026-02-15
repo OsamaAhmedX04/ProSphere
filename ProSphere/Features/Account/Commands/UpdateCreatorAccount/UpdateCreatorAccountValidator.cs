@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using ProSphere.Domain.Constants;
+using ProSphere.Domain.Constants.FileConstants;
 
 namespace ProSphere.Features.Account.Commands.UpdateCreatorAccount
 {

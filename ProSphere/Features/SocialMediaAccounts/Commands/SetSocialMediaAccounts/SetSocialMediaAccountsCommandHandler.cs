@@ -2,6 +2,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using ProSphere.Domain.Constants.CacheConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Extensions;
 using ProSphere.ResultResponse;
@@ -12,12 +14,14 @@ namespace ProSphere.Features.SocialMediaAccounts.Commands.SetSocialMediaAccounts
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IValidator<SetSocialMediaAccountsRequest> _validator;
+        private readonly IMemoryCache _cache;
 
         public SetSocialMediaAccountsCommandHandler
-            (IValidator<SetSocialMediaAccountsRequest> validator, UserManager<ApplicationUser> userManager)
+            (IValidator<SetSocialMediaAccountsRequest> validator, UserManager<ApplicationUser> userManager, IMemoryCache cache)
         {
             _validator = validator;
             _userManager = userManager;
+            _cache = cache;
         }
 
         public async Task<Result> Handle(SetSocialMediaAccountsCommand command, CancellationToken cancellationToken)
@@ -55,6 +59,8 @@ namespace ProSphere.Features.SocialMediaAccounts.Commands.SetSocialMediaAccounts
             user.SocialMedia.ThirdPlatformURL = command.request.ThirdPlatformURL;
 
             await _userManager.UpdateAsync(user);
+
+            _cache.Remove(CacheKey.GetUserSocialMediaAccountsKey(user.Id));
 
             return Result.Success("Social Media Accounts Updated Successfully");
         }

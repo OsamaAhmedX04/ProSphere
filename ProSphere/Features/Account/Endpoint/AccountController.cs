@@ -5,8 +5,12 @@ using ProSphere.Features.Account.Commands.RequestDeleteAccount;
 using ProSphere.Features.Account.Commands.UpdateCreatorAccount;
 using ProSphere.Features.Account.Commands.UpdateInvestorAccount;
 using ProSphere.Features.Account.Queries.GetAdminAccount;
+using ProSphere.Features.Account.Queries.GetAdminAccounts;
 using ProSphere.Features.Account.Queries.GetCreatorAccount;
+using ProSphere.Features.Account.Queries.GetCreatorAccounts;
 using ProSphere.Features.Account.Queries.GetInvestorAccount;
+using ProSphere.Features.Account.Queries.GetInvestorAccounts;
+using ProSphere.Features.Account.Queries.GetModeratorAccount;
 using ProSphere.Features.Account.Queries.GetModeratorAccounts;
 
 namespace ProSphere.Features.Account.Endpoint
@@ -30,6 +34,14 @@ namespace ProSphere.Features.Account.Endpoint
             return StatusCode(result.StatusCode, result);
         }
 
+        [HttpGet("admins")]
+        public async Task<IActionResult> GetAdminAccounts(int pageNumber)
+        {
+            var query = new GetAdminAccountsQuery(pageNumber);
+            var result = await _sender.Send(query);
+            return StatusCode(result.StatusCode, result);
+        }
+
         [HttpGet("investor/{id}")]
         public async Task<IActionResult> GetInvestorAccount(string id)
         {
@@ -38,10 +50,34 @@ namespace ProSphere.Features.Account.Endpoint
             return StatusCode(result.StatusCode, result);
         }
 
-        [HttpGet("Creator/{id}")]
+        [HttpGet("investors")]
+        public async Task<IActionResult> GetInvestorAccounts(int pageNumber, string? userName = null)
+        {
+            var query = new GetInvestorAccountsQuery(pageNumber, userName);
+            var result = await _sender.Send(query);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpGet("creator/{id}")]
         public async Task<IActionResult> GetCreatorAccount(string id)
         {
             var query = new GetCreatorAccountQuery(id);
+            var result = await _sender.Send(query);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpGet("creators")]
+        public async Task<IActionResult> GetCreatorAccounts(int pageNumber, string? userName = null)
+        {
+            var query = new GetCreatorAccountsQuery(pageNumber, userName);
+            var result = await _sender.Send(query);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpGet("moderator/{id}")]
+        public async Task<IActionResult> GetModeratorAccounts(string id)
+        {
+            var query = new GetModeratorAccountQuery(id);
             var result = await _sender.Send(query);
             return StatusCode(result.StatusCode, result);
         }
@@ -61,6 +97,7 @@ namespace ProSphere.Features.Account.Endpoint
             var result = await _sender.Send(command);
             return StatusCode(result.StatusCode, result);
         }
+
 
         [HttpPut("investor/{investorId}")]
         public async Task<IActionResult> UpdateInvestorAccount(string investorId, [FromForm] UpdateInvestorAccountRequest request)
