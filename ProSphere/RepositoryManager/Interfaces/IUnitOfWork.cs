@@ -26,6 +26,8 @@ namespace ProSphere.RepositoryManager.Interfaces
         IRepository<CreatorSkill> CreatorSkills { get; }
         IRepository<UserSocialMedia> UsersSocialMedia { get; }
 
+        IRepository<SearchHistory> SearchHistories { get; }
+
 
 
         Task<int> CompleteAsync();

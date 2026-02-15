@@ -31,6 +31,8 @@ namespace ProSphere.Data.Context
         public DbSet<CreatorSkill> CreatorSkills { get; set; }
         public DbSet<UserSocialMedia> UsersSocialMedia { get; set; }
 
+        public DbSet<SearchHistory> SearchHistories { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -20,6 +20,7 @@ namespace ProSphere.Domain.Entities
         public RefreshTokenAuth RefreshTokenAuth { get; set; }
         public UserSocialMedia SocialMedia { get; set; }
         public ICollection<IdentityVerification> IdentityVerifications { get; set; } = new List<IdentityVerification>();
+        public ICollection<SearchHistory> SearchHistories { get; set; } = new List<SearchHistory>();
 
 
     }
