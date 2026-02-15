@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProSphere.Features.Moderator.Commands.CreateModerator;
 using ProSphere.Features.Moderator.Commands.RecycleModeratorAccount;
+using ProSphere.Features.Moderator.Queries.GetModeratorsAvailableEmail;
 
 namespace ProSphere.Features.Moderator.Endpoint
 {
@@ -17,9 +18,9 @@ namespace ProSphere.Features.Moderator.Endpoint
         }
 
         [HttpGet("emails")]
-        public async Task<IActionResult> GetModeratorsEmail(int pageNumber)
+        public async Task<IActionResult> GetModeratorsEmail()
         {
-            var query = new GetModeratorsEmailQuery(pageNumber);
+            var query = new GetModeratorsAvailableEmailQuery();
             var result = await _sender.Send(query);
             return StatusCode(result.StatusCode, result);
         }
