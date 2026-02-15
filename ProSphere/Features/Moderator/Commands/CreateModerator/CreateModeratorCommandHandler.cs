@@ -10,7 +10,6 @@ using ProSphere.Extensions;
 using ProSphere.Helpers.Generators;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ProSphere.Features.Moderator.Commands.CreateModerator
 {

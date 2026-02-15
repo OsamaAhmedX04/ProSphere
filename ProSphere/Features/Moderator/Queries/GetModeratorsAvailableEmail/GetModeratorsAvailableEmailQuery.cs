@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
 
 namespace ProSphere.Features.Moderator.Queries.GetModeratorsAvailableEmail

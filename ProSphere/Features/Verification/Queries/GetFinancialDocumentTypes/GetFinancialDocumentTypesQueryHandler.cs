@@ -20,7 +20,7 @@ namespace ProSphere.Features.Verification.Queries.GetFinancialDocumentTypes
         public async Task<List<GetFinancialDocumentTypesResponse>>
             Handle(GetFinancialDocumentTypesQuery query, CancellationToken cancellationToken)
         {
-            if(_cache.TryGetValue(CacheKey.FinancailDocumentTypes, out List<GetFinancialDocumentTypesResponse> result))
+            if (_cache.TryGetValue(CacheKey.FinancailDocumentTypes, out List<GetFinancialDocumentTypesResponse> result))
                 return result;
 
             result = await _unitOfWork.FinancialDocumentTypes.GetAllAsyncEnhanced(

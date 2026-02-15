@@ -23,7 +23,7 @@ namespace ProSphere.Features.Account.Queries.GetInvestorAccount
         {
             if (_cache.TryGetValue(CacheKey.GetInvestorAccountKey(query.userId), out GetInvestorAccountResponse cachedResult))
                 return Result<GetInvestorAccountResponse>.Success(cachedResult, "Investor Account Retrieved Successfully (from cache)");
-            
+
             var result = await _unitOfWork.Investors.GetEnhancedAsync(
                 filter: i => i.Id == query.userId,
                 selector: i => new GetInvestorAccountResponse

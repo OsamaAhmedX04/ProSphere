@@ -1,6 +1,4 @@
-﻿using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-
-namespace ProSphere.Domain.Constants.CacheConstants
+﻿namespace ProSphere.Domain.Constants.CacheConstants
 {
     public static class CacheKey
     {

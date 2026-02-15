@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProSphere.Features.Moderator.Commands.CreateModerator;
 using ProSphere.Features.Moderator.Commands.RecycleModeratorAccount;
-using ProSphere.Features.Moderator.Queries.GetModeratorsEmail;
 
 namespace ProSphere.Features.Moderator.Endpoint
 {

@@ -7,7 +7,6 @@ using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.Helpers.Generators;
 using ProSphere.ResultResponse;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ProSphere.Features.Moderator.Commands.RecycleModeratorAccount
 {

@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 using ProSphere.Domain.Constants.CacheConstants;
-using ProSphere.Features.Verification.Queries.GetFinancialDocumentTypes;
 using ProSphere.RepositoryManager.Interfaces;
 
 namespace ProSphere.Features.Verification.Queries.GetProfessionalDocumentTypes

@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 using ProSphere.Domain.Constants.CacheConstants;
-using ProSphere.Features.Account.Queries.GetModeratorAccounts;
 using ProSphere.RepositoryManager.Interfaces;
-using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
 
 namespace ProSphere.Features.Account.Queries.GetModeratorAccount
@@ -23,7 +21,7 @@ namespace ProSphere.Features.Account.Queries.GetModeratorAccount
         public async Task<Result<GetModeratorAccountResponse>> Handle(GetModeratorAccountQuery query, CancellationToken cancellationToken)
         {
 
-            if(_cache.TryGetValue(CacheKey.GetModeratorAccountKey(query.userId), out GetModeratorAccountResponse cachedModeratorAccount))
+            if (_cache.TryGetValue(CacheKey.GetModeratorAccountKey(query.userId), out GetModeratorAccountResponse cachedModeratorAccount))
             {
                 return Result<GetModeratorAccountResponse>.Success(cachedModeratorAccount, "Retrieved Moderator Account from Cache Successfully");
             }
@@ -40,7 +38,7 @@ namespace ProSphere.Features.Account.Queries.GetModeratorAccount
                     Code = m.Code,
                 });
 
-            if(moderator is null)
+            if (moderator is null)
                 return Result<GetModeratorAccountResponse>.Failure("Moderator Account Not Found", StatusCodes.Status404NotFound);
 
             moderatorAccount.UserId = moderator.UserId;

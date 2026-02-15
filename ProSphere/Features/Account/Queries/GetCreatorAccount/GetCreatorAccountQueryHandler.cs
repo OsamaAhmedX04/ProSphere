@@ -22,7 +22,7 @@ namespace ProSphere.Features.Account.Queries.GetCreatorAccount
         {
             if (_cache.TryGetValue(CacheKey.GetCreatorAccountKey(query.userId), out GetCreatorAccountResponse cachedResponse))
                 return Result<GetCreatorAccountResponse>.Success(cachedResponse, "Creator Account Retrieved Successfully");
-            
+
             var result = await _unitOfWork.Creators.GetEnhancedAsync(
                 filter: c => c.Id == query.userId,
                 selector: c => new GetCreatorAccountResponse

@@ -3,7 +3,6 @@ using MediatR;
 using ProSphere.Domain.Constants.FileConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
-using ProSphere.Features.Account.Queries.GetInvestorAccount;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
@@ -11,7 +10,7 @@ using System.Linq.Expressions;
 
 namespace ProSphere.Features.Account.Queries.GetInvestorAccounts
 {
-    public class GetInvestorAccountsQueryHandler 
+    public class GetInvestorAccountsQueryHandler
         : IRequestHandler<GetInvestorAccountsQuery, Result<PageSourcePagination<GetInvestorAccountsResponse>>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -21,7 +20,7 @@ namespace ProSphere.Features.Account.Queries.GetInvestorAccounts
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<PageSourcePagination<GetInvestorAccountsResponse>>> 
+        public async Task<Result<PageSourcePagination<GetInvestorAccountsResponse>>>
             Handle(GetInvestorAccountsQuery query, CancellationToken cancellationToken)
         {
             Expression<Func<Investor, bool>> filter = c => true;

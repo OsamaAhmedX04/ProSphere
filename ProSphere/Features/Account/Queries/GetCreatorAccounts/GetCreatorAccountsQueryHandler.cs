@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace ProSphere.Features.Account.Queries.GetCreatorAccounts
 {
-    public class GetCreatorAccountsQueryHandler 
+    public class GetCreatorAccountsQueryHandler
         : IRequestHandler<GetCreatorAccountsQuery, Result<PageSourcePagination<GetCreatorAccountsResponse>>>
     {
         private readonly IUnitOfWork _unitOfWork;
