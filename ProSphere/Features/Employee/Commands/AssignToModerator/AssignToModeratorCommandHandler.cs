@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 using ProSphere.Domain.Constants.CacheConstants;
 using ProSphere.Extensions;
-using ProSphere.Features.Employee.Commands.CreateEmployee;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 
@@ -38,13 +37,13 @@ namespace ProSphere.Features.Employee.Commands.AssignToModerator
             if (employee is null || employee.IsDeleted)
                 return Result.Failure("Employee Not Found", StatusCodes.Status404NotFound);
 
-            if(moderator is null)
+            if (moderator is null)
                 return Result.Failure("Moderator Not Found", StatusCodes.Status404NotFound);
 
-            if(moderator.IsUsed)
+            if (moderator.IsUsed)
                 return Result.Failure("Moderator is already assigned to another Employee", StatusCodes.Status400BadRequest);
 
-            if(employee.IsActive)
+            if (employee.IsActive)
                 return Result.Failure("Employee is already assigned to another Moderator", StatusCodes.Status400BadRequest);
 
             employee.IsActive = true;

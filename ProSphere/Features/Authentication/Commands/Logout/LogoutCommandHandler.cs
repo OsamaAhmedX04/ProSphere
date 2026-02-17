@@ -26,12 +26,12 @@ namespace ProSphere.Features.Authentication.Commands.Logout
 
             var tokenRow = await _unitOfWork.RefreshTokenAuths.FirstOrDefaultAsync(rt => rt.UserId == userId);
 
-            if(tokenRow == null)
+            if (tokenRow == null)
                 return Result.Failure("User Already Logged Out", StatusCodes.Status401Unauthorized);
 
             _unitOfWork.RefreshTokenAuths.Delete(tokenRow.UserId);
             await _unitOfWork.CompleteAsync();
-            
+
             return Result.Success("Logged Out Successfully");
         }
     }

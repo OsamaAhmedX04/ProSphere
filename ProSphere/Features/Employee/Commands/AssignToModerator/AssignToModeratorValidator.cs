@@ -6,7 +6,7 @@ namespace ProSphere.Features.Employee.Commands.AssignToModerator
     {
         public AssignToModeratorValidator()
         {
-            
+
             RuleFor(x => x.EmployeeId)
                 .NotEmpty().WithMessage("Employee Id Is Required");
 

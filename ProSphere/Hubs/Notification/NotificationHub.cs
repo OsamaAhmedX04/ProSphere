@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using ProSphere.Hubs.Notification;
-
-namespace ProSphere.Hubs.Notification
+﻿namespace ProSphere.Hubs.Notification
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.SignalR;

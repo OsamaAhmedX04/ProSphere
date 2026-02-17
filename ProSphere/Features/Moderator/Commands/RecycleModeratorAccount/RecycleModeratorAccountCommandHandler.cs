@@ -41,11 +41,11 @@ namespace ProSphere.Features.Moderator.Commands.RecycleModeratorAccount
             await _userManager.AddPasswordAsync(user, response.TempPassword);
 
             await _userManager.RemoveFromRoleAsync(user, Role.Moderator);
-            
-            if(!userRoles.Contains(Role.InActiveModerator))
+
+            if (!userRoles.Contains(Role.InActiveModerator))
                 await _userManager.AddToRoleAsync(user, Role.InActiveModerator);
 
-            
+
             var moderator = await _unitOfWork.Moderators.FirstOrDefaultAsync(m => m.Id == command.moderatorId);
             if (moderator.IsUsed)
             {
@@ -57,8 +57,8 @@ namespace ProSphere.Features.Moderator.Commands.RecycleModeratorAccount
 
                 await _unitOfWork.CompleteAsync();
             }
-            
-            
+
+
 
 
             _cache.Remove(CacheKey.GetModeratorAccountKey(command.moderatorId));

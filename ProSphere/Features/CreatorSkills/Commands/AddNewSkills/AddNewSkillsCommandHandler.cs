@@ -37,11 +37,11 @@ namespace ProSphere.Features.CreatorSkills.Commands.AddNewSkills
 
             List<CreatorSkill> newSkills = new List<CreatorSkill>();
 
-            foreach(var skillId in chosenSkillsId)
+            foreach (var skillId in chosenSkillsId)
             {
                 if (userSkills.Contains(skillId))
                     continue;
-                newSkills.Add(new CreatorSkill { CreatorId = command.CreatorId, SkillId = skillId});
+                newSkills.Add(new CreatorSkill { CreatorId = command.CreatorId, SkillId = skillId });
             }
 
             await _unitOfWork.CreatorSkills.AddRangeAsync(newSkills);

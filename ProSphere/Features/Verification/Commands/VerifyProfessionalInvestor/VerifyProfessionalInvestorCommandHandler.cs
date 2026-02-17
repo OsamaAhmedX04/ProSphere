@@ -3,7 +3,6 @@ using MediatR;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.Extensions;
-using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.ExternalServices.Interfaces.FileStorage;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;

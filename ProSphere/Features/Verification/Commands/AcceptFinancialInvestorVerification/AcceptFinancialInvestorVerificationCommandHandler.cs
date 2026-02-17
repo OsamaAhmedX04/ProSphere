@@ -10,7 +10,6 @@ using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.Jobs.Documents.DeleteDocumentVerification;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using Supabase.Gotrue;
 
 namespace ProSphere.Features.Verification.Commands.AcceptFinancialInvestorVerification
 {

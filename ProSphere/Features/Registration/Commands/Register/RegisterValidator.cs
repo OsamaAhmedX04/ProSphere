@@ -18,7 +18,7 @@ namespace ProSphere.Features.Registration.Commands.Register
 
             RuleFor(x => x.Username)
            .NotEmpty().WithMessage("Username is required")
-           .Matches(@"^[a-zA-Z0-9._]{3,20}$") 
+           .Matches(@"^[a-zA-Z0-9._]{3,20}$")
            .WithMessage("Username can only contain letters, numbers, dot, underscore and must be 3-20 characters long");
 
             RuleFor(r => r.Email)

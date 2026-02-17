@@ -5,12 +5,9 @@ using ProSphere.Domain.Constants.CacheConstants;
 using ProSphere.Domain.Constants.RoleConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
-using ProSphere.Features.Employee.Commands.AssignToModerator;
-using ProSphere.Features.Moderator.Commands.RecycleModeratorAccount;
 using ProSphere.Helpers.Generators;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using Supabase.Gotrue;
 
 namespace ProSphere.Features.Employee.Commands.DeleteEmployee
 {
@@ -56,7 +53,7 @@ namespace ProSphere.Features.Employee.Commands.DeleteEmployee
                     await _userManager.RemoveFromRoleAsync(moderatorAppUser!, Role.Moderator);
                     await _userManager.AddToRoleAsync(moderatorAppUser!, Role.InActiveModerator);
                 }
-                
+
 
                 _cache.Remove(CacheKey.GetModeratorAvailableEmailsKey);
                 _cache.Remove(CacheKey.GetModeratorAccountKey(moderator.Id));
