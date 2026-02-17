@@ -3,7 +3,7 @@ using ProSphere.ResultResponse;
 
 namespace ProSphere.Features.Account.Queries.GetModeratorAccount
 {
-    public record GetModeratorAccountQuery(string userId) : IRequest<Result<GetModeratorAccountResponse>>
+    public record GetModeratorAccountQuery(string userName) : IRequest<Result<GetModeratorAccountResponse>>
     {
     }
 }

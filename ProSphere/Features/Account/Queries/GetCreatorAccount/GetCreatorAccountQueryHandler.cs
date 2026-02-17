@@ -20,19 +20,20 @@ namespace ProSphere.Features.Account.Queries.GetCreatorAccount
 
         public async Task<Result<GetCreatorAccountResponse>> Handle(GetCreatorAccountQuery query, CancellationToken cancellationToken)
         {
-            if (_cache.TryGetValue(CacheKey.GetCreatorAccountKey(query.userId), out GetCreatorAccountResponse cachedResponse))
+            if (_cache.TryGetValue(CacheKey.GetCreatorAccountKey(query.userName), out GetCreatorAccountResponse cachedResponse))
                 return Result<GetCreatorAccountResponse>.Success(cachedResponse, "Creator Account Retrieved Successfully");
 
             var result = await _unitOfWork.Creators.GetEnhancedAsync(
-                filter: c => c.Id == query.userId,
+                filter: c => c.User.UserName == query.userName && c.User.EmailConfirmed,
                 selector: c => new GetCreatorAccountResponse
                 {
+                    Username = c.User.UserName!,
                     FirstName = c.User.FirstName,
                     LastName = c.User.LastName,
                     HeadLine = c.HeadLine,
                     BIO = c.BIO,
                     Gender = c.User.Gender.ToString(),
-                    ImageProfileURL = SupabaseConstants.PrefixSupaURL + c.ImageProfileURL ?? null,
+                    ImageProfileURL = c.ImageProfileURL == null ? null : SupabaseConstants.PrefixSupaURL + c.ImageProfileURL,
                     IsVerified = c.User.IsVerified
                 });
 
@@ -44,7 +45,7 @@ namespace ProSphere.Features.Account.Queries.GetCreatorAccount
                 AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1),
                 SlidingExpiration = TimeSpan.FromMinutes(30),
             };
-            _cache.Set(CacheKey.GetCreatorAccountKey(query.userId), result, cacheEntryOptions);
+            _cache.Set(CacheKey.GetCreatorAccountKey(query.userName), result, cacheEntryOptions);
 
             return Result<GetCreatorAccountResponse>.Success(result, "Creator Account Retrieved Successfullt");
         }

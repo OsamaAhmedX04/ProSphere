@@ -38,6 +38,9 @@ namespace ProSphere.Features.Registration.Commands.Register
             if (await IsDeletedUser(command.request.Email))
                 return Result.Failure("This Email Cannot Make Account Except After 30 Day From Being Deleted", StatusCodes.Status400BadRequest);
 
+            if (await IsEmployee(command.request.Email))
+                return Result.Failure("This Email Is Already Exist", StatusCodes.Status400BadRequest);
+
             var validationResult = await _validator.ValidateAsync(command.request, cancellationToken);
             if (!validationResult.IsValid)
             {
@@ -47,7 +50,7 @@ namespace ProSphere.Features.Registration.Commands.Register
 
             var newUser = new ApplicationUser
             {
-                UserName = command.request.Email,
+                UserName = command.request.Username,
                 Email = command.request.Email,
                 FirstName = command.request.FirstName,
                 LastName = command.request.LastName,
@@ -70,12 +73,12 @@ namespace ProSphere.Features.Registration.Commands.Register
                 return Result.ValidationFailure(errors);
             }
 
-            if (command.request.Role == Role.Creator)
+            if (command.request.Role.ToLower() == Role.Creator.ToLower())
             {
                 await _unitOfWork.Creators.AddAsync(new Creator
                 {
                     Id = newUser.Id,
-                    UserName = newUser.FirstName + " " + newUser.LastName,
+                    FullName = newUser.FirstName + " " + newUser.LastName,
                 });
             }
             else
@@ -84,7 +87,7 @@ namespace ProSphere.Features.Registration.Commands.Register
                 {
                     Id = newUser.Id,
                     InvestorLevel = InvestorLevel.None,
-                    UserName = newUser.FirstName + " " + newUser.LastName,
+                    FullName = newUser.FirstName + " " + newUser.LastName,
                 });
             }
             await _unitOfWork.CompleteAsync();
@@ -105,6 +108,9 @@ namespace ProSphere.Features.Registration.Commands.Register
 
         private async Task<bool> IsDeletedUser(string userEmail) =>
             await _unitOfWork.UserAccountHistories.FirstOrDefaultAsync(h => h.Email == userEmail) != null;
+
+        private async Task<bool> IsEmployee(string userEmail) =>
+            await _unitOfWork.Employees.FirstOrDefaultAsync(e => e.Email == userEmail) != null;
 
     }
 }

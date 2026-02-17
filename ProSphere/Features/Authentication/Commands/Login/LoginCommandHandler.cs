@@ -34,7 +34,13 @@ namespace ProSphere.Features.Authentication.Commands.Login
                 return Result<AuthenticationTokenDto>.ValidationFailure(errors);
             }
 
-            var user = await _userManager.FindByEmailAsync(command.request.Email);
+            ApplicationUser? user;
+
+            if (command.request.Email.Contains("@"))
+                user = await _userManager.FindByEmailAsync(command.request.Email);
+
+            else
+                user = await _userManager.FindByNameAsync(command.request.Email);
 
             if (user == null)
                 return Result<AuthenticationTokenDto>.Failure("User Not Found", StatusCodes.Status404NotFound);
@@ -48,10 +54,11 @@ namespace ProSphere.Features.Authentication.Commands.Login
                 return Result<AuthenticationTokenDto>.Failure("Wrong Email Or Password", StatusCodes.Status400BadRequest);
 
             var userRoles = await _userManager.GetRolesAsync(user);
-            if (userRoles.Contains(Role.InActiveModerator) || userRoles.Contains(Role.InActiveAdmin))
-                return Result<AuthenticationTokenDto>.Failure("This Is InActive Role, Please Change Password", StatusCodes.Status403Forbidden);
 
             var authenticationTokenResponse = await _authenticationTokenService.GenerateAuthenticationTokens(user, command.request.RememberMe);
+
+            if (userRoles.Contains(Role.InActiveModerator) || userRoles.Contains(Role.InActiveAdmin))
+                return Result<AuthenticationTokenDto>.Success(authenticationTokenResponse, "This Is InActive Role, Please Change Password");
 
             return Result<AuthenticationTokenDto>.Success(authenticationTokenResponse, "User Logged In Successfully");
         }

@@ -27,6 +27,7 @@ namespace ProSphere.Features.Account.Queries.GetModeratorAccounts
                 filter: filter,
                 selector: m => new GetModeratorAccountsResponse
                 {
+                    UserName = m.User.UserName!,
                     UserId = m.Id,
                     Email = m.User.Email!,
                     IsUsed = m.IsUsed,

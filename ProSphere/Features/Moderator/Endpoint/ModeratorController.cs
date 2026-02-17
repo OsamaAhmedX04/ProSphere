@@ -17,7 +17,7 @@ namespace ProSphere.Features.Moderator.Endpoint
             _sender = sender;
         }
 
-        [HttpGet("emails")]
+        [HttpGet("available-emails")]
         public async Task<IActionResult> GetModeratorsEmail()
         {
             var query = new GetModeratorsAvailableEmailQuery();
@@ -33,7 +33,7 @@ namespace ProSphere.Features.Moderator.Endpoint
             return StatusCode(result.StatusCode, result);
         }
 
-        [HttpPut("{moderatorId}")]
+        [HttpPut("recycle-account/{moderatorId}")]
         public async Task<IActionResult> RecycleModeratorAccount(string moderatorId)
         {
             var command = new RecycleModeratorAccountCommand(moderatorId);

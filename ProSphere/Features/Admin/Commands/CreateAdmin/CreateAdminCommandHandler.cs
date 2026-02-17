@@ -33,10 +33,11 @@ namespace ProSphere.Features.Admin.Commands.CreateAdmin
                 var errors = validationResult.ConvertErrorsToDictionary();
                 return Result<CreateAdminResponse>.ValidationFailure(errors);
             }
-
+            var numberOfAdmins = await _unitOfWork.Admins.Count();
+            var accountCode = $"Admin{AccountCodeGenerator.Generate()}{numberOfAdmins + 1}";
             var newUser = new ApplicationUser
             {
-                UserName = command.request.Email,
+                UserName = accountCode,
                 Email = command.request.Email,
                 FirstName = command.request.FirstName,
                 LastName = command.request.LastName,

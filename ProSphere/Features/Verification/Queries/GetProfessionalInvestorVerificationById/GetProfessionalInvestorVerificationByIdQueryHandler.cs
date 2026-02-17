@@ -24,7 +24,7 @@ namespace ProSphere.Features.Verification.Queries.GetProfessionalInvestorVerific
                {
                    ProfessionalDocumentId = query.professionalDocumentId,
                    UserId = v.InvestorId,
-                   UserName = v.Investor.UserName,
+                   UserName = v.Investor.FullName,
                    DocumentType = v.DocumentType.Name,
                    DocumentURL = SupabaseConstants.PrefixSupaURL + v.DocumentURL,
                    status = v.status.ToString(),

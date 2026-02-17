@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using ProSphere.Domain.Entities;
 using ProSphere.Extensions;
 using ProSphere.RepositoryManager.Interfaces;
@@ -27,15 +28,23 @@ namespace ProSphere.Features.CreatorSkills.Commands.AddNewSkills
                 return Result.ValidationFailure(errors);
             }
 
-            var skillList = command.request.SkillsId
-                .Distinct()
-                .Select(skillId => new CreatorSkill
-                {
-                    CreatorId = command.CreatorId,
-                    SkillId = skillId
-                }).ToList();
+            var chosenSkillsId = command.request.SkillsId.Distinct();
 
-            await _unitOfWork.CreatorSkills.AddRangeAsync(skillList);
+            var userSkills = await _unitOfWork.CreatorSkills
+                .GetAllAsIQueryable()
+                .Where(s => s.CreatorId == command.CreatorId)
+                .Select(s => s.SkillId).ToListAsync();
+
+            List<CreatorSkill> newSkills = new List<CreatorSkill>();
+
+            foreach(var skillId in chosenSkillsId)
+            {
+                if (userSkills.Contains(skillId))
+                    continue;
+                newSkills.Add(new CreatorSkill { CreatorId = command.CreatorId, SkillId = skillId});
+            }
+
+            await _unitOfWork.CreatorSkills.AddRangeAsync(newSkills);
             await _unitOfWork.CompleteAsync();
 
             return Result.Success("Skills Added Successfully");

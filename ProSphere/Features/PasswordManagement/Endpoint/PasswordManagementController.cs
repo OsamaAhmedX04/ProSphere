@@ -16,7 +16,7 @@ namespace ProSphere.Features.PasswordManagement.Endpoint
             _sender = sender;
         }
 
-        [HttpPut("/api/password-management")]
+        [HttpPut("/api/password-management/change")]
         public async Task<IActionResult> ChangePassword(ChangePasswordRequest request)
         {
             var command = new ChangePasswordCommand(request);

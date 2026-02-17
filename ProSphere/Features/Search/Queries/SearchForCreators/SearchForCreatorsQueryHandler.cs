@@ -25,7 +25,7 @@ namespace ProSphere.Features.Search.Queries.SearchForCreators
             Expression<Func<Creator, bool>> filter = c => true;
 
             if (!string.IsNullOrEmpty(query.userName))
-                filter = filter.And(c => c.UserName.Contains(query.userName));
+                filter = filter.And(c => c.FullName.Contains(query.userName));
 
             if (query.verified.HasValue)
                 filter = filter.And(c => c.User.IsVerified == query.verified.Value);
@@ -35,7 +35,7 @@ namespace ProSphere.Features.Search.Queries.SearchForCreators
                 selector: c => new SearchForCreatorsResponse
                 {
                     Id = c.Id,
-                    UserName = c.UserName,
+                    UserName = c.FullName,
                     ImageProfileURL = c.ImageProfileURL,
                     HeadLine = c.HeadLine,
                     IsVerified = c.User.IsVerified

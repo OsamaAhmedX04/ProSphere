@@ -42,7 +42,7 @@ namespace ProSphere.Features.Verification.Queries.GetProfessionalInvestorVerific
                 {
                     ProfessionalDocumentId = v.Id,
                     UserId = v.InvestorId,
-                    UserName = v.Investor.UserName,
+                    UserName = v.Investor.FullName,
                     CreatedAt = v.CreatedAt,
                 },
                 pageNumber: query.pageNumber,

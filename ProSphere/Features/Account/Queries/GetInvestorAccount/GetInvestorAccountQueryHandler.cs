@@ -21,17 +21,18 @@ namespace ProSphere.Features.Account.Queries.GetInvestorAccount
 
         public async Task<Result<GetInvestorAccountResponse>> Handle(GetInvestorAccountQuery query, CancellationToken cancellationToken)
         {
-            if (_cache.TryGetValue(CacheKey.GetInvestorAccountKey(query.userId), out GetInvestorAccountResponse cachedResult))
+            if (_cache.TryGetValue(CacheKey.GetInvestorAccountKey(query.userName), out GetInvestorAccountResponse cachedResult))
                 return Result<GetInvestorAccountResponse>.Success(cachedResult, "Investor Account Retrieved Successfully (from cache)");
 
             var result = await _unitOfWork.Investors.GetEnhancedAsync(
-                filter: i => i.Id == query.userId,
+                filter: i => i.User.UserName == query.userName && i.User.EmailConfirmed,
                 selector: i => new GetInvestorAccountResponse
                 {
                     FirstName = i.User.FirstName,
                     LastName = i.User.LastName,
+                    UserName = i.User.UserName!,
                     Gender = i.User.Gender.ToString(),
-                    ImageProfileURL = SupabaseConstants.PrefixSupaURL + i.ImageProfileURL ?? null,
+                    ImageProfileURL = i.ImageProfileURL == null ? null : SupabaseConstants.PrefixSupaURL + i.ImageProfileURL,
                     HeadLine = i.HeadLine,
                     BIO = i.BIO,
                     IsVerified = i.User.IsVerified,
@@ -50,7 +51,7 @@ namespace ProSphere.Features.Account.Queries.GetInvestorAccount
                 AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1),
                 SlidingExpiration = TimeSpan.FromMinutes(30),
             };
-            _cache.Set(CacheKey.GetInvestorAccountKey(query.userId), result, cacheEntryOptions);
+            _cache.Set(CacheKey.GetInvestorAccountKey(query.userName), result, cacheEntryOptions);
 
             return Result<GetInvestorAccountResponse>.Success(result, "Investor Account Retrieved Successfullt");
         }

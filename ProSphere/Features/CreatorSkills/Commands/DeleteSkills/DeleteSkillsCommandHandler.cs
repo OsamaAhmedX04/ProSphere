@@ -26,9 +26,9 @@ namespace ProSphere.Features.CreatorSkills.Commands.DeleteSkills
                 return Result.ValidationFailure(errors);
             }
 
-            var skillList = command.request.SkillsId.Distinct();
+            var chosenSkillsId = command.request.SkillsId.Distinct();
 
-            await _unitOfWork.CreatorSkills.BulkDeleteAsync(cs => cs.CreatorId == command.creatorId && skillList.Contains(cs.SkillId));
+            await _unitOfWork.CreatorSkills.BulkDeleteAsync(cs => cs.CreatorId == command.creatorId && chosenSkillsId.Contains(cs.SkillId));
 
             return Result.Success("Skills Deleted Successfully.");
         }

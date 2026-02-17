@@ -6,6 +6,7 @@ using ProSphere.Domain.Constants.RoleConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.Helpers.Generators;
+using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 
 namespace ProSphere.Features.Moderator.Commands.RecycleModeratorAccount
@@ -13,12 +14,14 @@ namespace ProSphere.Features.Moderator.Commands.RecycleModeratorAccount
     public class RecycleModeratorAccountCommandHandler : IRequestHandler<RecycleModeratorAccountCommand, Result<RecycleModeratorAccountResponse>>
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMemoryCache _cache;
 
-        public RecycleModeratorAccountCommandHandler(UserManager<ApplicationUser> userManager, IMemoryCache cache)
+        public RecycleModeratorAccountCommandHandler(UserManager<ApplicationUser> userManager, IMemoryCache cache, IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _cache = cache;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Result<RecycleModeratorAccountResponse>> Handle(RecycleModeratorAccountCommand command, CancellationToken cancellationToken)
@@ -38,13 +41,31 @@ namespace ProSphere.Features.Moderator.Commands.RecycleModeratorAccount
             await _userManager.AddPasswordAsync(user, response.TempPassword);
 
             await _userManager.RemoveFromRoleAsync(user, Role.Moderator);
-            await _userManager.AddToRoleAsync(user, Role.InActiveModerator);
+            
+            if(!userRoles.Contains(Role.InActiveModerator))
+                await _userManager.AddToRoleAsync(user, Role.InActiveModerator);
+
+            
+            var moderator = await _unitOfWork.Moderators.FirstOrDefaultAsync(m => m.Id == command.moderatorId);
+            if (moderator.IsUsed)
+            {
+                var employee = await _unitOfWork.Employees.FirstOrDefaultAsync(e => e.AssignedTo == moderator.Id && e.IsActive);
+                employee!.IsActive = false;
+                employee!.EndWorkAt = DateTime.UtcNow;
+                employee!.AssignedTo = null;
+                moderator.IsUsed = false;
+
+                await _unitOfWork.CompleteAsync();
+            }
+            
+            
+
 
             _cache.Remove(CacheKey.GetModeratorAccountKey(command.moderatorId));
             _cache.Remove(CacheKey.GetModeratorAvailableEmailsKey);
 
 
-            return Result<RecycleModeratorAccountResponse>.Success(response, "Moderator Recycled Successfully");
+            return Result<RecycleModeratorAccountResponse>.Success(response, "Moderator Account Recycled Successfully");
         }
     }
 }

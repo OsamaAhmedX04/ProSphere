@@ -21,8 +21,9 @@ namespace ProSphere.Features.Account.Queries.GetAdminAccounts
                 filter: a => true,
                 selector: admin => new GetAdminAccountsResponse
                 {
-                    FirstName = admin.User.FirstName,
-                    LastName = admin.User.LastName,
+                    UserId = admin.Id,
+                    FullName = admin.User.FirstName + " " + admin.User.LastName,
+                    UserName = admin.User.UserName!,
                     Gender = admin.User.Gender.ToString(),
                     IsSuperAdmin = admin.IsSuperAdmin
                 },

@@ -38,14 +38,18 @@ namespace ProSphere.Features.Moderator.Commands.CreateModerator
                 return Result<CreateModeratorResponse>.ValidationFailure(errors);
             }
 
+            var numberOfModerators = await _unitOfWork.Moderators.Count();
+            var moderatorCode = $"{AccountCodeGenerator.Generate()}MOD{numberOfModerators + 1}";
+
             var newUser = new ApplicationUser
             {
                 FirstName = "Moderator",
                 LastName = "ProSphere",
                 Email = command.request.Email,
-                UserName = command.request.Email,
+                UserName = moderatorCode,
                 EmailConfirmed = true,
-                Gender = Gender.None
+                Gender = Gender.None,
+                IsVerified = true
             };
 
             var response = new CreateModeratorResponse { TempPassword = PasswordGenerator.Generate(PasswordDificulty.Low) };
@@ -65,10 +69,6 @@ namespace ProSphere.Features.Moderator.Commands.CreateModerator
                 var errors = creatingResult.ConvertErrorsToDictionary();
                 return Result<CreateModeratorResponse>.ValidationFailure(errors);
             }
-
-            var numberOfModerators = await _unitOfWork.Moderators.Count();
-
-            var moderatorCode = $"{AccountCodeGenerator.Generate()}MOD{numberOfModerators + 1}";
 
             var newModerator = new Domain.Entities.Moderator { Id = newUser.Id, Code = moderatorCode };
             await _unitOfWork.Moderators.AddAsync(newModerator);

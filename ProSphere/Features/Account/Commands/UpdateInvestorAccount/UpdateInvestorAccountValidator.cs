@@ -7,6 +7,20 @@ namespace ProSphere.Features.Account.Commands.UpdateInvestorAccount
     {
         public UpdateInvestorAccountValidator()
         {
+            RuleFor(r => r.FirstName)
+                .NotEmpty().WithMessage("First Name Is Required")
+                .MaximumLength(30).WithMessage("First Name Should Not Excced 30 Letter");
+
+            RuleFor(r => r.LastName)
+                .NotEmpty().WithMessage("Last Name Is Required")
+                .MaximumLength(30).WithMessage("Last Name Should Not Excced 30 Letter");
+
+            RuleFor(x => x.Username)
+           .NotEmpty().WithMessage("Username is required")
+           .Matches(@"^[a-zA-Z0-9._]{3,20}$")
+           .WithMessage("Username can only contain letters, numbers, dot, underscore and must be 3-20 characters long");
+
+
             RuleFor(u => u.ImageProfile)
                 .Must(image => image.Length < FileRestriction.AllowableImageFileSize)
                     .WithMessage("Image size must be less than 1 MB.")

@@ -2,12 +2,15 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using ProSphere.Domain.Constants.CacheConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.Jobs.Documents.DeleteDocumentVerification;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ProSphere.Features.Verification.Commands.AcceptIdentityVerification
 {
@@ -16,14 +19,16 @@ namespace ProSphere.Features.Verification.Commands.AcceptIdentityVerification
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSenderService _emailSenderService;
+        private readonly IMemoryCache _cache;
 
         public AcceptIdentityVerificationCommandHandler(
             IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager,
-            IEmailSenderService emailSenderService)
+            IEmailSenderService emailSenderService, IMemoryCache cache)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
             _emailSenderService = emailSenderService;
+            _cache = cache;
         }
 
         public async Task<Result> Handle(AcceptIdentityVerificationCommand command, CancellationToken cancellationToken)
@@ -58,6 +63,9 @@ namespace ProSphere.Features.Verification.Commands.AcceptIdentityVerification
                 );
 
             _emailSenderService.SendAcceptanceVerifiedIdentityMail(user.Email!, user.FirstName, user.LastName);
+
+            _cache.Remove(CacheKey.GetInvestorAccountKey(user.UserName!));
+            _cache.Remove(CacheKey.GetCreatorAccountKey(user.UserName!));
 
             return Result.Success("Identity Is Verified Successfully");
         }

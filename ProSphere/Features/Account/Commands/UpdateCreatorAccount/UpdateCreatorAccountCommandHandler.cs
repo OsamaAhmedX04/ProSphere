@@ -1,6 +1,10 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Memory;
+using ProSphere.Domain.Constants.CacheConstants;
 using ProSphere.Domain.Constants.FileConstants;
+using ProSphere.Domain.Entities;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.FileStorage;
 using ProSphere.RepositoryManager.Interfaces;
@@ -11,15 +15,19 @@ namespace ProSphere.Features.Account.Commands.UpdateCreatorAccount
     public class UpdateCreatorAccountCommandHandler : IRequestHandler<UpdateCreatorAccountCommand, Result>
     {
         private readonly IValidator<UpdateCreatorAccountRequest> _validator;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFileService _fileService;
+        private readonly IMemoryCache _cache;
 
         public UpdateCreatorAccountCommandHandler(IValidator<UpdateCreatorAccountRequest> validator,
-            IUnitOfWork unitOfWork, IFileService fileService)
+            IUnitOfWork unitOfWork, IFileService fileService, UserManager<ApplicationUser> userManager, IMemoryCache cache)
         {
             _validator = validator;
             _unitOfWork = unitOfWork;
             _fileService = fileService;
+            _userManager = userManager;
+            _cache = cache;
         }
 
         public async Task<Result> Handle(UpdateCreatorAccountCommand command, CancellationToken cancellationToken)
@@ -34,6 +42,19 @@ namespace ProSphere.Features.Account.Commands.UpdateCreatorAccount
             var creator = await _unitOfWork.Creators.FirstOrDefaultAsync(c => c.Id == command.creatorId);
             if (creator == null)
                 return Result.Failure("Creator Not Found", StatusCodes.Status404NotFound);
+
+            var user = await _userManager.FindByIdAsync(creator.Id);
+
+            user!.FirstName = command.request.FirstName;
+            user.LastName = command.request.LastName;
+            var settingResult = await _userManager.SetUserNameAsync(user, command.request.Username);
+            if (!settingResult.Succeeded)
+            {
+                var errors = settingResult.ConvertErrorsToDictionary();
+                return Result.ValidationFailure(errors);
+            }
+
+            await _userManager.UpdateAsync(user);
 
             if (command.request.ImageProfile != null)
             {
@@ -50,8 +71,9 @@ namespace ProSphere.Features.Account.Commands.UpdateCreatorAccount
 
             await _unitOfWork.CompleteAsync();
 
-            return Result.Success("Creator Account Updated Successfully");
+            _cache.Remove(CacheKey.GetCreatorAccountKey(user.UserName!));
 
+            return Result.Success("Creator Account Updated Successfully");
         }
     }
 }

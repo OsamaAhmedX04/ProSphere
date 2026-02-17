@@ -26,10 +26,10 @@ namespace ProSphere.Features.Account.Endpoint
             _sender = sender;
         }
 
-        [HttpGet("admin/{id}")]
-        public async Task<IActionResult> GetAdminAccount(string id)
+        [HttpGet("admin/{username}")]
+        public async Task<IActionResult> GetAdminAccount(string username)
         {
-            var query = new GetAdminAccountQuery(id);
+            var query = new GetAdminAccountQuery(username);
             var result = await _sender.Send(query);
             return StatusCode(result.StatusCode, result);
         }
@@ -42,10 +42,10 @@ namespace ProSphere.Features.Account.Endpoint
             return StatusCode(result.StatusCode, result);
         }
 
-        [HttpGet("investor/{id}")]
-        public async Task<IActionResult> GetInvestorAccount(string id)
+        [HttpGet("investor/{username}")]
+        public async Task<IActionResult> GetInvestorAccount(string username)
         {
-            var query = new GetInvestorAccountQuery(id);
+            var query = new GetInvestorAccountQuery(username);
             var result = await _sender.Send(query);
             return StatusCode(result.StatusCode, result);
         }
@@ -58,10 +58,10 @@ namespace ProSphere.Features.Account.Endpoint
             return StatusCode(result.StatusCode, result);
         }
 
-        [HttpGet("creator/{id}")]
-        public async Task<IActionResult> GetCreatorAccount(string id)
+        [HttpGet("creator/{username}")]
+        public async Task<IActionResult> GetCreatorAccount(string username)
         {
-            var query = new GetCreatorAccountQuery(id);
+            var query = new GetCreatorAccountQuery(username);
             var result = await _sender.Send(query);
             return StatusCode(result.StatusCode, result);
         }
@@ -74,10 +74,10 @@ namespace ProSphere.Features.Account.Endpoint
             return StatusCode(result.StatusCode, result);
         }
 
-        [HttpGet("moderator/{id}")]
-        public async Task<IActionResult> GetModeratorAccounts(string id)
+        [HttpGet("moderator/{username}")]
+        public async Task<IActionResult> GetModeratorAccounts(string username)
         {
-            var query = new GetModeratorAccountQuery(id);
+            var query = new GetModeratorAccountQuery(username);
             var result = await _sender.Send(query);
             return StatusCode(result.StatusCode, result);
         }

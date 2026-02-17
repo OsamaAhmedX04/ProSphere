@@ -22,11 +22,11 @@ namespace ProSphere.Features.Account.Queries.GetCreatorAccounts
         public async Task<Result<PageSourcePagination<GetCreatorAccountsResponse>>>
             Handle(GetCreatorAccountsQuery query, CancellationToken cancellationToken)
         {
-            Expression<Func<Creator, bool>> filter = c => true;
+            Expression<Func<Creator, bool>> filter = c => c.User.EmailConfirmed;
 
             if (!string.IsNullOrEmpty(query.userName))
             {
-                filter = filter.And(c => c.UserName.Contains(query.userName));
+                filter = filter.And(c => c.FullName.Contains(query.userName));
             }
 
             var result = await _unitOfWork.Creators.GetAllPaginatedEnhancedAsync(
@@ -34,10 +34,11 @@ namespace ProSphere.Features.Account.Queries.GetCreatorAccounts
                 selector: c => new GetCreatorAccountsResponse
                 {
                     UserId = c.Id,
-                    UserName = c.UserName,
+                    FullName = c.FullName,
+                    UserName = c.User.UserName!,
                     HeadLine = c.HeadLine,
                     IsVerified = c.User.IsVerified,
-                    ImageProfileURL = SupabaseConstants.PrefixSupaURL + c.ImageProfileURL ?? null,
+                    ImageProfileURL = c.ImageProfileURL == null ? null : SupabaseConstants.PrefixSupaURL + c.ImageProfileURL,
                 },
                 pageNumber: query.pageNumber,
                 pageSize: 20

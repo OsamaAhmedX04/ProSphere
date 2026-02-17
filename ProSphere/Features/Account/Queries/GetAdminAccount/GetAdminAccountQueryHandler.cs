@@ -19,15 +19,16 @@ namespace ProSphere.Features.Account.Queries.GetAdminAccount
 
         public async Task<Result<GetAdminAccountResponse>> Handle(GetAdminAccountQuery query, CancellationToken cancellationToken)
         {
-            if (_cache.TryGetValue(CacheKey.GetAdminAccountKey(query.userId), out GetAdminAccountResponse cachedResult))
+            if (_cache.TryGetValue(CacheKey.GetAdminAccountKey(query.userName), out GetAdminAccountResponse cachedResult))
                 return Result<GetAdminAccountResponse>.Success(cachedResult, "Admin Account Retrieved Successfully");
 
             var result = await _unitOfWork.Admins.GetEnhancedAsync(
-                filter: a => a.Id == query.userId,
+                filter: a => a.User.UserName == query.userName,
                 selector: a => new GetAdminAccountResponse
                 {
                     FirstName = a.User.FirstName,
                     LastName = a.User.LastName,
+                    UserName = a.User.UserName!,
                     Gender = a.User.Gender.ToString(),
                     IsSuperAdmin = a.IsSuperAdmin,
                 });

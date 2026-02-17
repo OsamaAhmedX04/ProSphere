@@ -33,7 +33,7 @@ namespace ProSphere.Features.PasswordManagement.Commands.ChangeInActiveRolePassw
         public async Task<Result<AuthenticationTokenDto>>
             Handle(ChangeInActiveRolePasswordCommand command, CancellationToken cancellationToken)
         {
-            var user = await _userManager.FindByIdAsync(command.request.UserId);
+            var user = await _userManager.FindByEmailAsync(command.request.Email);
 
             if (user == null)
                 return Result<AuthenticationTokenDto>.Failure("User Not Found", StatusCodes.Status404NotFound);
@@ -47,10 +47,11 @@ namespace ProSphere.Features.PasswordManagement.Commands.ChangeInActiveRolePassw
             }
 
             var userRoles = await _userManager.GetRolesAsync(user);
-            if (userRoles.Contains(Role.Moderator))
+            var role = userRoles.First();
+            if (role.Contains(Role.Moderator))
             {
-                var isavailableModerator = await _unitOfWork.Moderators.AnyAsync(m => m.IsUsed == false && m.Id == command.request.UserId);
-                if (!isavailableModerator)
+                var isUsedModerator = await _unitOfWork.Moderators.AnyAsync(m => m.IsUsed == false && m.User.Email == command.request.Email);
+                if (isUsedModerator)
                     return Result<AuthenticationTokenDto>.Failure("Moderator Account Not Assigned Yet", StatusCodes.Status404NotFound);
             }
 
@@ -68,12 +69,12 @@ namespace ProSphere.Features.PasswordManagement.Commands.ChangeInActiveRolePassw
             }
 
 
-            if (userRoles.Contains(Role.Moderator))
+            if (role.Contains(Role.Moderator))
             {
                 await _userManager.RemoveFromRoleAsync(user, Role.InActiveModerator);
                 await _userManager.AddToRoleAsync(user, Role.Moderator);
             }
-            if (userRoles.Contains(Role.Admin))
+            if (role.Contains(Role.Admin))
             {
                 var admin = await _unitOfWork.Admins.GetByIdAsync(user.Id);
                 var isSuperAdmin = admin!.IsSuperAdmin;

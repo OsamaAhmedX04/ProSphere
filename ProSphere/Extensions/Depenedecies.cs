@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Hangfire;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
@@ -42,8 +43,10 @@ namespace ProSphere.Extensions
         }
         public static IServiceCollection AddMediatorServices(this IServiceCollection services)
         {
-            services.AddMediatR(configuration =>
-                configuration.RegisterServicesFromAssemblyContaining<RegisterCommand>());
+            //services.AddMediatR(configuration =>
+            //    configuration.RegisterServicesFromAssemblyContaining<RegisterCommand>());
+
+            services.AddMediatR(typeof(RegisterCommand).Assembly);
 
             return services;
         }
@@ -121,6 +124,24 @@ namespace ProSphere.Extensions
                     ValidIssuer = jwtSettings["Issuer"],
                     ValidAudience = jwtSettings["Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(secretKey)
+                };
+
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+                        var path = context.HttpContext.Request.Path;
+
+                        // مهم جداً: نفس route بتاع الـ Hub
+                        if (!string.IsNullOrEmpty(accessToken) &&
+                            path.StartsWithSegments("/ChatHub"))
+                        {
+                            context.Token = accessToken;
+                        }
+
+                        return Task.CompletedTask;
+                    }
                 };
             });
 
@@ -262,6 +283,13 @@ namespace ProSphere.Extensions
         public static IServiceCollection AddCaching(this IServiceCollection services)
         {
             services.AddMemoryCache();
+
+            return services;
+        }
+
+        public static IServiceCollection AddSignalRWebSocket(this IServiceCollection services)
+        {
+            services.AddSignalR();
 
             return services;
         }

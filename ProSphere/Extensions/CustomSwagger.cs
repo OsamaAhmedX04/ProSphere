@@ -1,4 +1,4 @@
-﻿using Microsoft.OpenApi;
+﻿using Microsoft.OpenApi.Models;
 
 namespace ProSphere.Extensions
 {
@@ -10,28 +10,35 @@ namespace ProSphere.Extensions
             {
                 o.EnableAnnotations();
 
-                o.SwaggerDoc("v1", new OpenApiInfo
+                o.SwaggerDoc("v1", new OpenApiInfo()
                 {
                     Version = "v1",
-                    Title = "ProSphere",
-                    Description = "ProSphere API"
+                    Title = "Tumor Hospital",
+                    Description = "Tumor Hospital API",
                 });
 
-                o.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                o.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
                     Name = "Authorization",
-                    Description = "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token in the text input below.",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.Http,
                     Scheme = "Bearer",
-                    BearerFormat = "JWT"
+                    BearerFormat = "JWT",
+                    Description = "Enter your JWT token below:"
                 });
 
-                o.AddSecurityRequirement(doc => new OpenApiSecurityRequirement
+                o.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
-                        new OpenApiSecuritySchemeReference("Bearer"),
-                        new List<string>()
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
                     }
                 });
             });

@@ -28,7 +28,7 @@ namespace ProSphere.Data.Configurations
                     NormalizedEmail = "ADMINPROSPHERE@GMAIL.COM",
                     IsVerified = true,
                     EmailConfirmed = true,
-                    UserName = "adminProsphere@gmail.com",
+                    UserName = "adminProsphereX7",
                     NormalizedUserName = "ADMINPROSPHERE@GMAIL.COM",
                     PasswordHash = "AQAAAAIAAYagAAAAEF1P9msprFt8rq8JmHf0YuwxJQywTlpRnnLxK43Vx977UuiosltxCAfgW/bvmCyiFg==",
                     SecurityStamp = "11111111-1111-1111-1111-111111111111",

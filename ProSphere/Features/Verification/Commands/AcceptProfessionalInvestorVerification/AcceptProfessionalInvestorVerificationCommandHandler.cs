@@ -2,6 +2,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using ProSphere.Domain.Constants.CacheConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.ExternalServices.Interfaces.Email;
@@ -16,12 +18,14 @@ namespace ProSphere.Features.Verification.Commands.AcceptProfessionalInvestorVer
         private readonly IUnitOfWork _unitOfWork;
         private readonly IEmailSenderService _emailSenderService;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IMemoryCache _cache;
 
-        public AcceptProfessionalInvestorVerificationCommandHandler(IUnitOfWork unitOfWork, IEmailSenderService emailSenderService, UserManager<ApplicationUser> userManager)
+        public AcceptProfessionalInvestorVerificationCommandHandler(IUnitOfWork unitOfWork, IEmailSenderService emailSenderService, UserManager<ApplicationUser> userManager, IMemoryCache cache)
         {
             _unitOfWork = unitOfWork;
             _emailSenderService = emailSenderService;
             _userManager = userManager;
+            _cache = cache;
         }
 
         public async Task<Result> Handle(AcceptProfessionalInvestorVerificationCommand command, CancellationToken cancellationToken)
@@ -30,7 +34,7 @@ namespace ProSphere.Features.Verification.Commands.AcceptProfessionalInvestorVer
             if (!isModeratorExist)
                 return Result.Failure("Moderator Not Found", StatusCodes.Status404NotFound);
 
-            var professionalDocument = await _unitOfWork.FinancialVerifications.GetByIdAsync(command.professionalDocumentId);
+            var professionalDocument = await _unitOfWork.ProfessionalVerifications.GetByIdAsync(command.professionalDocumentId);
             if (professionalDocument == null || professionalDocument.status == Status.Rejected || professionalDocument.status == Status.Approved)
                 return Result.Failure("Document Not Exist", StatusCodes.Status404NotFound);
 
@@ -57,6 +61,8 @@ namespace ProSphere.Features.Verification.Commands.AcceptProfessionalInvestorVer
             var userData = await _userManager.FindByIdAsync(professionalDocument.InvestorId);
 
             _emailSenderService.SendAcceptanceVerifiedProfessionalMail(userData!.Email!, userData.FirstName, userData.LastName);
+
+            _cache.Remove(CacheKey.GetInvestorAccountKey(userData.UserName!));
 
             return Result.Success("Professional Is Verified Successfully");
         }

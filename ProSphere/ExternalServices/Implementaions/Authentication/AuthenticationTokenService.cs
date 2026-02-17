@@ -27,6 +27,7 @@ namespace ProSphere.ExternalServices.Implementaions.Authentication
             var token = _jwtService.GenerateToken(new AuthenticatedUserDto
             {
                 Id = user.Id,
+                Username = user.UserName!,
                 Role = userRole.First()
             });
 
@@ -68,6 +69,7 @@ namespace ProSphere.ExternalServices.Implementaions.Authentication
             var token = _jwtService.GenerateToken(new AuthenticatedUserDto
             {
                 Id = user.Id,
+                Username = user.UserName!,
                 Role = userRole.First()
             });
 

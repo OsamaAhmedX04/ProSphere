@@ -16,6 +16,11 @@ namespace ProSphere.Features.Registration.Commands.Register
                 .NotEmpty().WithMessage("Last Name Is Required")
                 .MaximumLength(30).WithMessage("Last Name Should Not Excced 30 Letter");
 
+            RuleFor(x => x.Username)
+           .NotEmpty().WithMessage("Username is required")
+           .Matches(@"^[a-zA-Z0-9._]{3,20}$") 
+           .WithMessage("Username can only contain letters, numbers, dot, underscore and must be 3-20 characters long");
+
             RuleFor(r => r.Email)
                 .NotEmpty().WithMessage("Email Is Required")
                 .EmailAddress().WithMessage("Please Enter Correct Email Address");

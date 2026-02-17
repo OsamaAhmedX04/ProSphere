@@ -6,8 +6,9 @@ namespace ProSphere.Features.PasswordManagement.Commands.ChangeInActiveRolePassw
     {
         public ChangeInActiveRolePasswordValidator()
         {
-            RuleFor(cp => cp.UserId)
-                .NotEmpty().WithMessage("User Id Is Required");
+            RuleFor(cp => cp.Email)
+                .NotEmpty().WithMessage("User Id Is Required")
+                .EmailAddress().WithMessage("InValid Email");
 
             RuleFor(cp => cp.CurrentPassword)
                 .NotEmpty().WithMessage("Current Password Is Required");

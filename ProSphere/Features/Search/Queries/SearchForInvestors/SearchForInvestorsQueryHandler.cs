@@ -28,7 +28,7 @@ namespace ProSphere.Features.Search.Queries.SearchForInvestors
             Expression<Func<Investor, bool>> filter = i => true;
 
             if (!string.IsNullOrEmpty(query.userName))
-                filter = filter.And(i => i.UserName.Contains(query.userName));
+                filter = filter.And(i => i.FullName.Contains(query.userName));
 
             if (query.verified.HasValue)
                 filter = filter.And(i => i.User.IsVerified == query.verified.Value);
@@ -43,7 +43,7 @@ namespace ProSphere.Features.Search.Queries.SearchForInvestors
                 filter: filter,
                 selector: i => new GetInvestorAccountsResponse
                 {
-                    UserName = i.UserName,
+                    FullName = i.FullName,
                     ImageProfileURL = i.ImageProfileURL,
                     HeadLine = i.HeadLine,
                     IsVerified = i.User.IsVerified,

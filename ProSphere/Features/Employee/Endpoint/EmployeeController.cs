@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ProSphere.Features.Employee.Commands.AssignToModerator;
 using ProSphere.Features.Employee.Commands.CreateEmployee;
 using ProSphere.Features.Employee.Commands.DeleteEmployee;
 using ProSphere.Features.Employee.Queries.GetAllEmployees;
@@ -29,6 +30,14 @@ namespace ProSphere.Features.Employee.Endpoint
         public async Task<IActionResult> CreateNewEmployee(CreateEmployeeRequest request)
         {
             var command = new CreateEmployeeCommand(request);
+            var result = await _sender.Send(command);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpPut("assign-employee")]
+        public async Task<IActionResult> AssignEmployeeToModerator(AssignToModeratorRequest request)
+        {
+            var command = new AssignToModeratorCommand(request);
             var result = await _sender.Send(command);
             return StatusCode(result.StatusCode, result);
         }

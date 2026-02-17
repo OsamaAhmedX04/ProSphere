@@ -24,7 +24,7 @@ namespace ProSphere.Features.Verification.Queries.GetFinancialInvestorVerificati
                {
                    FinancialDocumentId = query.financialDocumentId,
                    UserId = v.InvestorId,
-                   UserName = v.Investor.UserName,
+                   UserName = v.Investor.FullName,
                    DocumentType = v.DocumentType.Name,
                    DocumentURL = SupabaseConstants.PrefixSupaURL + v.DocumentURL,
                    status = v.status.ToString(),

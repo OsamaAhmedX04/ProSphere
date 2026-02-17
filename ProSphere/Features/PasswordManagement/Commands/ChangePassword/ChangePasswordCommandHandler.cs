@@ -20,7 +20,7 @@ namespace ProSphere.Features.PasswordManagement.Commands.ChangePassword
 
         public async Task<Result> Handle(ChangePasswordCommand command, CancellationToken cancellationToken)
         {
-            var user = await _userManager.FindByIdAsync(command.request.UserId);
+            var user = await _userManager.FindByEmailAsync(command.request.Email);
 
             if (user == null)
                 return Result.Failure("User Not Found", StatusCodes.Status404NotFound);

@@ -11,11 +11,11 @@
         public const string GetModeratorAvailableEmailsKey = $"{Prefix}:ModeratorAvailableEmails";
 
 
-        public static string GetUserSocialMediaAccountsKey(string userId) => $"{Prefix}:UserSocialMediaAccounts:{userId}";
-        public static string GetAdminAccountKey(string userId) => $"{Prefix}:AdminAccount:{userId}";
-        public static string GetCreatorAccountKey(string userId) => $"{Prefix}:CreatorAccount:{userId}";
-        public static string GetInvestorAccountKey(string userId) => $"{Prefix}:CreatorAccount:{userId}";
-        public static string GetModeratorAccountKey(string userId) => $"{Prefix}:ModeratorAccount:{userId}";
+        public static string GetUserSocialMediaAccountsKey(string userName) => $"{Prefix}:UserSocialMediaAccounts:{userName}";
+        public static string GetAdminAccountKey(string userName) => $"{Prefix}:AdminAccount:{userName}";
+        public static string GetCreatorAccountKey(string userName) => $"{Prefix}:CreatorAccount:{userName}";
+        public static string GetInvestorAccountKey(string userName) => $"{Prefix}:CreatorAccount:{userName}";
+        public static string GetModeratorAccountKey(string userName) => $"{Prefix}:ModeratorAccount:{userName}";
 
     }
 }

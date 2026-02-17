@@ -25,6 +25,7 @@ namespace ProSphere.ExternalServices.Implementaions.JWT
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Role, user.Role),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };

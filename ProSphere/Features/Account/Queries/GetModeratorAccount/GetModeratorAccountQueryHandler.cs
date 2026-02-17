@@ -21,7 +21,7 @@ namespace ProSphere.Features.Account.Queries.GetModeratorAccount
         public async Task<Result<GetModeratorAccountResponse>> Handle(GetModeratorAccountQuery query, CancellationToken cancellationToken)
         {
 
-            if (_cache.TryGetValue(CacheKey.GetModeratorAccountKey(query.userId), out GetModeratorAccountResponse cachedModeratorAccount))
+            if (_cache.TryGetValue(CacheKey.GetModeratorAccountKey(query.userName), out GetModeratorAccountResponse cachedModeratorAccount))
             {
                 return Result<GetModeratorAccountResponse>.Success(cachedModeratorAccount, "Retrieved Moderator Account from Cache Successfully");
             }
@@ -29,9 +29,11 @@ namespace ProSphere.Features.Account.Queries.GetModeratorAccount
             var moderatorAccount = new GetModeratorAccountResponse();
 
             var moderator = await _unitOfWork.Moderators.GetEnhancedAsync(
-                filter: m => m.Id == query.userId,
+                filter: m => m.User.UserName == query.userName,
                 selector: m => new
                 {
+                    Id = m.Id,
+                    UserName = m.User.UserName!,
                     UserId = m.Id,
                     Email = m.User.Email!,
                     IsUsed = m.IsUsed,
@@ -47,7 +49,7 @@ namespace ProSphere.Features.Account.Queries.GetModeratorAccount
             moderatorAccount.Code = moderator.Code;
 
             var employee = await _unitOfWork.Employees.GetEnhancedAsync(
-                filter: e => e.AssignedTo == query.userId,
+                filter: e => e.AssignedTo == moderator.Id,
                 selector: e => new
                 {
                     e.Id,
@@ -72,7 +74,7 @@ namespace ProSphere.Features.Account.Queries.GetModeratorAccount
                 SlidingExpiration = TimeSpan.FromMinutes(30)
             };
 
-            _cache.Set(CacheKey.GetModeratorAccountKey(query.userId), moderatorAccount, cacheEntryOptions);
+            _cache.Set(CacheKey.GetModeratorAccountKey(query.userName), moderatorAccount, cacheEntryOptions);
 
             return Result<GetModeratorAccountResponse>.Success(moderatorAccount, "Retrieved Moderator Account Successfully");
         }

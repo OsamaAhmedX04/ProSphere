@@ -23,19 +23,21 @@ namespace ProSphere.Features.Account.Queries.GetInvestorAccounts
         public async Task<Result<PageSourcePagination<GetInvestorAccountsResponse>>>
             Handle(GetInvestorAccountsQuery query, CancellationToken cancellationToken)
         {
-            Expression<Func<Investor, bool>> filter = c => true;
+            Expression<Func<Investor, bool>> filter = c => c.User.EmailConfirmed;
 
             if (!string.IsNullOrEmpty(query.userName))
             {
-                filter = filter.And(c => c.UserName.Contains(query.userName));
+                filter = filter.And(c => c.FullName.Contains(query.userName));
             }
 
             var result = await _unitOfWork.Investors.GetAllPaginatedEnhancedAsync(
                 filter: filter,
                 selector: i => new GetInvestorAccountsResponse
                 {
-                    UserName = i.UserName,
-                    ImageProfileURL = SupabaseConstants.PrefixSupaURL + i.ImageProfileURL ?? null,
+                    UserId = i.Id,
+                    FullName = i.FullName,
+                    UserName = i.User.UserName!,
+                    ImageProfileURL = i.ImageProfileURL == null ? null : SupabaseConstants.PrefixSupaURL + i.ImageProfileURL,
                     HeadLine = i.HeadLine,
                     IsVerified = i.User.IsVerified,
                     IsFinancail = i.InvestorLevel == InvestorLevel.Professional

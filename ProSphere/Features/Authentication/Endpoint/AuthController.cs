@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProSphere.Features.Authentication.Commands.Login;
+using ProSphere.Features.Authentication.Commands.Logout;
 using ProSphere.Features.Authentication.Commands.RefreshToken;
 
 namespace ProSphere.Features.Authentication.Endpoint
@@ -20,6 +22,15 @@ namespace ProSphere.Features.Authentication.Endpoint
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             var command = new LoginCommand(request);
+            var result = await _sender.Send(command);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [Authorize]
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var command = new LogoutCommand();
             var result = await _sender.Send(command);
             return StatusCode(result.StatusCode, result);
         }
