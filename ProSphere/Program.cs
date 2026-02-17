@@ -2,6 +2,8 @@ using Hangfire;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using ProSphere.Extensions;
+using ProSphere.Hubs.Chat;
+using ProSphere.Hubs.Notification;
 
 namespace ProSphere
 {
@@ -41,6 +43,8 @@ namespace ProSphere
 
             builder.Services.AddCaching();
 
+            builder.Services.AddSignalRWebSocket();
+
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -63,6 +67,8 @@ namespace ProSphere
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
 
+            app.MapHub<ChatHub>("/ChatHub");
+            app.MapHub<NotificationHub>("/NotificationHub");
 
             app.UseAuthentication();
 
