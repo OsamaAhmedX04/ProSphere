@@ -11,7 +11,7 @@ namespace ProSphere.Features.CV.Commands.UploadCV
                 .Must(file => file.Length < FileRestriction.AllowableCVFileSize)
                     .WithMessage("File size must be less than or equal 3 MB.")
                 .Must(file => FileRestriction.AllowableCVFileExtensions.Contains(Path.GetExtension(file.FileName).ToLower()))
-                    .WithMessage($"Invalid image format. Allowed formats are: {string.Join(',', FileRestriction.AllowableImageExtensions)}")
+                    .WithMessage($"Invalid image format. Allowed formats are: {string.Join(',', FileRestriction.AllowableCVFileExtensions)}")
                     .When(u => u.CV is not null);
         }
     }
