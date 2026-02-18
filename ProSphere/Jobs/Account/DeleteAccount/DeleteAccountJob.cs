@@ -141,6 +141,9 @@ namespace ProSphere.Jobs.Account.DeleteAccount
                 if (creator != null)
                     await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + creator.ImageProfileURL);
 
+                if(creator?.CVURL != null)
+                    await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + creator.CVURL);
+
                 _unitOfWork.Creators.Delete(user.Id);
             }
             if (userRoles.Contains(Role.Investor))
