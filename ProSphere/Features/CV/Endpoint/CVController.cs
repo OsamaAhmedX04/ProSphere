@@ -1,7 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ProSphere.Features.CreatorSkills.Queries.GetCreatorSkills;
 using ProSphere.Features.CV.Commands.DeleteCV;
 using ProSphere.Features.CV.Commands.UploadCV;
 using ProSphere.Features.CV.Queries.GetCVByUserId;
