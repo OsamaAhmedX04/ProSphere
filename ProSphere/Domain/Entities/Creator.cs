@@ -13,6 +13,7 @@ namespace ProSphere.Domain.Entities
         public string? ImageProfileURL { get; set; }
         public string? HeadLine { get; set; }
         public string? BIO { get; set; }
+        public string? CVURL { get; set; }
         public ICollection<CreatorSkill> Skills { get; set; } = new List<CreatorSkill>();
 
     }
