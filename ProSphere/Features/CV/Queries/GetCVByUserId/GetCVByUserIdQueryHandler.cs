@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using ProSphere.Domain.Constants.FileConstants;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 
@@ -19,7 +20,7 @@ namespace ProSphere.Features.CV.Queries.GetCVByUserId
                 filter: c => c.Id == query.UserId,
                 selector: c => new GetCVByUserIdResponse
                 {
-                    CVURL = c.CVURL
+                    CVURL = c.CVURL == null ? null : SupabaseConstants.PrefixSupaURL + c.CVURL
                 });
 
             if (response is null)
