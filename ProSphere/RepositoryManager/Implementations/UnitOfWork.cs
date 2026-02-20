@@ -76,7 +76,7 @@ namespace ProSphere.RepositoryManager.Implementations
             ChatMessages = new Repository<ChatMessage>(_db);
             ChatMessagesHistories = new Repository<ChatMessageHistory>(_db);
             Notifications = new Repository<Notification>(_db);
-            
+
         }
 
         public async Task<int> CompleteAsync() => await _db.SaveChangesAsync();

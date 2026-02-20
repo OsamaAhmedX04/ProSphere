@@ -29,7 +29,7 @@ namespace ProSphere.Data.Configurations
                 .IsRequired();
 
             builder.Property(e => e.NeededInvestment)
-                .HasPrecision(20,2)
+                .HasPrecision(20, 2)
                 .IsRequired();
 
             builder.Property(e => e.EquityPercentage)

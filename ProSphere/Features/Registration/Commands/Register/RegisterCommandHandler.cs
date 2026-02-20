@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using ProSphere.Data.Context;
 using ProSphere.Domain.Constants.RoleConstants;
 using ProSphere.Domain.Entities;

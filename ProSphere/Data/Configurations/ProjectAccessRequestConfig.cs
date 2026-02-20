@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProSphere.Domain.Entities;
-using ProSphere.Domain.Enums;
 
 namespace ProSphere.Data.Configurations
 {

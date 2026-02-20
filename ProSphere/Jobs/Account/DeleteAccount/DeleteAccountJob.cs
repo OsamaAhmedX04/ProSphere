@@ -89,7 +89,7 @@ namespace ProSphere.Jobs.Account.DeleteAccount
             var userRoles = await _userManager.GetRolesAsync(user);
             var role = userRoles.First();
 
-            if(role == Role.Investor)
+            if (role == Role.Investor)
             {
                 await _unitOfWork.ProjectsAccessRequests.BulkDeleteAsync(i => i.InvestorId == user.Id);
             }
@@ -104,7 +104,8 @@ namespace ProSphere.Jobs.Account.DeleteAccount
             var messages = await _unitOfWork.ChatMessages
                 .GetAllAsyncEnhanced(x => x.SenderId == user.Id || x.ReceiverId == user.Id);
 
-            var chathistories = messages.Select(x => new ChatMessageHistory {
+            var chathistories = messages.Select(x => new ChatMessageHistory
+            {
                 Message = x.Message,
                 SentAt = x.SentAt,
                 SenderEmail = x.Sender!.Email!,
@@ -177,7 +178,7 @@ namespace ProSphere.Jobs.Account.DeleteAccount
                 if (creator != null)
                     await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + creator.ImageProfileURL);
 
-                if(creator?.CVURL != null)
+                if (creator?.CVURL != null)
                     await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + creator.CVURL);
 
                 _unitOfWork.Creators.Delete(user.Id);

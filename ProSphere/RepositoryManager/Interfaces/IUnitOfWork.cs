@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProSphere.Domain.Entities;
-using ProSphere.RepositoryManager.Implementations;
+﻿using ProSphere.Domain.Entities;
 
 namespace ProSphere.RepositoryManager.Interfaces
 {
