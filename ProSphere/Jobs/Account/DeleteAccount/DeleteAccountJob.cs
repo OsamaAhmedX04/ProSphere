@@ -30,6 +30,7 @@ namespace ProSphere.Jobs.Account.DeleteAccount
             var financialHistory = await _unitOfWork.FinancialVerificationHistories.FirstOrDefaultAsync(h => h.InvestorEmail == user.Email);
             var professionalHistory = await _unitOfWork.ProfessionalVerificationHistories.FirstOrDefaultAsync(h => h.InvestorEmail == user.Email);
 
+
             if (identityHistory != null)
             {
                 _unitOfWork.IdentityVerificationHistories.Delete(identityHistory.Id);
@@ -51,6 +52,8 @@ namespace ProSphere.Jobs.Account.DeleteAccount
             }
 
             await _unitOfWork.UserAccountHistories.BulkDeleteAsync(h => h.Email == user.Email);
+
+            await _unitOfWork.ChatMessagesHistories.BulkDeleteAsync(x => x.SenderEmail == user.Email || x.ReceiverEmail == user.Email);
 
             await _unitOfWork.CompleteAsync();
 
@@ -77,6 +80,39 @@ namespace ProSphere.Jobs.Account.DeleteAccount
                     .BulkDeleteAsync(x => x.InvestorId == user.Id && (x.status == Status.Rejected || x.status == Status.Pending));
 
             }
+
+            await _unitOfWork.CompleteAsync();
+        }
+
+        public async Task DeleteBusinessUserDataAsync(ApplicationUser user)
+        {
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var role = userRoles.First();
+
+            if(role == Role.Investor)
+            {
+                await _unitOfWork.ProjectsAccessRequests.BulkDeleteAsync(i => i.InvestorId == user.Id);
+            }
+            else
+            {
+                await _unitOfWork.Projects.BulkDeleteAsync(i => i.CreatorId == user.Id);
+            }
+        }
+
+        public async Task MoveUserChatsAsync(ApplicationUser user)
+        {
+            var messages = await _unitOfWork.ChatMessages
+                .GetAllAsyncEnhanced(x => x.SenderId == user.Id || x.ReceiverId == user.Id);
+
+            var chathistories = messages.Select(x => new ChatMessageHistory {
+                Message = x.Message,
+                SentAt = x.SentAt,
+                SenderEmail = x.Sender!.Email!,
+                ReceiverEmail = x.Receiver!.Email!
+            }).ToList();
+
+            await _unitOfWork.ChatMessagesHistories.AddRangeAsync(chathistories);
+            await _unitOfWork.ChatMessages.BulkDeleteAsync(x => x.SenderId == user.Id || x.ReceiverId == user.Id);
 
             await _unitOfWork.CompleteAsync();
         }

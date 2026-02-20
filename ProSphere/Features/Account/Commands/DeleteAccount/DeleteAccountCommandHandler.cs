@@ -40,25 +40,37 @@ namespace ProSphere.Features.Account.Commands.DeleteAccount
 
 
             await _userManager.RemoveAuthenticationTokenAsync(user, AuthenticationTokenInfo.DefaultLoginProvider, AuthenticationTokenInfo.DeleteAccountOTPName);
+            DeleteUserDataJob(user);
 
+            return Result.Success("User Deleted Successfully");
+
+        }
+
+        private static void DeleteUserDataJob(ApplicationUser user)
+        {
             var deleteUselessDataJob = BackgroundJob.Enqueue<IDeleteAccountJob>(
-                service => service.DeleteUselessUserDataAsync(user)
+                            service => service.DeleteUselessUserDataAsync(user)
+                            );
+
+            var deleteBusinessDataJob = BackgroundJob.ContinueJobWith<IDeleteAccountJob>(
+                deleteUselessDataJob,
+                service => service.DeleteBusinessUserDataAsync(user)
+                );
+
+            var movingprivacydatajob = BackgroundJob.ContinueJobWith<IDeleteAccountJob>(
+                deleteBusinessDataJob,
+                service => service.MovePrivacyUserDataAsync(user)
                 );
 
             BackgroundJob.ContinueJobWith<IDeleteAccountJob>(
-                deleteUselessDataJob,
-                service => service.MovePrivacyUserDataAsync(user)
+                movingprivacydatajob,
+                service => service.MoveUserChatsAsync(user)
                 );
 
             BackgroundJob.Schedule<IDeleteAccountJob>(
                 service => service.DeleteUserAsync(user.Id),
                 TimeSpan.FromDays(30)
                 );
-
-            return Result.Success("User Deleted Successfully");
-
         }
-
-
     }
 }

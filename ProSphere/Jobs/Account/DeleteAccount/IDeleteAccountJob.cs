@@ -6,6 +6,8 @@ namespace ProSphere.Jobs.Account.DeleteAccount
     {
         Task DeleteUserAsync(string userId);
         Task DeleteUselessUserDataAsync(ApplicationUser user);
+        Task DeleteBusinessUserDataAsync(ApplicationUser user);
+        Task MoveUserChatsAsync(ApplicationUser user);
         Task MovePrivacyUserDataAsync(ApplicationUser user);
     }
 
