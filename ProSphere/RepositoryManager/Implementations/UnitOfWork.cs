@@ -27,6 +27,17 @@ namespace ProSphere.RepositoryManager.Implementations
         public IRepository<UserSocialMedia> UsersSocialMedia { get; }
         public IRepository<SearchHistory> SearchHistories { get; }
 
+        public IRepository<Project> Projects { get; }
+        public IRepository<ProjectDetail> ProjectsDetails { get; }
+        public IRepository<ProjectAccessRequest> ProjectsAccessRequests { get; }
+        public IRepository<ProjectImage> ProjectsImages { get; }
+        public IRepository<ProjectModeration> ProjectsModerations { get; }
+        public IRepository<ProjectVote> ProjectsVotes { get; }
+
+        public IRepository<ChatMessage> ChatMessages { get; }
+        public IRepository<ChatMessageHistory> ChatMessagesHistories { get; }
+        public IRepository<Notification> Notifications { get; }
+
         public UnitOfWork(AppDbContext db)
         {
             _db = db;
@@ -55,7 +66,17 @@ namespace ProSphere.RepositoryManager.Implementations
 
             SearchHistories = new Repository<SearchHistory>(_db);
 
+            Projects = new Repository<Project>(_db);
+            ProjectsDetails = new Repository<ProjectDetail>(_db);
+            ProjectsAccessRequests = new Repository<ProjectAccessRequest>(_db);
+            ProjectsModerations = new Repository<ProjectModeration>(_db);
+            ProjectsVotes = new Repository<ProjectVote>(_db);
+            ProjectsImages = new Repository<ProjectImage>(_db);
 
+            ChatMessages = new Repository<ChatMessage>(_db);
+            ChatMessagesHistories = new Repository<ChatMessageHistory>(_db);
+            Notifications = new Repository<Notification>(_db);
+            
         }
 
         public async Task<int> CompleteAsync() => await _db.SaveChangesAsync();

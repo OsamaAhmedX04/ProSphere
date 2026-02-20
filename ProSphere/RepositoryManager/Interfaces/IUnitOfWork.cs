@@ -1,4 +1,6 @@
-﻿using ProSphere.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using ProSphere.Domain.Entities;
+using ProSphere.RepositoryManager.Implementations;
 
 namespace ProSphere.RepositoryManager.Interfaces
 {
@@ -29,6 +31,16 @@ namespace ProSphere.RepositoryManager.Interfaces
         IRepository<SearchHistory> SearchHistories { get; }
 
 
+        IRepository<Project> Projects { get; }
+        IRepository<ProjectDetail> ProjectsDetails { get; }
+        IRepository<ProjectImage> ProjectsImages { get; }
+        IRepository<ProjectAccessRequest> ProjectsAccessRequests { get; }
+        IRepository<ProjectVote> ProjectsVotes { get; }
+        IRepository<ProjectModeration> ProjectsModerations { get; }
+
+        IRepository<ChatMessage> ChatMessages { get; }
+        IRepository<ChatMessageHistory> ChatMessagesHistories { get; }
+        IRepository<Notification> Notifications { get; }
 
         Task<int> CompleteAsync();
     }

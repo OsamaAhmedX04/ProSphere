@@ -21,6 +21,9 @@ namespace ProSphere.Domain.Entities
         public UserSocialMedia SocialMedia { get; set; }
         public ICollection<IdentityVerification> IdentityVerifications { get; set; } = new List<IdentityVerification>();
         public ICollection<SearchHistory> SearchHistories { get; set; } = new List<SearchHistory>();
+        public ICollection<ChatMessage> MessagesSent { get; set; } = new List<ChatMessage>();
+        public ICollection<ChatMessage> MessagesReceived { get; set; } = new List<ChatMessage>();
+        public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 
 
     }

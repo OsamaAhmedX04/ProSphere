@@ -33,6 +33,18 @@ namespace ProSphere.Data.Context
 
         public DbSet<SearchHistory> SearchHistories { get; set; }
 
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<ProjectDetail> ProjectsDetails { get; set; }
+        public DbSet<ProjectImage> ProjectsImages { get; set; }
+        public DbSet<ProjectAccessRequest> ProjectsAccessRequests { get; set; }
+        public DbSet<ProjectVote> ProjectsVotes { get; set; }
+        public DbSet<ProjectModeration> ProjectsModerations { get; set; }
+
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<ChatMessageHistory> ChatMessagesHistories { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

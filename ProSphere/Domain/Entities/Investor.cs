@@ -18,6 +18,7 @@ namespace ProSphere.Domain.Entities
 
         public ICollection<FinancialVerification> FinancialVerifications { get; set; } = new List<FinancialVerification>();
         public ICollection<ProfessionalVerification> ProfessionalVerifications { get; set; } = new List<ProfessionalVerification>();
+        public ICollection<ProjectAccessRequest> ProjectsAccessRequests { get; set; } = new List<ProjectAccessRequest>();
 
     }
 }
