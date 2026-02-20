@@ -35,17 +35,17 @@
 //    }
 
 //    // إرسال إشعار لمستخدم معين
-//    public async Task SendNotification(string userId, string title, string message)
+//    public async Task SendNotification(string userId, NotificationDto notification)
 //    {
 //        await _hubContext.Clients.User(userId)
-//            .SendAsync("ReceiveNotification", title, message);
+//            .SendAsync("ReceiveNotification", notification);
 //    }
 
 //    // إرسال إشعار لكل المتصلين (Broadcast)
-//    public async Task BroadcastNotification(string title, string message)
+//    public async Task BroadcastNotification(NotificationDto notification)
 //    {
 //        await _hubContext.Clients.All
-//            .SendAsync("ReceiveNotification", title, message);
+//            .SendAsync("ReceiveNotification", notification);
 //    }
 //}
 
