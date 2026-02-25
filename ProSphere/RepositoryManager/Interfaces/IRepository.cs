@@ -55,8 +55,7 @@ namespace ProSphere.RepositoryManager.Interfaces
             int pageSize = 10,
             Expression<Func<TEntity, bool>>? filter = null,
             bool expandable = false,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
-            Func<IQueryable<TEntity>, IQueryable<TEntity>>? include = null)
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null)
             where TResult : class;
 
 
@@ -69,6 +68,7 @@ namespace ProSphere.RepositoryManager.Interfaces
         void Delete(int id);
         void Delete(string id);
         void Delete(Guid id);
+        Task DeleteAsync(Expression<Func<TEntity, bool>> filter);
 
         Task BulkDeleteAsync(Expression<Func<TEntity, bool>> filter);
         #endregion

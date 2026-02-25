@@ -17,9 +17,6 @@ namespace ProSphere.Domain.Entities
         public string InvestorId { get; set; }
         public Investor Investor { get; set; }
 
-        [ForeignKey("Creator")]
-        public string CreatorId { get; set; }
-        public Creator Creator { get; set; }
         public Status Status { get; set; }
         public string? Message { get; set; }
         public DateTime CreatedAt { get; set; }

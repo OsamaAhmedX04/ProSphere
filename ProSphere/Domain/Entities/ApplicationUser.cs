@@ -13,17 +13,24 @@ namespace ProSphere.Domain.Entities
         public string LastName { get; set; }
         public Gender Gender { get; set; }
         public bool IsVerified { get; set; }
+        public bool IsBanned { get; set; }
+
         public List<Creator> Creators { get; set; } = new List<Creator>();
         public List<Investor> Investors { get; set; } = new List<Investor>();
         public List<Moderator> Moderators { get; set; } = new List<Moderator>();
         public List<Admin> Admins { get; set; } = new List<Admin>();
         public RefreshTokenAuth RefreshTokenAuth { get; set; }
         public UserSocialMedia SocialMedia { get; set; }
+        public BannedUser BannedUser { get; set; }
         public ICollection<IdentityVerification> IdentityVerifications { get; set; } = new List<IdentityVerification>();
         public ICollection<SearchHistory> SearchHistories { get; set; } = new List<SearchHistory>();
         public ICollection<ChatMessage> MessagesSent { get; set; } = new List<ChatMessage>();
         public ICollection<ChatMessage> MessagesReceived { get; set; } = new List<ChatMessage>();
         public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+        public ICollection<ReportedUser> ReportedUsers { get; set; } = new List<ReportedUser>();
+        public ICollection<ReportedUser> ReportersOnUsers { get; set; } = new List<ReportedUser>();
+        public ICollection<ReportedProject> ReportersOnProjects { get; set; } = new List<ReportedProject>();
+
 
 
     }

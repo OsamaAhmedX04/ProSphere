@@ -19,6 +19,7 @@ using ProSphere.ExternalServices.Interfaces.FileStorage;
 using ProSphere.ExternalServices.Interfaces.JWT;
 using ProSphere.Features.Registration.Commands.Register;
 using ProSphere.Jobs.Account.DeleteAccount;
+using ProSphere.Jobs.Ban.RemoveBan;
 using ProSphere.Jobs.Documents.DeleteDocumentVerification;
 using ProSphere.Jobs.Search.SearchSaver;
 using ProSphere.Options;
@@ -207,6 +208,7 @@ namespace ProSphere.Extensions
             services.AddScoped<IDeleteAccountJob, DeleteAccountJob>();
             services.AddScoped<IDeleteDocumentVerificationJob, DeleteDocumentVerificationJob>();
             services.AddScoped<ISearchSaver, SearchSaver>();
+            services.AddScoped<IRemoveBanJob, RemoveBanJob>();
 
             return services;
         }

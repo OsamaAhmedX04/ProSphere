@@ -12,6 +12,7 @@ namespace ProSphere.Data.Configurations
             builder.Property(au => au.LastName).HasMaxLength(40).IsRequired();
             builder.Property(au => au.Gender).IsRequired();
 
+            builder.Property(au => au.IsBanned).HasDefaultValue(false);
 
             builder.Property(au => au.Gender)
                 .HasConversion<string>()

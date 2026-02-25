@@ -11,6 +11,10 @@
         public const string GetModeratorAvailableEmailsKey = $"{Prefix}:ModeratorAvailableEmails";
 
 
+        public const string ReportReasonsKey = "ReportReasons";
+        public const string ReportReasonsLengthKey = "ReportReasonsLength";
+
+
         public static string GetUserSocialMediaAccountsKey(string userName) => $"{Prefix}:UserSocialMediaAccounts:{userName}";
         public static string GetAdminAccountKey(string userName) => $"{Prefix}:AdminAccount:{userName}";
         public static string GetCreatorAccountKey(string userName) => $"{Prefix}:CreatorAccount:{userName}";

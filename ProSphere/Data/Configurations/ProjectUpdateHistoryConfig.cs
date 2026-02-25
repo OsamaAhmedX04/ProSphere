@@ -4,11 +4,15 @@ using ProSphere.Domain.Entities;
 
 namespace ProSphere.Data.Configurations
 {
-    public class ProjectConfig : IEntityTypeConfiguration<Project>
+    public class ProjectUpdateHistoryConfig : IEntityTypeConfiguration<ProjectUpdateHistory>
     {
-        public void Configure(EntityTypeBuilder<Project> builder)
+        public void Configure(EntityTypeBuilder<ProjectUpdateHistory> builder)
         {
-            builder.HasKey(e => e.Id);
+            builder.HasKey(x => x.ProjectId);
+
+            builder.Property(x => x.Status)
+                .HasConversion<string>()
+                .IsRequired();
 
             builder.Property(e => e.Title)
                 .HasMaxLength(50)
@@ -36,30 +40,22 @@ namespace ProSphere.Data.Configurations
                 .HasPrecision(5, 2)
                 .IsRequired();
 
-            builder.Property(e => e.Status)
-                .HasConversion<string>()
+            builder.Property(x => x.ExecutionPlan)
                 .IsRequired();
 
-            builder.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("GETUTCDATE()");
+            builder.Property(x => x.FinancialDetails)
+                .IsRequired();
 
-            builder.Property(e => e.IsActive)
-                .HasDefaultValue(false);
+            builder.Property(x => x.BusinessModel)
+                .IsRequired();
 
-            builder.Property(e => e.IsInvested)
-                .HasDefaultValue(false);
-
-            builder.Property(e => e.IsBlocked)
-                .HasDefaultValue(false);
-
-            builder.Property(e => e.RowVersion)
-                .IsRowVersion();
-
+            builder.Property(x => x.MarketingStrategy)
+                .IsRequired();
 
             builder
-                .HasOne(e => e.Creator)
-                .WithMany(e => e.Projects)
-                .HasForeignKey(e => e.CreatorId)
+                .HasOne(x => x.Project)
+                .WithOne(x => x.UpdatesHistory)
+                .HasForeignKey<ProjectUpdateHistory>(x => x.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

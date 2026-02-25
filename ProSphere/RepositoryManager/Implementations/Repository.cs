@@ -158,8 +158,7 @@ namespace ProSphere.RepositoryManager.Implementations
             int pageSize = 10,
             Expression<Func<TEntity, bool>>? filter = null,
             bool expandable = false,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
-            Func<IQueryable<TEntity>, IQueryable<TEntity>>? include = null)
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null)
             where TResult : class
         {
             if (pageNumber < 1) pageNumber = 1;
@@ -175,8 +174,7 @@ namespace ProSphere.RepositoryManager.Implementations
                     query = query.Where(filter);
             }
 
-            if (include != null)
-                query = include(query);
+          
 
             if (orderBy != null)
                 query = orderBy(query);
@@ -227,6 +225,12 @@ namespace ProSphere.RepositoryManager.Implementations
             var entity = _dbSet.Find(id);
             if (entity != null)
                 _dbSet.Remove(entity);
+        }
+
+        public async Task DeleteAsync(Expression<Func<TEntity, bool>> filter)
+        {
+            var entity = await _dbSet.FirstOrDefaultAsync(filter);
+            if (entity != null) _dbSet.Remove(entity);
         }
         public async Task BulkDeleteAsync(Expression<Func<TEntity, bool>> filter)
             => await _dbSet.Where(filter).ExecuteDeleteAsync();

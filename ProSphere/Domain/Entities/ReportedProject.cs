@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProSphere.Domain.Entities
 {
-    public class ProjectModeration
+    public class ReportedProject
     {
         [Key]
         public Guid Id { get; set; }
@@ -13,14 +13,20 @@ namespace ProSphere.Domain.Entities
         public Guid ProjectId { get; set; }
         public Project Project { get; set; }
 
+        [ForeignKey("Reporter")]
+        public string? ReporterId { get; set; }
+        public ApplicationUser? Reporter { get; set; }
+
         [ForeignKey("Moderator")]
-        public string ModeratorId { get; set; }
-        public Moderator Moderator { get; set; }
+        public string? ReviewedBy { get; set; }
+        public Moderator? Moderator { get; set; }
+        public ReportReason Reason { get; set; }
+        public string? Description { get; set; }
         public Status Status { get; set; }
-        public bool IsUpdate { get; set; }
-        public string? Reason { get; set; }
+        public DateTime? ReviewedAt { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

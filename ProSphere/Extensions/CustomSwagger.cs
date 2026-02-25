@@ -13,8 +13,8 @@ namespace ProSphere.Extensions
                 o.SwaggerDoc("v1", new OpenApiInfo()
                 {
                     Version = "v1",
-                    Title = "Tumor Hospital",
-                    Description = "Tumor Hospital API",
+                    Title = "ProSphere",
+                    Description = "ProSphere API",
                 });
 
                 o.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()

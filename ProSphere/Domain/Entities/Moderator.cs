@@ -17,6 +17,8 @@ namespace ProSphere.Domain.Entities
         public ICollection<IdentityVerification> ReviewedIdentityVerifications { get; set; } = new List<IdentityVerification>();
         public ICollection<FinancialVerification> ReviewedFinancialVerifications { get; set; } = new List<FinancialVerification>();
         public ICollection<ProfessionalVerification> ReviewedProfessionalVerifications { get; set; } = new List<ProfessionalVerification>();
+        public ICollection<ReportedUser> ReviewedUserReports { get; set; } = new List<ReportedUser>();
+        public ICollection<ReportedProject> ReviewedProjectReports { get; set; } = new List<ReportedProject>();
         public ICollection<ProjectModeration> ProjectsModerations { get; set; } = new List<ProjectModeration>();
     }
 }

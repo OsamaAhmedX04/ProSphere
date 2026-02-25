@@ -33,10 +33,16 @@ namespace ProSphere.RepositoryManager.Implementations
         public IRepository<ProjectImage> ProjectsImages { get; }
         public IRepository<ProjectModeration> ProjectsModerations { get; }
         public IRepository<ProjectVote> ProjectsVotes { get; }
+        public IRepository<ProjectUpdateHistory> ProjectUpdatesHistories { get; }
+        public IRepository<ProjectUpdateImageHistory> ProjectUpdatesImagesHistories { get; }
 
         public IRepository<ChatMessage> ChatMessages { get; }
         public IRepository<ChatMessageHistory> ChatMessagesHistories { get; }
         public IRepository<Notification> Notifications { get; }
+
+        public IRepository<ReportedProject> ReportedProjects { get; }
+        public IRepository<ReportedUser> ReportedUsers { get; }
+        public IRepository<BannedUser> BannedUsers { get; }
 
         public UnitOfWork(AppDbContext db)
         {
@@ -72,10 +78,16 @@ namespace ProSphere.RepositoryManager.Implementations
             ProjectsModerations = new Repository<ProjectModeration>(_db);
             ProjectsVotes = new Repository<ProjectVote>(_db);
             ProjectsImages = new Repository<ProjectImage>(_db);
+            ProjectUpdatesHistories = new Repository<ProjectUpdateHistory>(_db);
+            ProjectUpdatesImagesHistories = new Repository<ProjectUpdateImageHistory>(_db);
 
             ChatMessages = new Repository<ChatMessage>(_db);
             ChatMessagesHistories = new Repository<ChatMessageHistory>(_db);
             Notifications = new Repository<Notification>(_db);
+
+            ReportedProjects = new Repository<ReportedProject>(_db);
+            ReportedUsers = new Repository<ReportedUser>(_db);
+            BannedUsers = new Repository<BannedUser>(_db);
 
         }
 

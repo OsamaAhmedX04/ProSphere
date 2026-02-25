@@ -35,10 +35,16 @@ namespace ProSphere.RepositoryManager.Interfaces
         IRepository<ProjectAccessRequest> ProjectsAccessRequests { get; }
         IRepository<ProjectVote> ProjectsVotes { get; }
         IRepository<ProjectModeration> ProjectsModerations { get; }
+        IRepository<ProjectUpdateHistory> ProjectUpdatesHistories { get; }
+        IRepository<ProjectUpdateImageHistory> ProjectUpdatesImagesHistories { get; }
 
         IRepository<ChatMessage> ChatMessages { get; }
         IRepository<ChatMessageHistory> ChatMessagesHistories { get; }
         IRepository<Notification> Notifications { get; }
+
+        IRepository<ReportedProject> ReportedProjects { get; }
+        IRepository<ReportedUser> ReportedUsers { get; }
+        IRepository<BannedUser> BannedUsers { get; }
 
         Task<int> CompleteAsync();
     }

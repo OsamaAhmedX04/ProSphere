@@ -17,8 +17,10 @@ namespace ProSphere.Data.Configurations
             builder.Property(x => x.CreatedAt)
                 .HasDefaultValueSql("GETUTCDATE()");
 
-            builder.Property(e => e.RowVersion)
-                .IsRowVersion();
+            builder.Property(x => x.IsUpdate)
+                .HasDefaultValue(false);
+
+            
 
             builder
                 .HasOne(x => x.Project)

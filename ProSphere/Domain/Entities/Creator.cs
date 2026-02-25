@@ -16,7 +16,6 @@ namespace ProSphere.Domain.Entities
         public string? CVURL { get; set; }
         public ICollection<CreatorSkill> Skills { get; set; } = new List<CreatorSkill>();
         public ICollection<Project> Projects { get; set; } = new List<Project>();
-        public ICollection<ProjectAccessRequest> ProjectsAccessRequests { get; set; } = new List<ProjectAccessRequest>();
         public ICollection<ProjectVote> ProjectsVotes { get; set; } = new List<ProjectVote>();
     }
 }

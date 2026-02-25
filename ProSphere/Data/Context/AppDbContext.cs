@@ -39,10 +39,16 @@ namespace ProSphere.Data.Context
         public DbSet<ProjectAccessRequest> ProjectsAccessRequests { get; set; }
         public DbSet<ProjectVote> ProjectsVotes { get; set; }
         public DbSet<ProjectModeration> ProjectsModerations { get; set; }
+        public DbSet<ProjectUpdateHistory> ProjectUpdatesHistories { get; set; }
+        public DbSet<ProjectUpdateImageHistory> ProjectUpdatesImagesHistories { get; set; }
 
         public DbSet<ChatMessage> ChatMessages { get; set; }
         public DbSet<ChatMessageHistory> ChatMessagesHistories { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+
+        public DbSet<ReportedProject> ReportedProjects { get; set; }
+        public DbSet<ReportedUser> ReportedUsers { get; set; }
+        public DbSet<BannedUser> BannedUsers { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

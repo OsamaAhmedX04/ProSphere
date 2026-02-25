@@ -28,12 +28,6 @@ namespace ProSphere.Data.Configurations
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasOne(x => x.Creator)
-                .WithMany(x => x.ProjectsAccessRequests)
-                .HasForeignKey(x => x.CreatorId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
                 .HasOne(x => x.Project)
                 .WithMany(x => x.AccessRequests)
                 .HasForeignKey(x => x.ProjectId)
