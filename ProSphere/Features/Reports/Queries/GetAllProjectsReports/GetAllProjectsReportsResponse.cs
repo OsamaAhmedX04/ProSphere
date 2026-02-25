@@ -1,8 +1,4 @@
-﻿using ProSphere.Domain.Entities;
-using ProSphere.Domain.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ProSphere.Features.Reports.Queries.GetAllProjectsReports
+﻿namespace ProSphere.Features.Reports.Queries.GetAllProjectsReports
 {
     public class GetAllProjectsReportsResponse
     {

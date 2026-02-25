@@ -28,7 +28,7 @@ namespace ProSphere.Features.ProjectModerating.Commands.AcceptProjectCreation
             var project = await _unitOfWork.Projects.FirstOrDefaultAsync(p => p.Id == command.projectId && p.Status == Status.Pending);
             if (project is null) return Result.Failure("Project Not Found", StatusCodes.Status404NotFound);
 
-            
+
 
 
             // Updated Project
@@ -64,7 +64,7 @@ namespace ProSphere.Features.ProjectModerating.Commands.AcceptProjectCreation
                     selector: p => p.ImageUrl
                     );
 
-                foreach(var imageURL in oldImagesurl)
+                foreach (var imageURL in oldImagesurl)
                 {
                     await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + imageURL);
                 }

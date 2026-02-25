@@ -3,8 +3,6 @@ using MediatR;
 using ProSphere.Domain.Constants.FileConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
-using ProSphere.Features.AccessProjectRequest.Queries.GetAccessRequestsOnProject;
-using ProSphere.Features.AccessProjectRequest.Queries.GetAllInvestorAccessProjectRequests;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
@@ -22,7 +20,7 @@ namespace ProSphere.Features.AccessProjectRequest.Queries.GetAllCreatorAccessedP
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<PageSourcePagination<GetAllCreatorAccessedProjectRequestsResponse>>> 
+        public async Task<Result<PageSourcePagination<GetAllCreatorAccessedProjectRequestsResponse>>>
             Handle(GetAllCreatorAccessedProjectRequestsQuery query, CancellationToken cancellationToken)
         {
             var isCreatorExist = await _unitOfWork.Creators.IsExistAsync(query.creatorId);
@@ -54,7 +52,7 @@ namespace ProSphere.Features.AccessProjectRequest.Queries.GetAllCreatorAccessedP
                     ProjectId = p.ProjectId,
                     ProjectTitle = p.Project.Title,
                     InvestorFullName = p.Investor.FullName,
-                    InvestorImageProfileURL = 
+                    InvestorImageProfileURL =
                         p.Investor.ImageProfileURL == null ? null : SupabaseConstants.PrefixSupaURL + p.Investor.ImageProfileURL,
                     Status = p.Status.ToString()
                 },

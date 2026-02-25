@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using ProSphere.Features.ProjectManagement.Queries.GetCreatorProjectDetails;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 
@@ -15,7 +14,7 @@ namespace ProSphere.Features.ProjectModerating.Queries.GetPendingProjectDetails
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<GetPendingProjectDetailsResponse>> 
+        public async Task<Result<GetPendingProjectDetailsResponse>>
             Handle(GetPendingProjectDetailsQuery query, CancellationToken cancellationToken)
         {
             var isProjectExist = await _unitOfWork.Projects.IsExistAsync(query.projectId);

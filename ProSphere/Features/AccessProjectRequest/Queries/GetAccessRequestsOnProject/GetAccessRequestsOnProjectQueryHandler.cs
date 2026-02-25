@@ -7,7 +7,6 @@ using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
 using System.Linq.Expressions;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ProSphere.Features.AccessProjectRequest.Queries.GetAccessRequestsOnProject
 {
@@ -25,7 +24,7 @@ namespace ProSphere.Features.AccessProjectRequest.Queries.GetAccessRequestsOnPro
             Handle(GetAccessRequestsOnProjectQuery query, CancellationToken cancellationToken)
         {
             var isCreatorExist = await _unitOfWork.Creators.IsExistAsync(query.creatorId);
-            if (!isCreatorExist) 
+            if (!isCreatorExist)
                 return Result<PageSourcePagination<GetAccessRequestsOnProjectResponse>>
                     .Failure("Creator Not Found", StatusCodes.Status404NotFound);
 
@@ -58,7 +57,7 @@ namespace ProSphere.Features.AccessProjectRequest.Queries.GetAccessRequestsOnPro
                     ProjectId = p.ProjectId,
                     ProjectTitle = p.Project.Title,
                     InvestorFullName = p.Investor.FullName,
-                    InvestorImageProfileURL = 
+                    InvestorImageProfileURL =
                         p.Investor.ImageProfileURL == null ? null : SupabaseConstants.PrefixSupaURL + p.Investor.ImageProfileURL,
                     Status = p.Status.ToString()
                 },

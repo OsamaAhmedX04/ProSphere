@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using ProSphere.Domain.Constants.FileConstants;
 using ProSphere.Domain.Enums;
-using ProSphere.Features.ProjectManagement.Queries.GetCreatorProjects;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
@@ -18,7 +17,7 @@ namespace ProSphere.Features.ProjectModerating.Queries.GetAllPendingProjects
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<PageSourcePagination<GetAllPendingProjectsResponse>>> 
+        public async Task<Result<PageSourcePagination<GetAllPendingProjectsResponse>>>
             Handle(GetAllPendingProjectsQuery query, CancellationToken cancellationToken)
         {
             var result = await _unitOfWork.Projects.GetAllPaginatedEnhancedAsync(

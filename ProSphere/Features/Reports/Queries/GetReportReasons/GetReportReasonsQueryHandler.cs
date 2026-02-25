@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using Microsoft.Extensions.Caching.Memory;
-using ProSphere.Domain.Constants.CacheConstants;
 using ProSphere.Domain.Enums;
 
 namespace ProSphere.Features.Reports.Queries.GetReportReasons

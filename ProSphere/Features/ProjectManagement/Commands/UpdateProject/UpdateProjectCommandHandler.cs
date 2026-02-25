@@ -6,7 +6,6 @@ using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.FileStorage;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ProSphere.Features.ProjectManagement.Commands.UpdateProject
 {
@@ -40,7 +39,7 @@ namespace ProSphere.Features.ProjectManagement.Commands.UpdateProject
 
             await _unitOfWork.ProjectUpdatesHistories.DeleteAsync(p => p.ProjectId == command.projectId);
 
-            
+
             var projectUpdateHistory = new ProjectUpdateHistory()
             {
                 ProjectId = command.projectId,
@@ -61,7 +60,7 @@ namespace ProSphere.Features.ProjectManagement.Commands.UpdateProject
 
             await _unitOfWork.ProjectUpdatesHistories.AddAsync(projectUpdateHistory);
 
-            
+
             project.Status = Status.Pending;
             project.IsActive = false;
             project.UpdatedAt = DateTime.UtcNow;

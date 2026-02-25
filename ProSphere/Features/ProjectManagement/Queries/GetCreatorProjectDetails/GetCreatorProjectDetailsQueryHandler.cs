@@ -1,11 +1,10 @@
 ﻿using MediatR;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjectDetails
 {
-    public class GetCreatorProjectDetailsQueryHandler 
+    public class GetCreatorProjectDetailsQueryHandler
         : IRequestHandler<GetCreatorProjectDetailsQuery, Result<GetCreatorProjectDetailsResponse>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -15,7 +14,7 @@ namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjectDetails
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<GetCreatorProjectDetailsResponse>> 
+        public async Task<Result<GetCreatorProjectDetailsResponse>>
             Handle(GetCreatorProjectDetailsQuery query, CancellationToken cancellationToken)
         {
             var isCreatorExist = await _unitOfWork.Creators.IsExistAsync(query.creatorId);

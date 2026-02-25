@@ -1,5 +1,4 @@
 ﻿using ProSphere.Domain.Entities;
-using ProSphere.Domain.Enums;
 
 namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjectUpdateVersion
 {

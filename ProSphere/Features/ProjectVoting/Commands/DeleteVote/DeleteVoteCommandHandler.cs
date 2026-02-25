@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using ProSphere.Domain.Entities;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 
@@ -22,8 +21,8 @@ namespace ProSphere.Features.ProjectVoting.Commands.DeleteVote
             var isProjectExist = await _unitOfWork.Projects.IsExistAsync(command.projectId);
             if (!isProjectExist) return Result.Failure("Project Not Found", StatusCodes.Status404NotFound);
 
-            
-            await _unitOfWork.ProjectsVotes.DeleteAsync(vote => 
+
+            await _unitOfWork.ProjectsVotes.DeleteAsync(vote =>
                                                         vote.CreatorId == command.creatorId && vote.ProjectId == command.projectId);
             await _unitOfWork.CompleteAsync();
 

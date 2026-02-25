@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using ProSphere.Domain.Constants.FileConstants;
-using ProSphere.Features.ProjectManagement.Queries.GetCreatorProjects;
 using ProSphere.RepositoryManager.Interfaces;
-using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
 
 namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjectData

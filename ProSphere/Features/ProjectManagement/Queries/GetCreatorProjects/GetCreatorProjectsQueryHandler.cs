@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 
 namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjects
 {
-    public class GetCreatorProjectsQueryHandler 
+    public class GetCreatorProjectsQueryHandler
         : IRequestHandler<GetCreatorProjectsQuery, Result<PageSourcePagination<GetCreatorProjectsResponse>>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -20,7 +20,7 @@ namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjects
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<PageSourcePagination<GetCreatorProjectsResponse>>> 
+        public async Task<Result<PageSourcePagination<GetCreatorProjectsResponse>>>
             Handle(GetCreatorProjectsQuery query, CancellationToken cancellationToken)
         {
             var isCreatorExist = await _unitOfWork.Creators.IsExistAsync(query.creatorId);

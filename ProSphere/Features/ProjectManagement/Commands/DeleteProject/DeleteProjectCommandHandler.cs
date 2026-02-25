@@ -29,7 +29,7 @@ namespace ProSphere.Features.ProjectManagement.Commands.DeleteProject
                 return Result.Failure("This Project Is Under Investing You Can NOT Delete this project", StatusCodes.Status400BadRequest);
 
             var projectImages = await _unitOfWork.ProjectsImages.GetAllAsyncEnhanced(p => p.ProjectId == command.projectId);
-            if(!(projectImages is null || projectImages.Count == 0))
+            if (!(projectImages is null || projectImages.Count == 0))
             {
                 foreach (var image in projectImages)
                     await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + image.ImageUrl);

@@ -3,7 +3,6 @@ using ProSphere.Domain.Constants.FileConstants;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ProSphere.Features.ProjectVoting.Queries.GetAllVotersOnProject
 {
@@ -17,7 +16,7 @@ namespace ProSphere.Features.ProjectVoting.Queries.GetAllVotersOnProject
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<PageSourcePagination<GetAllVotersOnProjectResponse>>> 
+        public async Task<Result<PageSourcePagination<GetAllVotersOnProjectResponse>>>
             Handle(GetAllVotersOnProjectQuery query, CancellationToken cancellationToken)
         {
             var isProjectExist = await _unitOfWork.Projects.IsExistAsync(query.projectId);

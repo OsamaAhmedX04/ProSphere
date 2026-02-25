@@ -3,7 +3,6 @@ using MediatR;
 using ProSphere.Domain.Constants.FileConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
-using ProSphere.Features.AccessProjectRequest.Queries.GetAccessRequestsOnProject;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
@@ -53,7 +52,7 @@ namespace ProSphere.Features.AccessProjectRequest.Queries.GetAllInvestorAccessPr
                 ProjectId = p.ProjectId,
                 ProjectTitle = p.Project.Title,
                 CreatorFullName = p.Project.Creator.FullName,
-                CreatorImageProfile = 
+                CreatorImageProfile =
                     p.Project.Creator.ImageProfileURL == null ? null : SupabaseConstants.PrefixSupaURL + p.Project.Creator.ImageProfileURL,
                 Status = p.Status.ToString()
             },

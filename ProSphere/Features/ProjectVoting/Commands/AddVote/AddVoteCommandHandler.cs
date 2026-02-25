@@ -22,7 +22,7 @@ namespace ProSphere.Features.ProjectVoting.Commands.AddVote
             var project = await _unitOfWork.Projects.FirstOrDefaultAsync(p => p.Id == command.projectId);
             if (project is null) return Result.Failure("Project Not Found", StatusCodes.Status404NotFound);
 
-            var vote = new ProjectVote { CreatorId = command.creatorId , ProjectId = command.projectId};
+            var vote = new ProjectVote { CreatorId = command.creatorId, ProjectId = command.projectId };
             await _unitOfWork.ProjectsVotes.AddAsync(vote);
             await _unitOfWork.CompleteAsync();
 

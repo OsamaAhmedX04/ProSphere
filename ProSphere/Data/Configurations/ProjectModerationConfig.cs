@@ -20,7 +20,7 @@ namespace ProSphere.Data.Configurations
             builder.Property(x => x.IsUpdate)
                 .HasDefaultValue(false);
 
-            
+
 
             builder
                 .HasOne(x => x.Project)

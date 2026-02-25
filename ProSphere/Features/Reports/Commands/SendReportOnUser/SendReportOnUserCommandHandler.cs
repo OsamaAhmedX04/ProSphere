@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.Extensions;
-using ProSphere.Features.Reports.Commands.SendReportOnProject;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 

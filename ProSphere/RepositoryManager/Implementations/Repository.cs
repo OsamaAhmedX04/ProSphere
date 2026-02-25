@@ -174,7 +174,7 @@ namespace ProSphere.RepositoryManager.Implementations
                     query = query.Where(filter);
             }
 
-          
+
 
             if (orderBy != null)
                 query = orderBy(query);

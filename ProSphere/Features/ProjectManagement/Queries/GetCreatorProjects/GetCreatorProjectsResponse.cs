@@ -1,6 +1,4 @@
-﻿using ProSphere.Domain.Enums;
-
-namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjects
+﻿namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjects
 {
     public class GetCreatorProjectsResponse
     {

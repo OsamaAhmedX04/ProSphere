@@ -15,7 +15,7 @@ namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjectUpdateVe
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<GetCreatorProjectUpdateVersionResponse>> 
+        public async Task<Result<GetCreatorProjectUpdateVersionResponse>>
             Handle(GetCreatorProjectUpdateVersionQuery query, CancellationToken cancellationToken)
         {
             var isCreatorExist = await _unitOfWork.Creators.IsExistAsync(query.creatorId);
@@ -23,7 +23,7 @@ namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjectUpdateVe
                 return Result<GetCreatorProjectUpdateVersionResponse>.Failure("Creator Not Found", StatusCodes.Status404NotFound);
 
             var isUpdatedProjectExist = await _unitOfWork.ProjectUpdatesHistories.IsExistAsync(query.projectId);
-            if (!isUpdatedProjectExist) 
+            if (!isUpdatedProjectExist)
                 return Result<GetCreatorProjectUpdateVersionResponse>.Failure("No Updates For This Project", StatusCodes.Status404NotFound);
 
             var result = await _unitOfWork.ProjectUpdatesHistories.GetEnhancedAsync(

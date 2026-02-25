@@ -42,7 +42,7 @@ namespace ProSphere.Features.Reports.Commands.SendReportOnProject
 
             if (report != null)
                 _unitOfWork.ReportedProjects.Delete(report.Id);
-            
+
             var newReport = new ReportedProject
             {
                 Description = command.request.Description,

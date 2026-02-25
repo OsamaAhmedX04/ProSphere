@@ -11,7 +11,7 @@ namespace ProSphere.Domain.Entities
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
         public ReportReason Reason { get; set; }
-        public int NumberOfBannedDays {  get; set; }
+        public int NumberOfBannedDays { get; set; }
         public DateTime BannedAt { get; set; }
         public bool IsExpired { get; set; }
     }

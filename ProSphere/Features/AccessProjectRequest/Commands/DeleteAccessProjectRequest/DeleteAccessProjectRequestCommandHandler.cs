@@ -19,7 +19,7 @@ namespace ProSphere.Features.AccessProjectRequest.Commands.DeleteAccessProjectRe
             var accessRequest = await _unitOfWork.ProjectsAccessRequests.FirstOrDefaultAsync(x => x.Id == command.requestId);
             if (accessRequest == null) return Result.Failure("Request Not Exist", StatusCodes.Status404NotFound);
 
-            if (accessRequest.Status != Status.Pending) 
+            if (accessRequest.Status != Status.Pending)
                 return Result.Failure($"Access Request Is Already {accessRequest.Status.ToString()}", StatusCodes.Status400BadRequest);
 
             _unitOfWork.ProjectsAccessRequests.Delete(accessRequest.Id);
