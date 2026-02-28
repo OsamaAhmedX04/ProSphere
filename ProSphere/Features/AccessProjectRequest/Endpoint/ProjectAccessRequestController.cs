@@ -7,7 +7,6 @@ using ProSphere.Features.AccessProjectRequest.Commands.SendAccessProjectRequest;
 using ProSphere.Features.AccessProjectRequest.Queries.GetAccessRequestsOnProject;
 using ProSphere.Features.AccessProjectRequest.Queries.GetAllCreatorAccessedProjectRequests;
 using ProSphere.Features.AccessProjectRequest.Queries.GetAllInvestorAccessProjectRequests;
-using ProSphere.Features.ProjectVoting.Queries.GetAllVotersOnProject;
 
 namespace ProSphere.Features.AccessProjectRequest.Endpoint
 {

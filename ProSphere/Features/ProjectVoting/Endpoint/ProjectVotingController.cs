@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ProSphere.Features.ProjectModerating.Commands.AcceptProjectCreation;
 using ProSphere.Features.ProjectVoting.Commands.AddVote;
 using ProSphere.Features.ProjectVoting.Commands.DeleteVote;
 using ProSphere.Features.ProjectVoting.Queries.GetAllVotersOnProject;

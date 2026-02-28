@@ -77,7 +77,6 @@
     <Folder Include="Features\PasswordManagement\Queries\" />
     <Folder Include="Features\PasswordRecovery\Queries\" />
     <Folder Include="Features\Registration\Queries\" />
-    <Folder Include="Features\Reports\Endpoint\" />
     <Folder Include="Features\Search\Commands\" />
     <Folder Include="Features\Search\Queries\SearchForProject\" />
   </ItemGroup>

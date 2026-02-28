@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ProSphere.Features.Moderator.Queries.GetModeratorsAvailableEmail;
 using ProSphere.Features.ProjectManagement.Commands.CreateProject;
 using ProSphere.Features.ProjectManagement.Commands.DeleteProject;
 using ProSphere.Features.ProjectManagement.Commands.UpdateProject;
@@ -33,7 +32,7 @@ namespace ProSphere.Features.ProjectManagement.Endpoint
         [HttpGet("/api/project/{creatorId}/{projectId}")]
         public async Task<IActionResult> GetCreatorProjectData(string creatorId, Guid projectId)
         {
-            var query = new GetCreatorProjectDataQuery(creatorId ,projectId);
+            var query = new GetCreatorProjectDataQuery(creatorId, projectId);
             var result = await _sender.Send(query);
             return StatusCode(result.StatusCode, result);
         }

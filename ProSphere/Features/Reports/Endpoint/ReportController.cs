@@ -1,7 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ProSphere.Features.ProjectManagement.Queries.GetCreatorProjectData;
 using ProSphere.Features.Reports.Commands.AcceptReportOnProject;
 using ProSphere.Features.Reports.Commands.AcceptReportOnUser;
 using ProSphere.Features.Reports.Commands.RejectReportOnProject;

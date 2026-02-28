@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ProSphere.Features.ProjectManagement.Queries.GetCreatorProjects;
 using ProSphere.Features.ProjectModerating.Commands.AcceptProjectCreation;
 using ProSphere.Features.ProjectModerating.Commands.RejectProjectCreation;
 using ProSphere.Features.ProjectModerating.Queries.GetAllPendingProjects;
