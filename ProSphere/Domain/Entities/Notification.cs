@@ -13,6 +13,7 @@ namespace ProSphere.Domain.Entities
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
         public NotificationStatus Status { get; set; }
+        public NotificationType Type { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime SentAt { get; set; }

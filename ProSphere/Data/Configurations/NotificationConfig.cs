@@ -14,6 +14,10 @@ namespace ProSphere.Data.Configurations
                 .HasConversion<string>()
                 .IsRequired();
 
+            builder.Property(x => x.Type)
+                .HasConversion<string>()
+                .IsRequired();
+
             builder.Property(x => x.SentAt)
                 .HasDefaultValueSql("GETUTCDATE()");
 
