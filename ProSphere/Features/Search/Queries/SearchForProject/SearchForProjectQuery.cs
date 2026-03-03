@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using ProSphere.Features.Search.Queries.SearchForCreators;
 using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;
 

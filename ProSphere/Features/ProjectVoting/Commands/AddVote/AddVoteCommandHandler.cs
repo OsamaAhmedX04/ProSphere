@@ -22,11 +22,11 @@ namespace ProSphere.Features.ProjectVoting.Commands.AddVote
             var project = await _unitOfWork.Projects.FirstOrDefaultAsync(p => p.Id == command.projectId && p.IsActive == true);
             if (project is null) return Result.Failure("Project Not Found", StatusCodes.Status404NotFound);
 
-            if(project.CreatorId == command.creatorId) return Result.Failure("Can't Vote For Your Project", StatusCodes.Status400BadRequest);
+            if (project.CreatorId == command.creatorId) return Result.Failure("Can't Vote For Your Project", StatusCodes.Status400BadRequest);
 
             var oldVote = await _unitOfWork.ProjectsVotes
                 .FirstOrDefaultAsync(v => v.ProjectId == command.projectId && v.CreatorId == command.creatorId);
-            if(oldVote is not null) return Result.Failure("This Creator had Already Voted On This Project", StatusCodes.Status400BadRequest);
+            if (oldVote is not null) return Result.Failure("This Creator had Already Voted On This Project", StatusCodes.Status400BadRequest);
 
 
             var vote = new ProjectVote { CreatorId = command.creatorId, ProjectId = command.projectId };

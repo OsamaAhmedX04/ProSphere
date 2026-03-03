@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using ProSphere.Domain.Constants.FileConstants;
 using ProSphere.ExternalServices.Interfaces.FileStorage;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;

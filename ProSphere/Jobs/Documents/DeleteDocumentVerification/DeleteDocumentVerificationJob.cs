@@ -1,5 +1,4 @@
-﻿using ProSphere.Domain.Constants.FileConstants;
-using ProSphere.Domain.Enums;
+﻿using ProSphere.Domain.Enums;
 using ProSphere.ExternalServices.Interfaces.FileStorage;
 using ProSphere.RepositoryManager.Interfaces;
 
@@ -65,7 +64,7 @@ namespace ProSphere.Jobs.Documents.DeleteDocumentVerification
 
             //foreach (var document in documents)
             //    await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + document);
-                await _fileService.DeleteRangeAsync(documents);
+            await _fileService.DeleteRangeAsync(documents);
         }
     }
 }

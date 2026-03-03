@@ -3,7 +3,6 @@ using LinqKit;
 using MediatR;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
-using ProSphere.Features.Search.Queries.SearchForCreators;
 using ProSphere.Jobs.Search.SearchSaver;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;

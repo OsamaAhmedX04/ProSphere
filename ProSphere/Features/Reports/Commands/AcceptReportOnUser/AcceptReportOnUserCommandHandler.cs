@@ -68,7 +68,7 @@ namespace ProSphere.Features.Reports.Commands.AcceptReportOnUser
                         s.SetProperty(p => p.IsBlockedDueToBannedUser, true))
                     );
             }
-            
+
 
             BackgroundJob.Schedule<IRemoveBanJob>(
                 serivce => serivce.RemoveBan(user.Id),

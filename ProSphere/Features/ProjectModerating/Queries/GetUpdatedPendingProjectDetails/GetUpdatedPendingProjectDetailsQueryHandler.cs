@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using ProSphere.Domain.Enums;
-using ProSphere.Features.ProjectModerating.Queries.GetPendingProjectDetails;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 
@@ -16,7 +15,7 @@ namespace ProSphere.Features.ProjectModerating.Queries.GetUpdatedPendingProjectD
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<GetUpdatedPendingProjectDetailsResponse>> 
+        public async Task<Result<GetUpdatedPendingProjectDetailsResponse>>
             Handle(GetUpdatedPendingProjectDetailsQuery query, CancellationToken cancellationToken)
         {
             var isProjectExist = await _unitOfWork.Projects.IsExistAsync(query.projectId);

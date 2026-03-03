@@ -16,7 +16,7 @@ namespace ProSphere.Features.AccessProjectRequest.Queries.GetInvestorProjectFull
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<GetInvestorProjectFullInformationResponse>> 
+        public async Task<Result<GetInvestorProjectFullInformationResponse>>
             Handle(GetInvestorProjectFullInformationQuery query, CancellationToken cancellationToken)
         {
             var isInvestorHasAccess = await _unitOfWork.ProjectsAccessRequests

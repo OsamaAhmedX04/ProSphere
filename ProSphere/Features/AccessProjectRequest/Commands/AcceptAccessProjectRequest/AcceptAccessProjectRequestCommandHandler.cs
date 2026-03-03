@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using ProSphere.Domain.Enums;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
-using System.Runtime.InteropServices;
 
 namespace ProSphere.Features.AccessProjectRequest.Commands.AcceptAccessProjectRequest
 {
@@ -32,7 +31,7 @@ namespace ProSphere.Features.AccessProjectRequest.Commands.AcceptAccessProjectRe
                 .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.Status, Status.Rejected));
 
             var project = await _unitOfWork.Projects.FirstOrDefaultAsync(p => p.Id == accessRequest.ProjectId);
-            if(project is not null) project.IsInvested = true;
+            if (project is not null) project.IsInvested = true;
 
             await _unitOfWork.CompleteAsync();
 

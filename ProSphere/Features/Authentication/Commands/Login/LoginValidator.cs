@@ -8,7 +8,7 @@ namespace ProSphere.Features.Authentication.Commands.Login
         {
             RuleFor(l => l.Email)
                 .NotEmpty().WithMessage("Email Is Required");
-                
+
             RuleFor(l => l.Email)
                 .EmailAddress().WithMessage("Please Enter Correct Email Address")
                 .When(l => l.Email.Contains("@"));

@@ -1,8 +1,4 @@
-﻿using ProSphere.Domain.Entities;
-using ProSphere.Domain.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ProSphere.Features.AccessProjectRequest.Queries.GetInvestorProjectFullInformation
+﻿namespace ProSphere.Features.AccessProjectRequest.Queries.GetInvestorProjectFullInformation
 {
     public class GetInvestorProjectFullInformationResponse
     {

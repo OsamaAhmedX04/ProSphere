@@ -37,7 +37,7 @@ namespace ProSphere.Features.ProjectManagement.Commands.UpdateProject
             var project = await _unitOfWork.Projects.FirstOrDefaultAsync(p => p.Id == command.projectId);
             if (project is null) return Result.Failure("Project Not Found", StatusCodes.Status404NotFound);
 
-            if(project.Status == Status.Pending) 
+            if (project.Status == Status.Pending)
                 return Result.Failure("Can Not Update Project Because It's Under Moderation", StatusCodes.Status400BadRequest);
 
             if (project.IsInvested)

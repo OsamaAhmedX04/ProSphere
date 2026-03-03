@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Memory;
 using ProSphere.Domain.Constants.CacheConstants;
-using ProSphere.Domain.Constants.FileConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.FileStorage;
@@ -60,7 +59,7 @@ namespace ProSphere.Features.Account.Commands.UpdateInvestorAccount
             {
                 if (investor.ImageProfileURL != null)
                     await _fileService.DeleteAsync(investor.ImageProfileURL);
-                    //await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + investor.ImageProfileURL);
+                //await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + investor.ImageProfileURL);
 
                 var imagePath = await _fileService.UploadAsync(command.request.ImageProfile, "Investors/ProfileImages");
 

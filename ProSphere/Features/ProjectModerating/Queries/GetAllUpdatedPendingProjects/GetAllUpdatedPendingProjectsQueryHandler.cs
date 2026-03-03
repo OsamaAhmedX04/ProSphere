@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using ProSphere.Domain.Constants.FileConstants;
 using ProSphere.Domain.Enums;
-using ProSphere.Features.ProjectModerating.Queries.GetAllPendingProjects;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
 using ProSphere.ResultResponse;

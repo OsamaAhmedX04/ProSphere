@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using ProSphere.Data.Context;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
-using SendGrid.Helpers.Mail;
 using System.Linq.Expressions;
 
 namespace ProSphere.RepositoryManager.Implementations

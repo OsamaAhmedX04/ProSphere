@@ -47,7 +47,7 @@ namespace ProSphere.Features.AccessProjectRequest.Endpoint
         }
 
         [HttpGet("/api/access-request/investor/{investorId}/project/{projectId}")]
-        public async Task<IActionResult> GetInvestorProjectFullInformation(string investorId,Guid projectId)
+        public async Task<IActionResult> GetInvestorProjectFullInformation(string investorId, Guid projectId)
         {
             var query = new GetInvestorProjectFullInformationQuery(investorId, projectId);
             var result = await _sender.Send(query);
