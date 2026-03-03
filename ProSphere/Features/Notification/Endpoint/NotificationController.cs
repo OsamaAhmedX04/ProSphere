@@ -4,8 +4,6 @@ using ProSphere.Features.Notification.Commands.DeleteAllNotifications;
 using ProSphere.Features.Notification.Commands.DeleteNotification;
 using ProSphere.Features.Notification.Commands.MarkNotificationAsRead;
 using ProSphere.Features.Notification.Queries.GetAllNotifications;
-using ProSphere.Features.Search.Queries.SearchForProject;
-using System.Security.Claims;
 
 namespace ProSphere.Features.Notification.Endpoint
 {
