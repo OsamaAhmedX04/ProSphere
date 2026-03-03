@@ -45,6 +45,8 @@ namespace ProSphere
 
             builder.Services.AddSignalRWebSocket();
 
+            builder.Services.AddGlobalExceptionHandler();
+
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -60,7 +62,15 @@ namespace ProSphere
                 app.UseHangfireDashboard("/hangfire");
             }
 
+            app.UseExceptionHandler();
+
+
             app.UseHttpsRedirection();
+
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.MapHealthChecks("/health", new HealthCheckOptions
             {
@@ -69,11 +79,6 @@ namespace ProSphere
 
             app.MapHub<ChatHub>("/ChatHub");
             app.MapHub<NotificationHub>("/NotificationHub");
-
-            app.UseAuthentication();
-
-            app.UseAuthorization();
-
 
             app.MapControllers();
 
