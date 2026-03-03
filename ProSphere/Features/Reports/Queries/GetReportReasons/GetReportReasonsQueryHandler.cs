@@ -18,7 +18,7 @@ namespace ProSphere.Features.Reports.Queries.GetReportReasons
                 {
                     Id = (int)r,
                     Name = r.ToString(),
-                    DisplayName = GetDisplayName(r)
+                    DisplayName = GetDisplayName(r),
                 })
                 .ToList();
 

@@ -51,6 +51,7 @@ namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjects
                 filter: filter,
                 selector: p => new GetCreatorProjectsResponse
                 {
+                    ProjectId = p.Id,
                     Title = p.Title,
                     ShortDescription = p.ShortDescription,
                     IsActive = p.IsActive,

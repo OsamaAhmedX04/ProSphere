@@ -18,8 +18,8 @@ namespace ProSphere.Features.ProjectVoting.Commands.DeleteVote
             var isCreatorExist = await _unitOfWork.Creators.IsExistAsync(command.creatorId);
             if (!isCreatorExist) return Result.Failure("Creator Not Found", StatusCodes.Status404NotFound);
 
-            var isProjectExist = await _unitOfWork.Projects.IsExistAsync(command.projectId);
-            if (!isProjectExist) return Result.Failure("Project Not Found", StatusCodes.Status404NotFound);
+            var project = await _unitOfWork.Projects.FirstOrDefaultAsync(p => p.Id == command.projectId && p.IsActive == true);
+            if (project is null) return Result.Failure("Project Not Found", StatusCodes.Status404NotFound);
 
 
             await _unitOfWork.ProjectsVotes.DeleteAsync(vote =>

@@ -59,7 +59,8 @@ namespace ProSphere.Features.Account.Commands.UpdateCreatorAccount
             if (command.request.ImageProfile != null)
             {
                 if (creator.ImageProfileURL != null)
-                    await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + creator.ImageProfileURL);
+                    //await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + creator.ImageProfileURL);
+                    await _fileService.DeleteAsync(creator.ImageProfileURL);
 
                 var imagePath = await _fileService.UploadAsync(command.request.ImageProfile, "Creators/ProfileImages");
 

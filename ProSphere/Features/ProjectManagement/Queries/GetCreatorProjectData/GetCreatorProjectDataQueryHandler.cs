@@ -17,7 +17,7 @@ namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjectData
         public async Task<Result<GetCreatorProjectDataResponse>>
             Handle(GetCreatorProjectDataQuery query, CancellationToken cancellationToken)
         {
-            var isUpdatedProject = await _unitOfWork.ProjectUpdatesHistories.IsExistAsync(query.projectId);
+            var updatedProject = await _unitOfWork.ProjectUpdatesHistories.FirstOrDefaultAsync(p => p.ProjectId == query.projectId);
 
             var result = await _unitOfWork.Projects.GetEnhancedAsync(
                 filter: p => p.Id == query.projectId,
@@ -36,7 +36,7 @@ namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjectData
                     ImagesURL = p.Images.Select(image => SupabaseConstants.PrefixSupaURL + image.ImageUrl).ToList(),
                     Status = p.Status.ToString(),
                     UpdatedAt = p.UpdatedAt,
-                    IsUpdated = isUpdatedProject
+                    IsUpdateExist = updatedProject != null
                 });
 
             return Result<GetCreatorProjectDataResponse>

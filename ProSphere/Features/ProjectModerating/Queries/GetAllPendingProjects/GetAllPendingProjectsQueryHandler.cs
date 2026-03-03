@@ -21,22 +21,19 @@ namespace ProSphere.Features.ProjectModerating.Queries.GetAllPendingProjects
             Handle(GetAllPendingProjectsQuery query, CancellationToken cancellationToken)
         {
             var result = await _unitOfWork.Projects.GetAllPaginatedEnhancedAsync(
-                filter: p => p.Status == Status.Pending,
+                filter: p => p.Status == Status.Pending && !p.UpdatedAt.HasValue,
                 selector: p => new GetAllPendingProjectsResponse
                 {
+                    ProjectId = p.Id,
                     Title = p.Title,
                     ShortDescription = p.ShortDescription,
-                    CreatedAt = p.CreatedAt,
                     EquityPercentage = p.EquityPercentage,
-                    IsActive = p.IsActive,
-                    IsInvested = p.IsInvested,
                     Market = p.Market,
                     NeededInvestment = p.NeededInvestment,
                     Problem = p.Problem,
                     SolutionSummary = p.SolutionSummary,
                     ImagesURL = p.Images.Select(image => SupabaseConstants.PrefixSupaURL + image.ImageUrl).ToList(),
                     Status = p.Status.ToString(),
-                    UpdatedAt = p.UpdatedAt
                 },
                 pageNumber: query.pageNumber,
                 pageSize: 10

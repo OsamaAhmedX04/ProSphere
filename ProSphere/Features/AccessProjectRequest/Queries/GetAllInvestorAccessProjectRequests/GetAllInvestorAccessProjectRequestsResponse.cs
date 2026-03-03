@@ -6,6 +6,8 @@
         public Guid ProjectId { get; set; }
         public string CreatorId { get; set; }
         public string CreatorFullName { get; set; }
+        public string? HeadLine { get; set; }
+        public bool IsVerified { get; set; }
         public string? CreatorImageProfile { get; set; }
         public string ProjectTitle { get; set; }
         public string Status { get; set; }

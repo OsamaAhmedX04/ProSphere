@@ -23,6 +23,8 @@ namespace ProSphere.Features.Reports.Commands.RejectReportOnUser
 
 
             report.Status = Status.Rejected;
+            report.ReviewedAt = DateTime.UtcNow;
+            report.ReviewedBy = command.moderatorId;
 
             try
             {

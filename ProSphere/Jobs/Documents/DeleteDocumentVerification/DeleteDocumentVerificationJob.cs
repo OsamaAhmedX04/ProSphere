@@ -25,8 +25,9 @@ namespace ProSphere.Jobs.Documents.DeleteDocumentVerification
                 );
             await _unitOfWork.FinancialVerifications.BulkDeleteAsync(v => v.InvestorId == userId && v.status == status);
 
-            foreach (var document in documents)
-                await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + document);
+            //foreach (var document in documents)
+            //    await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + document);
+            await _fileService.DeleteRangeAsync(documents);
         }
 
         public async Task DeleteIdentityVerificationDocuments(string userId, Status status)
@@ -45,9 +46,10 @@ namespace ProSphere.Jobs.Documents.DeleteDocumentVerification
 
             foreach (var document in documents)
             {
-                await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + document.FrontIdImageURL);
-                await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + document.BackIdImageURL);
-                await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + document.SelfieWithIdImageURL);
+                await _fileService
+                    .DeleteRangeAsync(new List<string> { document.FrontIdImageURL, document.BackIdImageURL, document.SelfieWithIdImageURL });
+                //await _fileService.DeleteAsync(document.BackIdImageURL);
+                //await _fileService.DeleteAsync(document.SelfieWithIdImageURL);
             }
         }
 
@@ -61,8 +63,9 @@ namespace ProSphere.Jobs.Documents.DeleteDocumentVerification
 
             await _unitOfWork.ProfessionalVerifications.BulkDeleteAsync(v => v.InvestorId == userId && v.status == status);
 
-            foreach (var document in documents)
-                await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + document);
+            //foreach (var document in documents)
+            //    await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + document);
+                await _fileService.DeleteRangeAsync(documents);
         }
     }
 }

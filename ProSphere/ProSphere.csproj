@@ -74,11 +74,17 @@
   <ItemGroup>
     <Folder Include="Features\Admin\Queries\" />
     <Folder Include="Features\Authentication\Queries\" />
+    <Folder Include="Features\Chat\Commands\SendMessage\" />
+    <Folder Include="Features\Chat\Queries\GetAllContactsForUser\" />
+    <Folder Include="Features\Chat\Queries\GetAllChatBetweenUsers\" />
+    <Folder Include="Features\Notification\Commands\DeleteNotification\" />
+    <Folder Include="Features\Notification\Commands\DeleteAllNotifications\" />
+    <Folder Include="Features\Notification\Commands\MarkNotificationAsRead\" />
+    <Folder Include="Features\Notification\Queries\GetAllNotifications\" />
     <Folder Include="Features\PasswordManagement\Queries\" />
     <Folder Include="Features\PasswordRecovery\Queries\" />
     <Folder Include="Features\Registration\Queries\" />
     <Folder Include="Features\Search\Commands\" />
-    <Folder Include="Features\Search\Queries\SearchForProject\" />
   </ItemGroup>
 
 </Project>

@@ -64,17 +64,19 @@ namespace ProSphere.Features.ProjectModerating.Commands.AcceptProjectCreation
                     selector: p => p.ImageUrl
                     );
 
-                foreach (var imageURL in oldImagesurl)
-                {
-                    await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + imageURL);
-                }
+                //foreach (var imageURL in oldImagesurl)
+                //{
+                //    await _fileService.DeleteAsync(imageURL);
+                //}
+
+                await _fileService.DeleteRangeAsync(oldImagesurl);
                 await _unitOfWork.ProjectsImages.BulkDeleteAsync(p => p.ProjectId == command.projectId);
 
 
 
 
                 var newImagesURL = await _unitOfWork.ProjectUpdatesImagesHistories.GetAllAsyncEnhanced(
-                    filter: p => p.ProjectId == project.Id,
+                    filter: p => p.ProjectUpdateHistoryId == updatedProject.Id,
                     selector: p => p.ImageUrl
                     );
 
@@ -89,7 +91,7 @@ namespace ProSphere.Features.ProjectModerating.Commands.AcceptProjectCreation
                 }
 
 
-                _unitOfWork.ProjectUpdatesHistories.Delete(updatedProject.ProjectId);
+                _unitOfWork.ProjectUpdatesHistories.Delete(updatedProject.Id);
             }
 
             var moderationResult = new ProjectModeration

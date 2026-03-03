@@ -40,5 +40,18 @@ namespace ProSphere.Jobs.Search.SearchSaver
             await _unitOfWork.SearchHistories.AddAsync(searchHistory);
             await _unitOfWork.CompleteAsync();
         }
+
+        public async Task SaveSearchAtProjectHistory(string userId, string? projectName = null)
+        {
+            var searchHistory = new SearchHistory
+            {
+                UserId = userId,
+                SearchTerm = projectName,
+                FullSearchTerm = $"ProjectName: {projectName}",
+                SearchCategory = SearchCategory.Project
+            };
+            await _unitOfWork.SearchHistories.AddAsync(searchHistory);
+            await _unitOfWork.CompleteAsync();
+        }
     }
 }

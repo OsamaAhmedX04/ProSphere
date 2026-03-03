@@ -52,6 +52,8 @@ namespace ProSphere.Features.AccessProjectRequest.Queries.GetAllInvestorAccessPr
                 ProjectId = p.ProjectId,
                 ProjectTitle = p.Project.Title,
                 CreatorFullName = p.Project.Creator.FullName,
+                HeadLine = p.Project.Creator.HeadLine,
+                IsVerified = p.Project.Creator.User.IsVerified,
                 CreatorImageProfile =
                     p.Project.Creator.ImageProfileURL == null ? null : SupabaseConstants.PrefixSupaURL + p.Project.Creator.ImageProfileURL,
                 Status = p.Status.ToString()

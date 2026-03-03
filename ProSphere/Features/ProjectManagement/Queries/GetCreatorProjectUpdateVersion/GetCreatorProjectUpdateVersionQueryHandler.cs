@@ -22,8 +22,8 @@ namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjectUpdateVe
             if (!isCreatorExist)
                 return Result<GetCreatorProjectUpdateVersionResponse>.Failure("Creator Not Found", StatusCodes.Status404NotFound);
 
-            var isUpdatedProjectExist = await _unitOfWork.ProjectUpdatesHistories.IsExistAsync(query.projectId);
-            if (!isUpdatedProjectExist)
+            var updatedProject = await _unitOfWork.ProjectUpdatesHistories.FirstOrDefaultAsync(p => p.ProjectId == query.projectId);
+            if (updatedProject is null)
                 return Result<GetCreatorProjectUpdateVersionResponse>.Failure("No Updates For This Project", StatusCodes.Status404NotFound);
 
             var result = await _unitOfWork.ProjectUpdatesHistories.GetEnhancedAsync(
@@ -44,7 +44,8 @@ namespace ProSphere.Features.ProjectManagement.Queries.GetCreatorProjectUpdateVe
                     ShortDescription = p.ShortDescription,
                     SolutionSummary = p.SolutionSummary,
                     Title = p.Title,
-                    Status = p.Status.ToString()
+                    Status = p.Status.ToString(),
+                    RejectionReason = p.RejectionReason
                 });
 
             return Result<GetCreatorProjectUpdateVersionResponse>.Success(result!, "Updated Project Retrieved Successfully");

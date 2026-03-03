@@ -35,7 +35,7 @@ namespace ProSphere.Features.CV.Commands.UploadCV
                 return Result.Failure("User Not Found", StatusCodes.Status404NotFound);
 
             if (user.CVURL != null)
-                await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + user.CVURL);
+                await _fileService.DeleteAsync(user.CVURL);
 
             var filePath = await _fileService.UploadAsync(command.Request.CV, "CVs");
             user.CVURL = filePath;

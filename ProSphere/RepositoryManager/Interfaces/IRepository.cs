@@ -65,6 +65,9 @@ namespace ProSphere.RepositoryManager.Interfaces
         Task AddAsync(TEntity entity);
         Task AddRangeAsync(List<TEntity> entities);
         void Update(TEntity entity);
+        Task<int> ExecuteUpdateAsync(
+            Expression<Func<TEntity, bool>> filter,
+            Func<IQueryable<TEntity>, Task<int>> updateAction);
         void Delete(int id);
         void Delete(string id);
         void Delete(Guid id);

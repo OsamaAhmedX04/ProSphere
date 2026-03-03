@@ -23,6 +23,7 @@ namespace ProSphere.Features.AccessProjectRequest.Commands.RejectAccessProjectRe
                 return Result.Failure($"Access Request Is Already {accessRequest.Status.ToString()}", StatusCodes.Status400BadRequest);
 
             accessRequest.Status = Status.Rejected;
+            accessRequest.RespondedAt = DateTime.UtcNow;
             await _unitOfWork.CompleteAsync();
 
             return Result.Success("Request Is Rejected Successfully");

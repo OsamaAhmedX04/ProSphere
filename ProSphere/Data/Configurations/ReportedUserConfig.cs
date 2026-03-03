@@ -23,13 +23,13 @@ namespace ProSphere.Data.Configurations
                 .HasOne(x => x.User)
                 .WithMany(x => x.ReportedUsers)
                 .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .HasOne(x => x.Reporter)
                 .WithMany(x => x.ReportersOnUsers)
                 .HasForeignKey(x => x.ReporterId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .HasOne(x => x.Moderator)

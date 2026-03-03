@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ProSphere.Domain.Enums;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
+using System.Runtime.InteropServices;
 
 namespace ProSphere.Features.AccessProjectRequest.Commands.AcceptAccessProjectRequest
 {
@@ -24,10 +25,14 @@ namespace ProSphere.Features.AccessProjectRequest.Commands.AcceptAccessProjectRe
                 return Result.Failure($"Access Request Is Already {accessRequest.Status.ToString()}", StatusCodes.Status400BadRequest);
 
             accessRequest.Status = Status.Approved;
+            accessRequest.RespondedAt = DateTime.UtcNow;
             await _unitOfWork.ProjectsAccessRequests
                 .GetAllAsIQueryable()
                 .Where(p => p.ProjectId == accessRequest.ProjectId && p.Status == Status.Pending)
                 .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.Status, Status.Rejected));
+
+            var project = await _unitOfWork.Projects.FirstOrDefaultAsync(p => p.Id == accessRequest.ProjectId);
+            if(project is not null) project.IsInvested = true;
 
             await _unitOfWork.CompleteAsync();
 

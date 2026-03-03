@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using ProSphere.Domain.Constants.RoleConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.RepositoryManager.Interfaces;
 
@@ -26,7 +28,18 @@ namespace ProSphere.Jobs.Ban.RemoveBan
                 {
                     user.IsBanned = false;
                     await _userManager.UpdateAsync(user);
+
+                    var isCreator = await _userManager.IsInRoleAsync(user, Role.Creator);
+                    if (isCreator)
+                    {
+                        await _unitOfWork.Projects.ExecuteUpdateAsync(
+                            p => p.CreatorId == user.Id,
+                            q => q.ExecuteUpdateAsync(s =>
+                                s.SetProperty(p => p.IsBlockedDueToBannedUser, false))
+                            );
+                    }
                 }
+
                 await _unitOfWork.CompleteAsync();
             }
         }

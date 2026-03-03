@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using ProSphere.Domain.Constants.RoleConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Extensions;
@@ -39,7 +40,7 @@ namespace ProSphere.Features.Authentication.Commands.Login
                 user = await _userManager.FindByEmailAsync(command.request.Email);
 
             else
-                user = await _userManager.FindByNameAsync(command.request.Email);
+                user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == command.request.Email);
 
             if (user == null)
                 return Result<AuthenticationTokenDto>.Failure("User Not Found", StatusCodes.Status404NotFound);

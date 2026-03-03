@@ -1,7 +1,9 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Memory;
 using ProSphere.Domain.Constants.CacheConstants;
+using ProSphere.Domain.Entities;
 using ProSphere.Extensions;
 using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.RepositoryManager.Interfaces;
@@ -16,15 +18,17 @@ namespace ProSphere.Features.Employee.Commands.CreateEmployee
         private readonly IEmailSenderService _emailSenderService;
         private readonly IMemoryCache _cache;
         private readonly ILogger<CreateEmployeeCommandHandler> _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public CreateEmployeeCommandHandler(IUnitOfWork unitOfWork, IValidator<CreateEmployeeRequest> validator,
-            IEmailSenderService emailSenderService, IMemoryCache cache, ILogger<CreateEmployeeCommandHandler> logger)
+            IEmailSenderService emailSenderService, IMemoryCache cache, ILogger<CreateEmployeeCommandHandler> logger, UserManager<ApplicationUser> userManager)
         {
             _unitOfWork = unitOfWork;
             _validator = validator;
             _emailSenderService = emailSenderService;
             _cache = cache;
             _logger = logger;
+            _userManager = userManager;
         }
 
         public async Task<Result> Handle(CreateEmployeeCommand command, CancellationToken cancellationToken)
@@ -43,9 +47,13 @@ namespace ProSphere.Features.Employee.Commands.CreateEmployee
                 return Result.Failure("Moderator Account Is Not Available", StatusCodes.Status404NotFound);
 
 
-            var isDuplicatedEmail = await _unitOfWork.Employees.AnyAsync(e => e.Email == command.request.Email);
-            if (isDuplicatedEmail)
+            var isDuplicatedEmployeeEmail = await _unitOfWork.Employees.AnyAsync(e => e.Email == command.request.Email);
+            if (isDuplicatedEmployeeEmail)
                 return Result.Failure("Employee Email Is Already Exist", StatusCodes.Status400BadRequest);
+
+            var userSystemEmail = await _userManager.FindByEmailAsync(command.request.Email);
+            if (userSystemEmail is not null)
+                return Result.Failure("This Email Is Already Exist", StatusCodes.Status400BadRequest);
 
 
             var newEmployee = new Domain.Entities.Employee

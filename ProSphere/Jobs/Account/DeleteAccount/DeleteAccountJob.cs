@@ -34,21 +34,21 @@ namespace ProSphere.Jobs.Account.DeleteAccount
             if (identityHistory != null)
             {
                 _unitOfWork.IdentityVerificationHistories.Delete(identityHistory.Id);
-                await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + identityHistory.IdBackImageURL);
-                await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + identityHistory.IdFrontImageURL);
-                await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + identityHistory.SelfieWithIdURL);
+                await _fileService.DeleteAsync(identityHistory.IdBackImageURL);
+                await _fileService.DeleteAsync(identityHistory.IdFrontImageURL);
+                await _fileService.DeleteAsync(identityHistory.SelfieWithIdURL);
 
             }
             if (financialHistory != null)
             {
                 _unitOfWork.FinancialVerificationHistories.Delete(financialHistory.Id);
-                await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + financialHistory.DocumentURL);
+                await _fileService.DeleteAsync(financialHistory.DocumentURL);
 
             }
             if (professionalHistory != null)
             {
                 _unitOfWork.ProfessionalVerificationHistories.Delete(professionalHistory.Id);
-                await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + professionalHistory.DocumentURL);
+                await _fileService.DeleteAsync(professionalHistory.DocumentURL);
             }
 
             await _unitOfWork.UserAccountHistories.BulkDeleteAsync(h => h.Email == user.Email);
@@ -69,6 +69,9 @@ namespace ProSphere.Jobs.Account.DeleteAccount
             {
                 await _unitOfWork.IdentityVerifications.BulkDeleteAsync(
                     x => x.UserId == user.Id && (x.status == Status.Rejected || x.status == Status.Pending));
+
+                await _unitOfWork.ReportedProjects.BulkDeleteAsync(r => r.ReporterId == user.Id);
+                await _unitOfWork.ReportedUsers.BulkDeleteAsync(r => r.ReporterId == user.Id);
             }
 
             if (userRoles.Contains(Role.Investor))
@@ -78,6 +81,7 @@ namespace ProSphere.Jobs.Account.DeleteAccount
 
                 await _unitOfWork.ProfessionalVerifications
                     .BulkDeleteAsync(x => x.InvestorId == user.Id && (x.status == Status.Rejected || x.status == Status.Pending));
+
 
             }
 
@@ -175,19 +179,19 @@ namespace ProSphere.Jobs.Account.DeleteAccount
             if (userRoles.Contains(Role.Creator))
             {
                 var creator = await _unitOfWork.Creators.FirstOrDefaultAsync(x => x.Id == user.Id);
-                if (creator != null)
-                    await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + creator.ImageProfileURL);
+                if (!string.IsNullOrWhiteSpace(creator?.ImageProfileURL))
+                    await _fileService.DeleteAsync(creator.ImageProfileURL);
 
-                if (creator?.CVURL != null)
-                    await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + creator.CVURL);
+                if (!string.IsNullOrWhiteSpace(creator?.CVURL))
+                    await _fileService.DeleteAsync(creator.CVURL);
 
                 _unitOfWork.Creators.Delete(user.Id);
             }
             if (userRoles.Contains(Role.Investor))
             {
                 var investor = await _unitOfWork.Investors.FirstOrDefaultAsync(x => x.Id == user.Id);
-                if (investor != null)
-                    await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + investor.ImageProfileURL);
+                if (!string.IsNullOrWhiteSpace(investor?.ImageProfileURL))
+                    await _fileService.DeleteAsync(investor.ImageProfileURL);
 
                 _unitOfWork.Investors.Delete(user.Id);
 

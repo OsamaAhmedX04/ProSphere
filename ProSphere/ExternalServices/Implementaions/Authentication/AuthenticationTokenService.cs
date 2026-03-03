@@ -28,6 +28,7 @@ namespace ProSphere.ExternalServices.Implementaions.Authentication
             {
                 Id = user.Id,
                 Username = user.UserName!,
+                Email = user.Email!,
                 Role = userRole.First()
             });
 
@@ -70,6 +71,7 @@ namespace ProSphere.ExternalServices.Implementaions.Authentication
             {
                 Id = user.Id,
                 Username = user.UserName!,
+                Email = user.Email!,
                 Role = userRole.First()
             });
 

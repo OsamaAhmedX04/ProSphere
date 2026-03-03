@@ -7,6 +7,7 @@ using ProSphere.Features.AccessProjectRequest.Commands.SendAccessProjectRequest;
 using ProSphere.Features.AccessProjectRequest.Queries.GetAccessRequestsOnProject;
 using ProSphere.Features.AccessProjectRequest.Queries.GetAllCreatorAccessedProjectRequests;
 using ProSphere.Features.AccessProjectRequest.Queries.GetAllInvestorAccessProjectRequests;
+using ProSphere.Features.AccessProjectRequest.Queries.GetInvestorProjectFullInformation;
 
 namespace ProSphere.Features.AccessProjectRequest.Endpoint
 {
@@ -41,6 +42,14 @@ namespace ProSphere.Features.AccessProjectRequest.Endpoint
         public async Task<IActionResult> GetAllInvestorProjectsAccessRequests(int pageNumber, string investorId, string? status = null)
         {
             var query = new GetAllInvestorAccessProjectRequestsQuery(pageNumber, investorId, status);
+            var result = await _sender.Send(query);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpGet("/api/access-request/investor/{investorId}/project/{projectId}")]
+        public async Task<IActionResult> GetInvestorProjectFullInformation(string investorId,Guid projectId)
+        {
+            var query = new GetInvestorProjectFullInformationQuery(investorId, projectId);
             var result = await _sender.Send(query);
             return StatusCode(result.StatusCode, result);
         }

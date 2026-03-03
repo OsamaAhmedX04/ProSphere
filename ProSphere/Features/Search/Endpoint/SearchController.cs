@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProSphere.Features.Search.Queries.GetSearchHistory;
 using ProSphere.Features.Search.Queries.SearchForCreators;
 using ProSphere.Features.Search.Queries.SearchForInvestors;
+using ProSphere.Features.Search.Queries.SearchForProject;
 using System.Security.Claims;
 
 namespace ProSphere.Features.Search.Endpoint
@@ -38,8 +39,18 @@ namespace ProSphere.Features.Search.Endpoint
             return StatusCode(result.StatusCode, result);
         }
 
+        [HttpGet("projects")]
+        public async Task<IActionResult> SearchForProjects
+            (int pageNumber, string? projectName = null)
+        {
+            var userId = User?.FindFirstValue(ClaimTypes.NameIdentifier);
+            var query = new SearchForProjectQuery(pageNumber, userId, projectName);
+            var result = await _sender.Send(query);
+            return StatusCode(result.StatusCode, result);
+        }
+
         [HttpGet("history")]
-        public async Task<IActionResult> SearchForInvestors()
+        public async Task<IActionResult> GetHistoryOfSearch()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var query = new GetSearchHistoryQuery(userId!);

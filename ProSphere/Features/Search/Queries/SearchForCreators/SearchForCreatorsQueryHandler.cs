@@ -22,7 +22,7 @@ namespace ProSphere.Features.Search.Queries.SearchForCreators
         public async Task<Result<PageSourcePagination<SearchForCreatorsResponse>>>
             Handle(SearchForCreatorsQuery query, CancellationToken cancellationToken)
         {
-            Expression<Func<Creator, bool>> filter = c => true;
+            Expression<Func<Creator, bool>> filter = c => !c.User.IsBanned;
 
             if (!string.IsNullOrEmpty(query.userName))
                 filter = filter.And(c => c.FullName.Contains(query.userName));

@@ -52,6 +52,9 @@ namespace ProSphere.Data.Configurations
             builder.Property(e => e.IsBlocked)
                 .HasDefaultValue(false);
 
+            builder.Property(e => e.IsBlockedDueToBannedUser)
+                .HasDefaultValue(false);
+
             builder.Property(e => e.RowVersion)
                 .IsRowVersion();
 

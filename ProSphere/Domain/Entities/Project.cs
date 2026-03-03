@@ -23,6 +23,7 @@ namespace ProSphere.Domain.Entities
         public bool IsActive { get; set; }
         public bool IsInvested { get; set; }
         public bool IsBlocked { get; set; }
+        public bool IsBlockedDueToBannedUser { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
@@ -30,8 +31,8 @@ namespace ProSphere.Domain.Entities
         public byte[] RowVersion { get; set; }
 
         public ProjectDetail Details { get; set; }
-        public ProjectModeration ModerationAction { get; set; }
         public ProjectUpdateHistory UpdatesHistory { get; set; }
+        public ICollection<ProjectModeration> ModerationActions { get; set; } = new List<ProjectModeration>();
         public ICollection<ProjectImage> Images { get; set; } = new List<ProjectImage>();
         public ICollection<ProjectAccessRequest> AccessRequests { get; set; } = new List<ProjectAccessRequest>();
         public ICollection<ProjectVote> Votes { get; set; } = new List<ProjectVote>();

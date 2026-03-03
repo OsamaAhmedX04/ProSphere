@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ProSphere.Domain.Constants.RoleConstants;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
 using ProSphere.Jobs.Ban.RemoveBan;
@@ -31,7 +32,11 @@ namespace ProSphere.Features.Reports.Commands.AcceptReportOnUser
             if (user is null)
                 return Result.Failure("Target User Not Found", StatusCodes.Status404NotFound);
 
+            var isCreator = await _userManager.IsInRoleAsync(user, Role.Creator);
+
             report.Status = Status.Approved;
+            report.ReviewedAt = DateTime.UtcNow;
+            report.ReviewedBy = command.moderatorId;
             user.IsBanned = true;
 
             var banData = new BannedUser
@@ -54,6 +59,16 @@ namespace ProSphere.Features.Reports.Commands.AcceptReportOnUser
             }
 
             await _unitOfWork.ReportedUsers.BulkDeleteAsync(r => r.UserId == report.UserId && r.Id != command.reportId);
+
+            if (isCreator)
+            {
+                await _unitOfWork.Projects.ExecuteUpdateAsync(
+                    p => p.CreatorId == user.Id,
+                    q => q.ExecuteUpdateAsync(s =>
+                        s.SetProperty(p => p.IsBlockedDueToBannedUser, true))
+                    );
+            }
+            
 
             BackgroundJob.Schedule<IRemoveBanJob>(
                 serivce => serivce.RemoveBan(user.Id),

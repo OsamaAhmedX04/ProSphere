@@ -17,6 +17,25 @@ namespace ProSphere.ExternalServices.Implementaions.FileStorage
             _bucketName = options.Value.BucketName;
         }
 
+        //public async Task<string> UploadAsync(IFormFile file, string? folder = null)
+        //{
+        //    using var ms = new MemoryStream();
+        //    await file.CopyToAsync(ms);
+        //    var fileBytes = ms.ToArray();
+
+        //    var bucket = _client.Storage.From(_bucketName);
+        //    var fileName = folder != null
+        //        ? $"{folder}/{Guid.NewGuid()}_{file.FileName}"
+        //        : $"{Guid.NewGuid()}_{file.FileName}";
+
+        //    await bucket.Upload(fileBytes, fileName);
+
+        //    // Remove trailing ? from public URL
+        //    var imageBucketUrl = bucket.GetPublicUrl(fileName)?.TrimEnd('?')!;
+        //    var imagePath = imageBucketUrl.Substring(SupabaseConstants.StartIndexOfCorrectPath);
+        //    return imagePath;
+        //}
+
         public async Task<string> UploadAsync(IFormFile file, string? folder = null)
         {
             using var ms = new MemoryStream();
@@ -24,17 +43,16 @@ namespace ProSphere.ExternalServices.Implementaions.FileStorage
             var fileBytes = ms.ToArray();
 
             var bucket = _client.Storage.From(_bucketName);
+
             var fileName = folder != null
                 ? $"{folder}/{Guid.NewGuid()}_{file.FileName}"
                 : $"{Guid.NewGuid()}_{file.FileName}";
 
             await bucket.Upload(fileBytes, fileName);
 
-            // Remove trailing ? from public URL
-            var imageBucketUrl = bucket.GetPublicUrl(fileName)?.TrimEnd('?')!;
-            var imagePath = imageBucketUrl.Substring(SupabaseConstants.StartIndexOfCorrectPath);
-            return imagePath;
+            return fileName;
         }
+
 
 
         public async Task<string> EditAsync(string existingFilePath, IFormFile newFile)
@@ -48,10 +66,18 @@ namespace ProSphere.ExternalServices.Implementaions.FileStorage
             return await UploadAsync(newFile, folder);
         }
 
+
+
         public async Task DeleteAsync(string filePath)
         {
             var bucket = _client.Storage.From(_bucketName);
             await bucket.Remove(filePath);
+        }
+
+        public async Task DeleteRangeAsync(List<string> filesPath)
+        {
+            var bucket = _client.Storage.From(_bucketName);
+            await bucket.Remove(filesPath);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace ProSphere.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<ProjectUpdateHistory> builder)
         {
-            builder.HasKey(x => x.ProjectId);
+            builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Status)
                 .HasConversion<string>()

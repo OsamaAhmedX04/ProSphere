@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using ProSphere.Features.ProjectModerating.Commands.AcceptProjectCreation;
 using ProSphere.Features.ProjectModerating.Commands.RejectProjectCreation;
 using ProSphere.Features.ProjectModerating.Queries.GetAllPendingProjects;
+using ProSphere.Features.ProjectModerating.Queries.GetAllUpdatedPendingProjects;
 using ProSphere.Features.ProjectModerating.Queries.GetPendingProjectDetails;
+using ProSphere.Features.ProjectModerating.Queries.GetUpdatedPendingProjectDetails;
 
 namespace ProSphere.Features.ProjectModerating.Endpoint
 {
@@ -30,6 +32,22 @@ namespace ProSphere.Features.ProjectModerating.Endpoint
         public async Task<IActionResult> GetPendingProjectDetails(Guid projectId)
         {
             var query = new GetPendingProjectDetailsQuery(projectId);
+            var result = await _sender.Send(query);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpGet("/api/updated-project/pending")]
+        public async Task<IActionResult> GetAllUpdatedPendingProjects(int pageNumber)
+        {
+            var query = new GetAllUpdatedPendingProjectsQuery(pageNumber);
+            var result = await _sender.Send(query);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpGet("/api/updated-project/pending/{projectId}/details")]
+        public async Task<IActionResult> GetUpdatedPendingProjectDetails(Guid projectId)
+        {
+            var query = new GetUpdatedPendingProjectDetailsQuery(projectId);
             var result = await _sender.Send(query);
             return StatusCode(result.StatusCode, result);
         }

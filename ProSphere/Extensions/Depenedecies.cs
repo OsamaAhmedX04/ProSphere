@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ProSphere.Data.Context;
 using ProSphere.Domain.Entities;
+using ProSphere.Exceptions;
 using ProSphere.ExternalServices.Implementaions.Authentication;
 using ProSphere.ExternalServices.Implementaions.Email;
 using ProSphere.ExternalServices.Implementaions.FileStorage;
@@ -292,6 +293,14 @@ namespace ProSphere.Extensions
         public static IServiceCollection AddSignalRWebSocket(this IServiceCollection services)
         {
             services.AddSignalR();
+
+            return services;
+        }
+
+        public static IServiceCollection AddGlobalExceptionHandler(this IServiceCollection services)
+        {
+            services.AddExceptionHandler<GlobalExceptionHandler>();
+            services.AddProblemDetails();
 
             return services;
         }

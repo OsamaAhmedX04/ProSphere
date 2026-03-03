@@ -65,7 +65,7 @@ namespace ProSphere.Features.ProjectManagement.Commands.CreateProject
                 string imageURL = string.Empty;
                 foreach (var image in command.request.Images)
                 {
-                    imageURL = await _fileService.UploadAsync(image);
+                    imageURL = await _fileService.UploadAsync(image, "Projects/Images");
                     projectImages.Add(new ProjectImage { ImageUrl = imageURL, ProjectId = newProject.Id });
                 }
                 newProject.Images = projectImages;

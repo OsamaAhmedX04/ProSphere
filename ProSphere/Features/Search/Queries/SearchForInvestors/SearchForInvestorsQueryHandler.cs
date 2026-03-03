@@ -62,7 +62,8 @@ namespace ProSphere.Features.Search.Queries.SearchForInvestors
             }
 
 
-            return Result<PageSourcePagination<GetInvestorAccountsResponse>>.Success(result, "Paginated Search For Investors Retreived Successfully");
+            return Result<PageSourcePagination<GetInvestorAccountsResponse>>
+                .Success(result, "Paginated Search For Investors Retreived Successfully");
         }
     }
 }

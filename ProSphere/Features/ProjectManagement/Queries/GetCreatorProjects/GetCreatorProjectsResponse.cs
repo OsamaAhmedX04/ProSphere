@@ -2,6 +2,7 @@
 {
     public class GetCreatorProjectsResponse
     {
+        public Guid ProjectId { get; set; }
         public string Title { get; set; }
         public string ShortDescription { get; set; }
         public List<string> ImagesURL { get; set; } = new List<string>();

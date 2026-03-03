@@ -55,7 +55,7 @@ namespace ProSphere.Features.Reports.Endpoint
             return StatusCode(result.StatusCode, result);
         }
 
-        [HttpPost("user/{userId}")]
+        [HttpPost("user/{targetUserId}")]
         public async Task<IActionResult> SendReportOnUser(string reporterId, string targetUserId, SendReportOnUserRequest request)
         {
             var command = new SendReportOnUserCommand(reporterId, targetUserId, request);

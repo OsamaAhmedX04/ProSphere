@@ -29,7 +29,7 @@ namespace ProSphere.Data.Configurations
                 .HasOne(x => x.Reporter)
                 .WithMany(x => x.ReportersOnProjects)
                 .HasForeignKey(x => x.ReporterId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .HasOne(x => x.Moderator)

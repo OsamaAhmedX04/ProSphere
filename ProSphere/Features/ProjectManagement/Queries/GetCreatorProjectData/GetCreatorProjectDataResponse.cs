@@ -15,6 +15,6 @@
         public string Status { get; set; }
         public bool IsActive { get; set; }
         public bool IsInvested { get; set; }
-        public bool IsUpdated { get; set; }
+        public bool IsUpdateExist { get; set; }
     }
 }

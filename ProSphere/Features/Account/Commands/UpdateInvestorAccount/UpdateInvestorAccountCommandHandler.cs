@@ -59,7 +59,8 @@ namespace ProSphere.Features.Account.Commands.UpdateInvestorAccount
             if (command.request.ImageProfile != null)
             {
                 if (investor.ImageProfileURL != null)
-                    await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + investor.ImageProfileURL);
+                    await _fileService.DeleteAsync(investor.ImageProfileURL);
+                    //await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + investor.ImageProfileURL);
 
                 var imagePath = await _fileService.UploadAsync(command.request.ImageProfile, "Investors/ProfileImages");
 

@@ -32,7 +32,7 @@ namespace ProSphere.Features.ProjectManagement.Commands.DeleteProject
             if (!(projectImages is null || projectImages.Count == 0))
             {
                 foreach (var image in projectImages)
-                    await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + image.ImageUrl);
+                    await _fileService.DeleteAsync(image.ImageUrl);
 
                 await _unitOfWork.ProjectsImages.BulkDeleteAsync(p => p.ProjectId == command.projectId);
             }

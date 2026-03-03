@@ -26,7 +26,7 @@ namespace ProSphere.Features.CV.Commands.DeleteCV
             if (user.CVURL == null)
                 return Result.Failure("No CV to delete", StatusCodes.Status400BadRequest);
 
-            await _fileService.DeleteAsync(SupabaseConstants.PrefixSupaURL + user.CVURL);
+            await _fileService.DeleteAsync(user.CVURL);
             user.CVURL = null;
 
             await _unitOfWork.CompleteAsync();

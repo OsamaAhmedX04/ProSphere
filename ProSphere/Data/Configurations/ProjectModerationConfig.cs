@@ -24,8 +24,8 @@ namespace ProSphere.Data.Configurations
 
             builder
                 .HasOne(x => x.Project)
-                .WithOne(x => x.ModerationAction)
-                .HasForeignKey<ProjectModeration>(x => x.ProjectId)
+                .WithMany(x => x.ModerationActions)
+                .HasForeignKey(x => x.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder

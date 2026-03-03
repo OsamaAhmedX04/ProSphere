@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ProSphere.Data.Context;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
+using SendGrid.Helpers.Mail;
 using System.Linq.Expressions;
 
 namespace ProSphere.RepositoryManager.Implementations
@@ -207,6 +208,14 @@ namespace ProSphere.RepositoryManager.Implementations
             => await _dbSet.AddRangeAsync(entities);
         public void Update(TEntity entity)
             => _dbSet.Update(entity);
+
+        public async Task<int> ExecuteUpdateAsync(
+            Expression<Func<TEntity, bool>> filter,
+            Func<IQueryable<TEntity>, Task<int>> updateAction)
+        {
+            var query = _db.Set<TEntity>().Where(filter);
+            return await updateAction(query);
+        }
 
         public void Delete(int id)
         {

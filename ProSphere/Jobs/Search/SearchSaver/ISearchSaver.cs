@@ -5,5 +5,6 @@
         Task SaveSearchAtCreatorHistory(string userId, string? userName = null, bool? verified = null);
         Task SaveSearchAtInvestorHistory(string userId, string? userName = null, bool? verified = null, bool? financial = null,
         bool? professional = null);
+        Task SaveSearchAtProjectHistory(string userId, string? projectName = null);
     }
 }

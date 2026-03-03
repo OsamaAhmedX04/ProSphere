@@ -57,9 +57,17 @@ namespace ProSphere.Features.AccessProjectRequest.Queries.GetAccessRequestsOnPro
                     ProjectId = p.ProjectId,
                     ProjectTitle = p.Project.Title,
                     InvestorFullName = p.Investor.FullName,
+                    HeadLine = p.Investor.HeadLine,
+                    IsVerified = p.Investor.User.IsVerified,
+                    IsFinancail = p.Investor.InvestorLevel == InvestorLevel.Professional
+                                  ||
+                                  p.Investor.InvestorLevel == InvestorLevel.Financial,
+
+                    IsProfessional = p.Investor.InvestorLevel == InvestorLevel.Professional,
                     InvestorImageProfileURL =
                         p.Investor.ImageProfileURL == null ? null : SupabaseConstants.PrefixSupaURL + p.Investor.ImageProfileURL,
-                    Status = p.Status.ToString()
+                    Status = p.Status.ToString(),
+                    InvestorMessage = p.Message
                 },
                 pageNumber: query.pageNumber,
                 pageSize: 15

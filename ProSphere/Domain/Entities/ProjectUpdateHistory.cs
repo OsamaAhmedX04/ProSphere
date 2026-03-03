@@ -7,6 +7,8 @@ namespace ProSphere.Domain.Entities
     public class ProjectUpdateHistory
     {
         [Key]
+        public Guid Id { get; set; }
+
         [ForeignKey("Project")]
         public Guid ProjectId { get; set; }
         public Project Project { get; set; }

@@ -36,7 +36,8 @@ namespace ProSphere.Features.AccessProjectRequest.Commands.SendAccessProjectRequ
 
             var accessrequest = await _unitOfWork.ProjectsAccessRequests
                 .FirstOrDefaultAsync(p => p.ProjectId == command.projectId && p.InvestorId == command.investorId);
-            if (accessrequest is not null) return Result.Failure("Request Is Already Sent", StatusCodes.Status400BadRequest);
+            if(accessrequest is not null)
+                return Result.Failure($"Your Request Is Already {accessrequest.Status.ToString()}, Can Not Send More Requests For This Project", StatusCodes.Status400BadRequest);
 
             var request = new ProjectAccessRequest
             {
