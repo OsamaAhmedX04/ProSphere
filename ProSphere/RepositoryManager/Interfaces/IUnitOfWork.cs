@@ -38,7 +38,8 @@ namespace ProSphere.RepositoryManager.Interfaces
         IRepository<ProjectUpdateHistory> ProjectUpdatesHistories { get; }
         IRepository<ProjectUpdateImageHistory> ProjectUpdatesImagesHistories { get; }
 
-        IRepository<ChatMessage> ChatMessages { get; }
+        IRepository<Message> Messages { get; }
+        IRepository<Conversation> Conversations { get; }
         IRepository<ChatMessageHistory> ChatMessagesHistories { get; }
         IRepository<Notification> Notifications { get; }
 

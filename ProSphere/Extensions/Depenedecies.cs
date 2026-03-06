@@ -26,6 +26,7 @@ using ProSphere.Jobs.Search.SearchSaver;
 using ProSphere.Options;
 using ProSphere.RepositoryManager.Implementations;
 using ProSphere.RepositoryManager.Interfaces;
+using ProSphere.Services.Notification;
 using Serilog;
 using Supabase;
 using System.Text;
@@ -40,6 +41,7 @@ namespace ProSphere.Extensions
         {
             services.AddScoped<IAuthenticationTokenService, AuthenticationTokenService>();
             services.AddScoped<IEmailSenderService, EmailSenderService>();
+            services.AddScoped<INotificationService, NotificationService>();
 
             return services;
         }
@@ -89,6 +91,7 @@ namespace ProSphere.Extensions
 
             // Register Repository
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IChatRepository, ChatRepository>();
 
             return services;
         }

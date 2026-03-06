@@ -36,7 +36,8 @@ namespace ProSphere.RepositoryManager.Implementations
         public IRepository<ProjectUpdateHistory> ProjectUpdatesHistories { get; }
         public IRepository<ProjectUpdateImageHistory> ProjectUpdatesImagesHistories { get; }
 
-        public IRepository<ChatMessage> ChatMessages { get; }
+        public IRepository<Message> Messages { get; }
+        public IRepository<Conversation> Conversations { get; }
         public IRepository<ChatMessageHistory> ChatMessagesHistories { get; }
         public IRepository<Notification> Notifications { get; }
 
@@ -81,7 +82,8 @@ namespace ProSphere.RepositoryManager.Implementations
             ProjectUpdatesHistories = new Repository<ProjectUpdateHistory>(_db);
             ProjectUpdatesImagesHistories = new Repository<ProjectUpdateImageHistory>(_db);
 
-            ChatMessages = new Repository<ChatMessage>(_db);
+            Messages = new Repository<Message>(_db);
+            Conversations = new Repository<Conversation>(_db);
             ChatMessagesHistories = new Repository<ChatMessageHistory>(_db);
             Notifications = new Repository<Notification>(_db);
 
