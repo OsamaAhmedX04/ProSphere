@@ -24,8 +24,8 @@ namespace ProSphere.Domain.Entities
         public BannedUser BannedUser { get; set; }
         public ICollection<IdentityVerification> IdentityVerifications { get; set; } = new List<IdentityVerification>();
         public ICollection<SearchHistory> SearchHistories { get; set; } = new List<SearchHistory>();
-        public ICollection<ChatMessage> MessagesSent { get; set; } = new List<ChatMessage>();
-        public ICollection<ChatMessage> MessagesReceived { get; set; } = new List<ChatMessage>();
+        public ICollection<Message> MessagesSent { get; set; } = new List<Message>();
+        public ICollection<Message> MessagesReceived { get; set; } = new List<Message>();
         public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
         public ICollection<ReportedUser> ReportedUsers { get; set; } = new List<ReportedUser>();
         public ICollection<ReportedUser> ReportersOnUsers { get; set; } = new List<ReportedUser>();

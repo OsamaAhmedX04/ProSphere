@@ -17,5 +17,6 @@ namespace ProSphere.Domain.Entities
         public ICollection<CreatorSkill> Skills { get; set; } = new List<CreatorSkill>();
         public ICollection<Project> Projects { get; set; } = new List<Project>();
         public ICollection<ProjectVote> ProjectsVotes { get; set; } = new List<ProjectVote>();
+        public ICollection<Conversation> Conversations { get; set; } = new List<Conversation>();
     }
 }

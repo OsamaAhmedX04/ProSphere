@@ -10,8 +10,6 @@ namespace ProSphere.Data.Configurations
         {
             builder.HasKey(e => e.Id);
 
-            builder.Property(x => x.SentAt)
-                .HasDefaultValueSql("GETUTCDATE()");
         }
     }
 }

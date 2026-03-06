@@ -42,7 +42,8 @@ namespace ProSphere.Data.Context
         public DbSet<ProjectUpdateHistory> ProjectUpdatesHistories { get; set; }
         public DbSet<ProjectUpdateImageHistory> ProjectUpdatesImagesHistories { get; set; }
 
-        public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
         public DbSet<ChatMessageHistory> ChatMessagesHistories { get; set; }
         public DbSet<Notification> Notifications { get; set; }
 

@@ -4,16 +4,16 @@ using ProSphere.Domain.Entities;
 
 namespace ProSphere.Data.Configurations
 {
-    public class ChatMessageConfig : IEntityTypeConfiguration<ChatMessage>
+    public class MessageConfig : IEntityTypeConfiguration<Message>
     {
-        public void Configure(EntityTypeBuilder<ChatMessage> builder)
+        public void Configure(EntityTypeBuilder<Message> builder)
         {
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.SentAt)
                 .HasDefaultValueSql("GETUTCDATE()");
 
-            builder.Property(x => x.IsSeen).HasDefaultValue(false);
+            builder.HasIndex(m => new { m.ConversationId, m.SentAt });
 
             builder
                 .HasOne(x => x.Sender)
@@ -26,6 +26,12 @@ namespace ProSphere.Data.Configurations
                 .WithMany(x => x.MessagesReceived)
                 .HasForeignKey(x => x.ReceiverId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasOne(x => x.Conversation)
+                .WithMany(x => x.Messages)
+                .HasForeignKey(x => x.ConversationId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
