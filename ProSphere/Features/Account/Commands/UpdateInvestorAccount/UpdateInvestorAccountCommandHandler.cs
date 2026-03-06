@@ -66,6 +66,7 @@ namespace ProSphere.Features.Account.Commands.UpdateInvestorAccount
                 investor.ImageProfileURL = imagePath;
             }
 
+            investor.FullName = command.request.FirstName + " " + command.request.LastName;
             investor.BIO = command.request.BIO;
             investor.HeadLine = command.request.HeadLine;
 

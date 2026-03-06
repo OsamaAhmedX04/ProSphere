@@ -66,6 +66,7 @@ namespace ProSphere.Features.Account.Commands.UpdateCreatorAccount
                 creator.ImageProfileURL = imagePath;
             }
 
+            creator.FullName = command.request.FirstName + " " + command.request.LastName;
             creator.BIO = command.request.BIO;
             creator.HeadLine = command.request.HeadLine;
 
