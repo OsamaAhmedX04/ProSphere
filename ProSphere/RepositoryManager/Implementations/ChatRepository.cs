@@ -1,5 +1,4 @@
 ﻿using LinqKit;
-using Microsoft.Data.SqlTypes;
 using Microsoft.EntityFrameworkCore;
 using ProSphere.Data.Context;
 using ProSphere.Domain.Constants.FileConstants;
@@ -8,7 +7,6 @@ using ProSphere.Features.Chat.Queries.GetAllChatBetweenUsers;
 using ProSphere.Features.Chat.Queries.GetAllContactsForUser;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
-using Supabase.Gotrue;
 using System.Linq.Expressions;
 
 namespace ProSphere.RepositoryManager.Implementations

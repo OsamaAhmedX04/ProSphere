@@ -15,7 +15,7 @@ namespace ProSphere.Features.Chat.Queries.GetAllChatBetweenUsers
             _chatRepository = chatRepository;
         }
 
-        public async Task<Result<PageSourcePagination<GetAllChatBetweenUsersResponse>>> 
+        public async Task<Result<PageSourcePagination<GetAllChatBetweenUsersResponse>>>
             Handle(GetAllChatBetweenUsersQuery query, CancellationToken cancellationToken)
         {
             var result = await _chatRepository.GetMessagesBetweenUsers(query.firstUserId, query.secondUserId, query.pageNumber, 25);

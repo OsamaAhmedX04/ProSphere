@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using ProSphere.Features.Chat.Commands.SendMessage;
 using ProSphere.Features.Chat.Queries.GetAllChatBetweenUsers;
 using ProSphere.Features.Chat.Queries.GetAllContactsForUser;
-using ProSphere.Features.CreatorSkills.Queries.GetCreatorSkills;
 
 namespace ProSphere.Features.Chat.Endpoint
 {

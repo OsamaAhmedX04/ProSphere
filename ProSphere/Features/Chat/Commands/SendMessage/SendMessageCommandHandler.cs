@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using ProSphere.Domain.Constants.FileConstants;
 using ProSphere.Domain.Entities;
@@ -11,7 +10,6 @@ using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.ResultResponse;
 using ProSphere.Services.Notification;
 using ProSphere.Shared.DTOs.Chat;
-using ProSphere.Shared.DTOs.Notification;
 
 namespace ProSphere.Features.Chat.Commands.SendMessage
 {
@@ -41,8 +39,8 @@ namespace ProSphere.Features.Chat.Commands.SendMessage
                 var errors = validationResult.ConvertErrorsToDictionary();
                 return Result.ValidationFailure(errors);
             }
-            
-           
+
+
 
 
             // prepare message
@@ -83,7 +81,7 @@ namespace ProSphere.Features.Chat.Commands.SendMessage
                 conversation.LastMessageSentAt = DateTime.UtcNow;
             }
 
-            
+
 
             var chatMessage = new Message
             {
@@ -106,7 +104,7 @@ namespace ProSphere.Features.Chat.Commands.SendMessage
             };
 
             await _hub.Clients.Client(command.receiverId).SendAsync("ReceiveMessage", messageDto, cancellationToken);
-            
+
 
             await _unitOfWork.CompleteAsync();
             return Result.Success("Message Sent Successfully");

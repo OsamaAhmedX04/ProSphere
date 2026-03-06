@@ -106,7 +106,7 @@ namespace ProSphere.Jobs.Account.DeleteAccount
         {
             var messages = await _unitOfWork.Messages
                 .GetAllAsyncEnhanced(
-                    filter:x => x.SenderId == user.Id,
+                    filter: x => x.SenderId == user.Id,
                     selector: x => new
                     {
                         Message = x.Content,
