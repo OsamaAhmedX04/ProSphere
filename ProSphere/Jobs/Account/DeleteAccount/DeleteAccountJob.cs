@@ -104,19 +104,33 @@ namespace ProSphere.Jobs.Account.DeleteAccount
 
         public async Task MoveUserChatsAsync(ApplicationUser user)
         {
-            var messages = await _unitOfWork.ChatMessages
-                .GetAllAsyncEnhanced(x => x.SenderId == user.Id || x.ReceiverId == user.Id);
+            var messages = await _unitOfWork.Messages
+                .GetAllAsyncEnhanced(
+                    filter:x => x.SenderId == user.Id,
+                    selector: x => new
+                    {
+                        Message = x.Content,
+                        Image = x.ImageURL,
+                        SentAt = x.SentAt,
+                        SenderEmail = x.Sender.Email,
+                        ReceiverEmail = x.Receiver.Email,
+                        ConversationId = x.ConversationId
+                    }
+                    );
 
             var chathistories = messages.Select(x => new ChatMessageHistory
             {
-                Message = x.Message,
+                MessageContent = x.Message,
+                ImageContent = x.Image,
                 SentAt = x.SentAt,
-                SenderEmail = x.Sender!.Email!,
-                ReceiverEmail = x.Receiver!.Email!
+                SenderEmail = x.SenderEmail!,
+                ReceiverEmail = x.ReceiverEmail!
             }).ToList();
 
+            var conversationIDs = messages.Select(x => x.ConversationId).ToList();
+
             await _unitOfWork.ChatMessagesHistories.AddRangeAsync(chathistories);
-            await _unitOfWork.ChatMessages.BulkDeleteAsync(x => x.SenderId == user.Id || x.ReceiverId == user.Id);
+            await _unitOfWork.Conversations.BulkDeleteAsync(x => conversationIDs.Contains(x.Id));
 
             await _unitOfWork.CompleteAsync();
         }
