@@ -16,25 +16,6 @@ namespace ProSphere.ExternalServices.Implementaions.FileStorage
             _bucketName = options.Value.BucketName;
         }
 
-        //public async Task<string> UploadAsync(IFormFile file, string? folder = null)
-        //{
-        //    using var ms = new MemoryStream();
-        //    await file.CopyToAsync(ms);
-        //    var fileBytes = ms.ToArray();
-
-        //    var bucket = _client.Storage.From(_bucketName);
-        //    var fileName = folder != null
-        //        ? $"{folder}/{Guid.NewGuid()}_{file.FileName}"
-        //        : $"{Guid.NewGuid()}_{file.FileName}";
-
-        //    await bucket.Upload(fileBytes, fileName);
-
-        //    // Remove trailing ? from public URL
-        //    var imageBucketUrl = bucket.GetPublicUrl(fileName)?.TrimEnd('?')!;
-        //    var imagePath = imageBucketUrl.Substring(SupabaseConstants.StartIndexOfCorrectPath);
-        //    return imagePath;
-        //}
-
         public async Task<string> UploadAsync(IFormFile file, string? folder = null)
         {
             using var ms = new MemoryStream();
