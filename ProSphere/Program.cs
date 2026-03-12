@@ -47,6 +47,10 @@ namespace ProSphere
 
             builder.Services.AddGlobalExceptionHandler();
 
+            builder.Services.AddPaymentService(builder.Configuration);
+            
+            builder.Services.AddVideoCallService(builder.Configuration);
+
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

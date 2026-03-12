@@ -14,10 +14,14 @@ using ProSphere.ExternalServices.Implementaions.Authentication;
 using ProSphere.ExternalServices.Implementaions.Email;
 using ProSphere.ExternalServices.Implementaions.FileStorage;
 using ProSphere.ExternalServices.Implementaions.JWT;
+using ProSphere.ExternalServices.Implementaions.Payment;
+using ProSphere.ExternalServices.Implementaions.VideoCall;
 using ProSphere.ExternalServices.Interfaces.Authentication;
 using ProSphere.ExternalServices.Interfaces.Email;
 using ProSphere.ExternalServices.Interfaces.FileStorage;
 using ProSphere.ExternalServices.Interfaces.JWT;
+using ProSphere.ExternalServices.Interfaces.Payment;
+using ProSphere.ExternalServices.Interfaces.VideoCall;
 using ProSphere.Features.Registration.Commands.Register;
 using ProSphere.Jobs.Account.DeleteAccount;
 using ProSphere.Jobs.Ban.RemoveBan;
@@ -158,6 +162,29 @@ namespace ProSphere.Extensions
             return services;
         }
 
+        public static IServiceCollection AddPaymentService(this IServiceCollection services, IConfiguration configuration)
+        {
+            // Register Payment Service
+            services.AddOptions<FawaterakOptions>()
+                .Bind(configuration.GetSection("Fawaterak"))
+                .ValidateOnStart();
+
+            services.AddScoped<IPaymentService, PaymentService>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddVideoCallService(this IServiceCollection services, IConfiguration configuration)
+        {
+            // Register Payment Service
+            services.AddOptions<ZoomOptions>()
+                .Bind(configuration.GetSection("Zoom"))
+                .ValidateOnStart();
+
+            services.AddHttpClient<IMeetingService, MeetingService>();
+
+            return services;
+        }
         public static IServiceCollection AddEmailService(this IServiceCollection services, IConfiguration configuration)
         {
             // Register SendGrid
