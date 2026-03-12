@@ -51,6 +51,8 @@ namespace ProSphere.Data.Context
         public DbSet<ReportedUser> ReportedUsers { get; set; }
         public DbSet<BannedUser> BannedUsers { get; set; }
 
+        public DbSet<Meeting> Meetings { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

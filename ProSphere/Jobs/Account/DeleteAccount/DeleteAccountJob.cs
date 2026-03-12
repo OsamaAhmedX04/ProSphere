@@ -81,7 +81,11 @@ namespace ProSphere.Jobs.Account.DeleteAccount
                 await _unitOfWork.ProfessionalVerifications
                     .BulkDeleteAsync(x => x.InvestorId == user.Id && (x.status == Status.Rejected || x.status == Status.Pending));
 
-
+                await _unitOfWork.Meetings.BulkDeleteAsync(m => m.InvestorId == user.Id);
+            }
+            if (userRoles.Contains(Role.Creator))
+            {
+                await _unitOfWork.Meetings.BulkDeleteAsync(m => m.CreatorId == user.Id);
             }
 
             await _unitOfWork.CompleteAsync();

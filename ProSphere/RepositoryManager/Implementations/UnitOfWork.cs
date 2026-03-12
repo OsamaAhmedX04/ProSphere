@@ -45,6 +45,8 @@ namespace ProSphere.RepositoryManager.Implementations
         public IRepository<ReportedUser> ReportedUsers { get; }
         public IRepository<BannedUser> BannedUsers { get; }
 
+        public IRepository<Meeting> Meetings { get; }
+
         public UnitOfWork(AppDbContext db)
         {
             _db = db;
@@ -90,6 +92,8 @@ namespace ProSphere.RepositoryManager.Implementations
             ReportedProjects = new Repository<ReportedProject>(_db);
             ReportedUsers = new Repository<ReportedUser>(_db);
             BannedUsers = new Repository<BannedUser>(_db);
+
+            Meetings = new Repository<Meeting>(_db);
 
         }
 

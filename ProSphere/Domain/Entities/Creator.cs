@@ -18,5 +18,6 @@ namespace ProSphere.Domain.Entities
         public ICollection<Project> Projects { get; set; } = new List<Project>();
         public ICollection<ProjectVote> ProjectsVotes { get; set; } = new List<ProjectVote>();
         public ICollection<Conversation> Conversations { get; set; } = new List<Conversation>();
+        public ICollection<Meeting> Meetings { get; set; } = new List<Meeting>();
     }
 }

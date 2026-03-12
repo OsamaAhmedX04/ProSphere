@@ -20,6 +20,7 @@ namespace ProSphere.Domain.Entities
         public ICollection<ProfessionalVerification> ProfessionalVerifications { get; set; } = new List<ProfessionalVerification>();
         public ICollection<ProjectAccessRequest> ProjectsAccessRequests { get; set; } = new List<ProjectAccessRequest>();
         public ICollection<Conversation> Conversations { get; set; } = new List<Conversation>();
+        public ICollection<Meeting> Meetings { get; set; } = new List<Meeting>();
 
     }
 }

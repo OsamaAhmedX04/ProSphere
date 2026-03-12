@@ -47,6 +47,8 @@ namespace ProSphere.RepositoryManager.Interfaces
         IRepository<ReportedUser> ReportedUsers { get; }
         IRepository<BannedUser> BannedUsers { get; }
 
+        IRepository<Meeting> Meetings { get; }
+
         Task<int> CompleteAsync();
     }
 }
