@@ -31,6 +31,8 @@ namespace ProSphere
 
             builder.Services.AddJWT(builder.Configuration);
 
+            builder.Services.AddCurrentUserGetterService();
+
             builder.Services.AddEmailService(builder.Configuration);
 
             builder.Services.AddFileService(builder.Configuration);

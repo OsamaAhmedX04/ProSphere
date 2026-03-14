@@ -162,6 +162,13 @@ namespace ProSphere.Extensions
             return services;
         }
 
+        public static IServiceCollection AddCurrentUserGetterService(this IServiceCollection services)
+        {
+            services.AddHttpContextAccessor();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+            return services;
+        }
         public static IServiceCollection AddPaymentService(this IServiceCollection services, IConfiguration configuration)
         {
             // Register Payment Service
