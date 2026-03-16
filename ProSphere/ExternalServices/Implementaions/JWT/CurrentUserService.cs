@@ -17,5 +17,23 @@ namespace ProSphere.ExternalServices.Implementaions.JWT
            .User?
            .FindFirst(ClaimTypes.NameIdentifier)?
            .Value;
+
+        public string? UserRole =>
+           _contextAccessor.HttpContext?
+           .User?
+           .FindFirst(ClaimTypes.Role)?
+           .Value;
+
+        public string? Username =>
+           _contextAccessor.HttpContext?
+           .User?
+           .FindFirst(ClaimTypes.Name)?
+           .Value;
+
+        public string? UserEmail =>
+           _contextAccessor.HttpContext?
+           .User?
+           .FindFirst(ClaimTypes.Email)?
+           .Value;
     }
 }
