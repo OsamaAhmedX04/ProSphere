@@ -6,7 +6,7 @@ using ProSphere.ResultResponse;
 namespace ProSphere.Features.Search.Queries.SearchForInvestors
 {
     public record SearchForInvestorsQuery
-        (int pageNumber, string? userId = null, string? userName = null, bool? verified = null, bool? financial = null,
+        (int pageNumber, string? userName = null, bool? verified = null, bool? financial = null,
         bool? professional = null)
         : IRequest<Result<PageSourcePagination<GetInvestorAccountsResponse>>>
     {

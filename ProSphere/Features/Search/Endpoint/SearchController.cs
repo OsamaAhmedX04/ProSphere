@@ -23,8 +23,7 @@ namespace ProSphere.Features.Search.Endpoint
         public async Task<IActionResult> SearchForCreators
             (int pageNumber, string? userName = null, bool? verified = null)
         {
-            var userId = User?.FindFirstValue(ClaimTypes.NameIdentifier);
-            var query = new SearchForCreatorsQuery(pageNumber, userId, userName, verified);
+            var query = new SearchForCreatorsQuery(pageNumber, userName, verified);
             var result = await _sender.Send(query);
             return StatusCode(result.StatusCode, result);
         }
@@ -33,8 +32,7 @@ namespace ProSphere.Features.Search.Endpoint
         public async Task<IActionResult> SearchForInvestors
             (int pageNumber, string? userName = null, bool? verified = null, bool? financial = null, bool? professional = null)
         {
-            var userId = User?.FindFirstValue(ClaimTypes.NameIdentifier);
-            var query = new SearchForInvestorsQuery(pageNumber, userId, userName, verified, financial, professional);
+            var query = new SearchForInvestorsQuery(pageNumber, userName, verified, financial, professional);
             var result = await _sender.Send(query);
             return StatusCode(result.StatusCode, result);
         }
@@ -43,8 +41,7 @@ namespace ProSphere.Features.Search.Endpoint
         public async Task<IActionResult> SearchForProjects
             (int pageNumber, string? projectName = null)
         {
-            var userId = User?.FindFirstValue(ClaimTypes.NameIdentifier);
-            var query = new SearchForProjectQuery(pageNumber, userId, projectName);
+            var query = new SearchForProjectQuery(pageNumber, projectName);
             var result = await _sender.Send(query);
             return StatusCode(result.StatusCode, result);
         }
@@ -52,8 +49,7 @@ namespace ProSphere.Features.Search.Endpoint
         [HttpGet("history")]
         public async Task<IActionResult> GetHistoryOfSearch()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var query = new GetSearchHistoryQuery(userId!);
+            var query = new GetSearchHistoryQuery();
             var result = await _sender.Send(query);
             return StatusCode(StatusCodes.Status200OK, result);
         }

@@ -2,6 +2,7 @@
 using LinqKit;
 using MediatR;
 using ProSphere.Domain.Entities;
+using ProSphere.ExternalServices.Interfaces.JWT;
 using ProSphere.Jobs.Search.SearchSaver;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
@@ -13,10 +14,12 @@ namespace ProSphere.Features.Search.Queries.SearchForCreators
     public class SearchForCreatorsQueryHandler : IRequestHandler<SearchForCreatorsQuery, Result<PageSourcePagination<SearchForCreatorsResponse>>>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ICurrentUserService _currentUser;
 
-        public SearchForCreatorsQueryHandler(IUnitOfWork unitOfWork)
+        public SearchForCreatorsQueryHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUser)
         {
             _unitOfWork = unitOfWork;
+            _currentUser = currentUser;
         }
 
         public async Task<Result<PageSourcePagination<SearchForCreatorsResponse>>>
@@ -44,11 +47,11 @@ namespace ProSphere.Features.Search.Queries.SearchForCreators
                 pageSize: 20
                 );
 
-            if (query.userId != null)
+            if (_currentUser.UserId != null)
             {
                 BackgroundJob.Enqueue<ISearchSaver>(
                      service => service.SaveSearchAtCreatorHistory(
-                         query.userId, query.userName, query.verified
+                         _currentUser.UserId, query.userName, query.verified
                   ));
             }
 

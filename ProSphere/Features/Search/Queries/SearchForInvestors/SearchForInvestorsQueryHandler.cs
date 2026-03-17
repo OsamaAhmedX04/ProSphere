@@ -3,6 +3,7 @@ using LinqKit;
 using MediatR;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
+using ProSphere.ExternalServices.Interfaces.JWT;
 using ProSphere.Features.Account.Queries.GetInvestorAccounts;
 using ProSphere.Jobs.Search.SearchSaver;
 using ProSphere.RepositoryManager.Interfaces;
@@ -16,10 +17,12 @@ namespace ProSphere.Features.Search.Queries.SearchForInvestors
         : IRequestHandler<SearchForInvestorsQuery, Result<PageSourcePagination<GetInvestorAccountsResponse>>>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ICurrentUserService _currentUser;
 
-        public SearchForInvestorsQueryHandler(IUnitOfWork unitOfWork)
+        public SearchForInvestorsQueryHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUser)
         {
             _unitOfWork = unitOfWork;
+            _currentUser = currentUser;
         }
 
         public async Task<Result<PageSourcePagination<GetInvestorAccountsResponse>>>
@@ -53,11 +56,11 @@ namespace ProSphere.Features.Search.Queries.SearchForInvestors
                 pageNumber: query.pageNumber,
                 pageSize: 20
             );
-            if (query.userId != null)
+            if (_currentUser.UserId != null)
             {
                 BackgroundJob.Enqueue<ISearchSaver>(
                     service => service.SaveSearchAtInvestorHistory(
-                        query.userId, query.userName, query.verified, query.financial, query.professional
+                        _currentUser.UserId, query.userName, query.verified, query.financial, query.professional
                 ));
             }
 

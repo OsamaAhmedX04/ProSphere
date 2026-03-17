@@ -4,7 +4,7 @@ using ProSphere.ResultResponse;
 
 namespace ProSphere.Features.Search.Queries.SearchForProject
 {
-    public record SearchForProjectQuery(int pageNumber, string? userId = null, string? projectName = null)
+    public record SearchForProjectQuery(int pageNumber, string? projectName = null)
         : IRequest<Result<PageSourcePagination<SearchForProjectResponse>>>
     {
     }

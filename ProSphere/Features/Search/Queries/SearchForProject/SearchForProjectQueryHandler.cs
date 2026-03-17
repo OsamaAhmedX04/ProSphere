@@ -3,6 +3,7 @@ using LinqKit;
 using MediatR;
 using ProSphere.Domain.Entities;
 using ProSphere.Domain.Enums;
+using ProSphere.ExternalServices.Interfaces.JWT;
 using ProSphere.Jobs.Search.SearchSaver;
 using ProSphere.RepositoryManager.Interfaces;
 using ProSphere.RepositoryManager.Pagination;
@@ -14,10 +15,12 @@ namespace ProSphere.Features.Search.Queries.SearchForProject
     public class SearchForProjectQueryHandler : IRequestHandler<SearchForProjectQuery, Result<PageSourcePagination<SearchForProjectResponse>>>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ICurrentUserService _currentUser;
 
-        public SearchForProjectQueryHandler(IUnitOfWork unitOfWork)
+        public SearchForProjectQueryHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUser)
         {
             _unitOfWork = unitOfWork;
+            _currentUser = currentUser;
         }
 
         public async Task<Result<PageSourcePagination<SearchForProjectResponse>>>
@@ -50,11 +53,11 @@ namespace ProSphere.Features.Search.Queries.SearchForProject
                 pageSize: 20
                 );
 
-            if (query.userId != null)
+            if (_currentUser.UserId != null)
             {
                 BackgroundJob.Enqueue<ISearchSaver>(
                      service => service.SaveSearchAtProjectHistory(
-                         query.userId, query.projectName
+                         _currentUser.UserId, query.projectName
                   ));
             }
 
