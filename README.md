@@ -93,7 +93,7 @@ It ensures that every request is **verified, validated, and properly authorized*
 
 #### 🔁 Password Recovery & Reset
 - Forgot password via email
-- Secure reset باستخدام token
+- Secure reset with token
 - Supports resend token functionality
 
 ---
